@@ -87,14 +87,14 @@ body {
 
 .dropdown-parent:hover > a,
 .dropdown-parent.active > a {
-    color: #d16004;
+    color: #3256a8; /* Ny färg vid hover/klick */
 }
 
 .dropdown {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%); /* Centrera i förhållande till header */
+    transform: translateX(-50%); /* Initial centrering, justeras av JS */
     width: 596px; /* Samma bredd som logotypen på desktop */
     background-color: #ffffff;
     list-style: none;
@@ -107,7 +107,7 @@ body {
     opacity: 0;
     transform: translate(-50%, -10px);
     pointer-events: none;
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Mjuk animation */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -139,16 +139,7 @@ body {
     background-color: #e0e0e0;
 }
 
-/* CSS-baserad hover för desktop */
-@media (hover: hover) and (min-width: 769px) {
-    .dropdown-parent:hover .dropdown {
-        opacity: 1;
-        transform: translate(-50%, 0);
-        pointer-events: auto;
-    }
-}
-
-/* JavaScript-kontrollerad för mobil och tillgänglighet */
+/* JavaScript-kontrollerad för desktop och mobil */
 .dropdown-parent.active .dropdown {
     opacity: 1;
     transform: translate(-50%, 0);
@@ -212,7 +203,7 @@ body {
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #007BFF;
+    background-color: #3256a8; /* Ny färg */
     color: white;
     padding: 10px;
     cursor: pointer;

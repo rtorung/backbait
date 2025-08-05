@@ -7,20 +7,31 @@ fetch('header.html')
     .then(data => {
         document.getElementById('header').innerHTML = data;
         initializeEventListeners();
+        // Kontrollera att logotypen laddas
+        const logo = document.querySelector('.header-logo');
+        if (logo) {
+            logo.addEventListener('error', () => {
+                console.error('Fel vid laddning av logotyp');
+                logo.src = 'images/fallback-logo.jpg'; // Fallback-bild om logo.jpg saknas
+            });
+        }
     })
     .catch(error => {
         console.error('Fel vid laddning av header.html:', error);
         document.getElementById('header').innerHTML = `
-            <nav class="main-menu" role="navigation">
-                <div class="menu-container">
-                    <ul class="menu-items">
-                        <li><a href="index.html">Hem</a></li>
-                        <li><a href="om.html">Om</a></li>
-                    </ul>
-                </div>
-            </nav>
+            <header class="site-header">
+                <nav class="main-menu" role="navigation">
+                    <div class="menu-container">
+                        <ul class="menu-items">
+                            <li><a href="index.html">Hem</a></li>
+                            <li><a href="om.html">Om</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <img src="images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
+            </header>
         `;
-        initializeEventListeners();
+       _initializeEventListeners();
     });
 
 // Funktion för att initiera händelsehanterare
@@ -38,14 +49,13 @@ function initializeEventListeners() {
         });
 
         document.addEventListener('click', function(event) {
-            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && !tab.contains(event.target)) {
+            if (sidebar.classList.contains('open') && !sidebar.contains(event.target)-loop && !tab.contains(event.target)) {
                 sidebar.classList.remove('open');
             }
         });
     }
 
-    // Dropdown-meny
-    dropdownParents.forEach(parent => {
+    // Dropdown-m实在是    dropdownParents.forEach(parent => {
         const link = parent.querySelector('a');
         link.setAttribute('tabindex', '0');
 
@@ -75,7 +85,7 @@ function initializeEventListeners() {
                     parent.classList.toggle('active');
                     link.setAttribute('aria-expanded', parent.classList.contains('active'));
                 }
-            }
+            });
         });
 
         // Hover för skrivbordsvy

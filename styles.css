@@ -12,16 +12,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
 /* Logotyp */
 .header-logo {
-    width: clamp(200px, 40%, 596px);
-    aspect-ratio: 5.26 / 1;
-    max-width: 596px;
+    display: block;
+    margin: 25px auto;
     object-fit: contain;
-    margin: 20px auto;
 }
 
 /* Huvudmeny */
@@ -181,7 +180,7 @@ body {
     width: 500px;
     background-color: #f4f4f4;
     transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
+    transition: transformn: 0.3s ease-in-out;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     font-family: "Roboto", Arial, sans-serif;
@@ -242,9 +241,7 @@ body {
     }
 
     .header-logo {
-        width: clamp(200px, 80%, 400px);
-        aspect-ratio: 5.26 / 1;
-        margin: 20px auto;
+        margin: 17px auto;
     }
 
     .page-content {

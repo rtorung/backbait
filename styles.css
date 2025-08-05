@@ -58,20 +58,17 @@ body {
     position: relative;
 }
 
-/* Textfärg för dropdown-parent vid hover i skrivbordsvy */
-.dropdown-parent:hover a {
+.dropdown-parent:hover a,
+.dropdown-parent.active a {
     color: #d16004; /* Orange textfärg */
 }
 
 .dropdown {
-    display: none;
-    visibility: hidden; /* Gömmer dropdown helt när den inte är aktiv */
-    position: fixed;
-    top: 200px; /* Bild (96.95px) + margin-top (20px) + margin-bottom (20px) + menyhöjd (36px) */
+    position: absolute;
+    top: 100%;
     left: 0;
-    right: 0;
-    width: 100vw; /* Full bredd av viewporten */
-    background-color: #ffffff; /* Vit bakgrund */
+    width: 400px; /* Fast bredd för dropdown */
+    background-color: #ffffff;
     list-style: none;
     padding: 20px;
     margin: 0;
@@ -79,28 +76,25 @@ body {
     z-index: 1100;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
     opacity: 0;
-    pointer-events: none; /* Förhindra interaktion när dold */
-    display: flex;
-    flex-wrap: nowrap; /* Två spalter side-by-side */
-    min-height: 200px; /* Fast höjd för skrivbordsvy */
-    column-gap: 100px; /* Fast horisontellt avstånd mellan spalterna (100px) */
-    justify-content: flex-start; /* Vänsterjustera spalterna */
+    height: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease-in-out, height 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transition-delay: 0.1s; /* Fördröjning för att undvika blinkningar */
+    overflow: hidden;
 }
 
-.dropdown-parent.active .dropdown {
-    display: flex;
-    visibility: visible; /* Visa dropdown när aktiv */
+.dropdown-parent.active .dropdown,
+.dropdown-parent:hover .dropdown {
     opacity: 1;
-    pointer-events: auto; /* Aktivera klick på dropdown-länkar */
-    z-index: 1200; /* Högre z-index för aktiv dropdown */
+    height: auto;
+    transform: translateY(0);
 }
 
 .dropdown .column {
     display: flex;
-    flex-direction: column; /* Vertikal fyllning i varje spalt */
-    max-width: 200px; /* Maximal bredd för varje spalt */
+    flex-direction: column;
+    max-width: 200px;
 }
 
 .dropdown li {
@@ -110,17 +104,15 @@ body {
 }
 
 .dropdown li a {
-    color: #000000 !important; /* Alltid svart text */
+    color: #000000 !important;
     text-decoration: none;
     display: block;
     font-size: 14px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
-    pointer-events: auto; /* Säkerställ att dropdown-länkar är klickbara */
 }
 
 .dropdown li a:hover {
-    color: #000000 !important; /* Säkerställ svart text vid hover */
     background-color: #e0e0e0;
 }
 
@@ -135,8 +127,9 @@ body {
 }
 
 .centered-image {
-    width: 479.85px;
-    height: 96.95px;
+    width: 40%;
+    aspect-ratio: 479.85 / 96.95; /* Behåller ursprungligt bildförhållande */
+    max-width: 479.85px;
     object-fit: contain;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -234,8 +227,9 @@ body {
     }
 
     .centered-image {
-        width: 342.75px;
-        height: 69.25px;
+        width: 80%;
+        max-width: 342.75px;
+        aspect-ratio: 479.85 / 96.95;
         margin-top: 20px;
         margin-bottom: 20px;
     }
@@ -256,57 +250,27 @@ body {
         width: calc(100% - 50px);
         height: 70%;
         top: 20%;
-        font-family: "Roboto", Arial, sans-serif;
-        font-weight: 300;
-    }
-
-    /* Inaktivera hover i mobilläge */
-    .dropdown-parent:hover .dropdown {
-        display: none;
-        visibility: hidden;
-    }
-
-    /* Textfärg för aktiv dropdown-parent i mobilläge */
-    .dropdown-parent.active a {
-        color: #d16004; /* Orange textfärg */
-    }
-
-    .dropdown-parent.active .dropdown {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: fixed;
-        top: 145.25px; /* Bild (69.25px) + margin-top (20px) + margin-bottom (20px) + menyhöjd (36px) */
-        left: 0;
-        right: 0;
-        width: 100vw;
-        background-color: #ffffff;
-        z-index: 1200;
-        pointer-events: auto; /* Aktivera klick i mobilläge */
     }
 
     .dropdown {
-        flex-direction: column; /* Vertikal visning i mobilläge */
-        min-height: 360px; /* Fast höjd för mobilläge */
-        column-gap: 0; /* Inget spaltavstånd i mobilläge */
-        justify-content: flex-start; /* Ingen centrering i mobilläge */
+        position: fixed;
+        top: 36px; /* Menyhöjd */
+        left: 0;
+        right: 0;
+        width: 100vw;
+        flex-direction: column;
+        min-height: 360px;
+        height: auto;
+        transform: none;
+        transition: opacity 0.2s ease-in-out;
     }
 
     .dropdown .column {
-        max-width: none; /* Ingen maxbredd i mobilläge */
+        max-width: none;
     }
 
     .dropdown li {
-        flex: 0 0 100%; /* En per rad i mobilläge */
-        padding: 10px 0;
-    }
-
-    .dropdown li a {
-        color: #000000 !important; /* Alltid svart text */
-    }
-
-    .dropdown li a:hover {
-        color: #000000 !important; /* Säkerställ svart text vid hover */
-        background-color: #e0e0e0;
+        flex: 0 0 100%;
+        padding: 10px 20px;
     }
 }

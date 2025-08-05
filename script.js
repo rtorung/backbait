@@ -1,7 +1,10 @@
 // Ladda header.html
-fetch('header.html')
+fetch('/Back-Fishing/header.html')
     .then(response => {
-        if (!response.ok) throw new Error('Kunde inte ladda header.html');
+        if (!response.ok) {
+            console.error('Fetch-fel: Status', response.status, response.statusText, 'URL:', response.url);
+            throw new Error('Kunde inte ladda header.html');
+        }
         return response.text();
     })
     .then(data => {
@@ -11,27 +14,27 @@ fetch('header.html')
         const logo = document.querySelector('.header-logo');
         if (logo) {
             logo.addEventListener('error', () => {
-                console.error('Fel vid laddning av logotyp');
-                logo.src = 'images/fallback-logo.jpg'; // Fallback-bild om logo.jpg saknas
+                console.error('Fel vid laddning av logotyp:', logo.src);
+                logo.src = '/Back-Fishing/images/fallback-logo.jpg'; // Fallback-bild
             });
         }
     })
     .catch(error => {
-        console.error('Fel vid laddning av header.html:', error);
+        console.error('Fel vid laddning av header.html:', error.message);
         document.getElementById('header').innerHTML = `
             <header class="site-header">
                 <nav class="main-menu" role="navigation">
                     <div class="menu-container">
                         <ul class="menu-items">
-                            <li><a href="index.html">Hem</a></li>
-                            <li><a href="om.html">Om</a></li>
+                            <li><a href="/Back-Fishing/index.html">Hem</a></li>
+                            <li><a href="/Back-Fishing/om.html">Om</a></li>
                         </ul>
                     </div>
                 </nav>
-                <img src="images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
+                <img src="/Back-Fishing/images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
             </header>
         `;
-       _initializeEventListeners();
+        initializeEventListeners();
     });
 
 // Funktion för att initiera händelsehanterare
@@ -49,13 +52,14 @@ function initializeEventListeners() {
         });
 
         document.addEventListener('click', function(event) {
-            if (sidebar.classList.contains('open') && !sidebar.contains(event.target)-loop && !tab.contains(event.target)) {
+            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && !tab.contains(event.target)) {
                 sidebar.classList.remove('open');
             }
         });
     }
 
-    // Dropdown-m实在是    dropdownParents.forEach(parent => {
+    // Dropdown-meny
+    dropdownParents.forEach(parent => {
         const link = parent.querySelector('a');
         link.setAttribute('tabindex', '0');
 
@@ -85,7 +89,7 @@ function initializeEventListeners() {
                     parent.classList.toggle('active');
                     link.setAttribute('aria-expanded', parent.classList.contains('active'));
                 }
-            });
+            }
         });
 
         // Hover för skrivbordsvy

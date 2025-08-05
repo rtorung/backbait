@@ -38,16 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!isActive) {
                     parent.classList.add('active');
                     link.setAttribute('aria-expanded', 'true');
-
-                    // Positionera dropdown på desktop
-                    if (window.innerWidth > 768) {
-                        const headerLogo = document.querySelector('.header-logo');
-                        const headerRect = document.querySelector('.site-header').getBoundingClientRect();
-                        const logoRect = headerLogo.getBoundingClientRect();
-                        const dropdownWidth = dropdown.offsetWidth;
-                        const logoCenter = logoRect.left + (logoRect.width / 2) - headerRect.left;
-                        dropdown.style.left = `${logoCenter - (dropdownWidth / 2)}px`;
-                    }
                 } else {
                     parent.classList.remove('active');
                     link.setAttribute('aria-expanded', 'false');
@@ -64,6 +54,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+
+        // Hover för desktop
+        if (window.innerWidth > 768) {
+            dropdownParents.forEach(parent => {
+                parent.addEventListener('mouseenter', function() {
+                    parent.classList.add('active');
+                    parent.querySelector('a').setAttribute('aria-expanded', 'true');
+                });
+                parent.addEventListener('mouseleave', function() {
+                    parent.classList.remove('active');
+                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
     }
 
     // Sidoruta

@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
                 const isActive = parent.classList.contains('active');
+                console.log('Dropdown clicked:', { isActive, parent }); // Felsökningslogg
 
                 // Stäng andra dropdowns
                 dropdownParents.forEach(p => {
@@ -38,9 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!isActive) {
                     parent.classList.add('active');
                     link.setAttribute('aria-expanded', 'true');
+                    dropdown.style.display = 'block'; // Tvinga visning på mobil
                 } else {
                     parent.classList.remove('active');
                     link.setAttribute('aria-expanded', 'false');
+                    dropdown.style.display = 'none'; // Dölj på mobil
                 }
             });
         });
@@ -51,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdownParents.forEach(parent => {
                     parent.classList.remove('active');
                     parent.querySelector('a').setAttribute('aria-expanded', 'false');
+                    parent.querySelector('.dropdown').style.display = 'none';
                 });
             }
         });

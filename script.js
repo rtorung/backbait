@@ -1,89 +1,107 @@
 // Ladda header.html
 fetch('header.html')
-    .then(response => response.text())
+    .then(response => {
+        if (!response.ok) throw new Error('Kunde inte ladda header.html');
+        return response.text();
+    })
     .then(data => {
         document.getElementById('header').innerHTML = data;
-        // Efter att header är laddad, initiera händelsehanterare
         initializeEventListeners();
     })
-    .catch(error => console.error('Fel vid laddning av header.html:', error));
+    .catch(error => {
+        console.error('Fel vid laddning av header.html:', error);
+        document.getElementById('header').innerHTML = `
+            <nav class="main-menu" role="navigation">
+                <div class="menu-container">
+                    <ul class="menu-items">
+                        <li><a href="index.html">Hem</a></li>
+                        <li><a href="om.html">Om</a></li>
+                    </ul>
+                </div>
+            </nav>
+        `;
+        initializeEventListeners();
+    });
 
 // Funktion för att initiera händelsehanterare
 function initializeEventListeners() {
-    // Sidoruta
+    const dropdownParents = document.querySelectorAll('.dropdown-parent');
     const sidebar = document.querySelector('.sidebar');
     const tab = document.querySelector('.tab');
 
-    if (tab) {
+    // Sidoruta
+    if (tab && sidebar) {
         tab.addEventListener('click', function(event) {
-            console.log('Sidoruta klickad');
             event.stopPropagation();
             sidebar.classList.toggle('open');
-            // Stäng dropdown-menyer
-            document.querySelectorAll('.dropdown-parent').forEach(parent => {
-                parent.classList.remove('active');
-            });
+            dropdownParents.forEach(parent => parent.classList.remove('active'));
+        });
+
+        document.addEventListener('click', function(event) {
+            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && !tab.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
         });
     }
 
-    // Klick utanför sidorutan
-    document.addEventListener('click', function(event) {
-        if (sidebar && sidebar.classList.contains('open') && !sidebar.contains(event.target) && !tab.contains(event.target)) {
-            console.log('Klick utanför sidorutan');
-            sidebar.classList.remove('open');
-        }
-    });
-
     // Dropdown-meny
-    const dropdownParents = document.querySelectorAll('.dropdown-parent');
-
     dropdownParents.forEach(parent => {
-        // Hantera klick/touch för mobilläge
+        const link = parent.querySelector('a');
+        link.setAttribute('tabindex', '0');
+
+        // Klick/touch för mobilläge
         ['click', 'touchstart'].forEach(eventType => {
-            parent.querySelector('a').addEventListener(eventType, function(event) {
-                console.log(`Dropdown-parent ${eventType}:`, parent.querySelector('a').textContent);
-                event.preventDefault();
-                event.stopPropagation();
-                // Applicera .active endast i mobilläge (< 768px)
+            link.addEventListener(eventType, function(event) {
                 if (window.innerWidth <= 768) {
+                    event.preventDefault();
+                    event.stopPropagation();
                     dropdownParents.forEach(otherParent => {
-                        if (otherParent !== parent) {
-                            otherParent.classList.remove('active');
-                        }
+                        if (otherParent !== parent) otherParent.classList.remove('active');
                     });
                     parent.classList.toggle('active');
+                    link.setAttribute('aria-expanded', parent.classList.contains('active'));
                 }
             });
         });
 
-        // Hantera hover för skrivbordsvy
-        parent.querySelector('a').addEventListener('mouseenter', function() {
-            if (window.innerWidth > 768) {
-                console.log(`Dropdown-parent mouseenter:`, parent.querySelector('a').textContent);
-                dropdownParents.forEach(otherParent => {
-                    if (otherParent !== parent) {
-                        otherParent.classList.remove('active');
-                    }
-                });
-                parent.classList.add('active');
+        // Tangentbordsstöd
+        link.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                if (window.innerWidth <= 768) {
+                    dropdownParents.forEach(otherParent => {
+                        if (otherParent !== parent) otherParent.classList.remove('active');
+                    });
+                    parent.classList.toggle('active');
+                    link.setAttribute('aria-expanded', parent.classList.contains('active'));
+                }
             }
         });
 
-        parent.addEventListener('mouseleave', function() {
-            if (window.innerWidth > 768) {
-                console.log(`Dropdown-parent mouseleave:`, parent.querySelector('a').textContent);
+        // Hover för skrivbordsvy
+        if (window.innerWidth > 768) {
+            parent.addEventListener('mouseenter', function() {
+                dropdownParents.forEach(otherParent => {
+                    if (otherParent !== parent) otherParent.classList.remove('active');
+                });
+                parent.classList.add('active');
+                link.setAttribute('aria-expanded', 'true');
+            });
+
+            parent.querySelector('.dropdown').addEventListener('mouseleave', function() {
                 parent.classList.remove('active');
-            }
-        });
+                link.setAttribute('aria-expanded', 'false');
+            });
+        }
     });
 
     // Stäng dropdown vid klick/touch utanför i mobilläge
     ['click', 'touchstart'].forEach(eventType => {
         document.addEventListener(eventType, function(event) {
             if (window.innerWidth <= 768 && !event.target.closest('.dropdown-parent')) {
-                console.log(`${eventType} utanför dropdown`);
                 dropdownParents.forEach(parent => {
                     parent.classList.remove('active');
+                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
                 });
             }
         });
@@ -91,9 +109,9 @@ function initializeEventListeners() {
 
     // Stäng dropdown vid fönsterstorleksändring
     window.addEventListener('resize', function() {
-        console.log('Fönsterstorlek ändrad');
         dropdownParents.forEach(parent => {
             parent.classList.remove('active');
+            parent.querySelector('a').setAttribute('aria-expanded', 'false');
         });
     });
 }

@@ -154,7 +154,7 @@ function initializeSidebar() {
                 closeAllDropdowns();
                 if (sidebar.classList.contains('open')) {
                     const focusable = sidebar.querySelector('a, button, [tabindex="0"]');
-                    if (focusable) focusable.focus();
+                    if (focusable) focusable.focus(); 
                 }
             }
         });

@@ -14,13 +14,19 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    min-height: 163px; /* ~165px för desktop */
 }
 
 /* Logotyp */
 .header-logo {
     display: block;
     margin: 25px auto;
-    object-fit: contain;
+    width: 596px; /* Ursprunglig storlek för logo596.jpg */
+}
+
+.site-header a, .site-header picture {
+    display: block;
+    text-align: center;
 }
 
 /* Huvudmeny */
@@ -180,7 +186,7 @@ body {
     width: 500px;
     background-color: #f4f4f4;
     transform: translateX(100%);
-    transition: transformn: 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     font-family: "Roboto", Arial, sans-serif;
@@ -240,8 +246,13 @@ body {
         justify-content: flex-start;
     }
 
+    .site-header {
+        min-height: 110px; /* 110px för mobil */
+    }
+
     .header-logo {
         margin: 17px auto;
+        width: 400px; /* Ursprunglig storlek för logo400.jpg */
     }
 
     .page-content {

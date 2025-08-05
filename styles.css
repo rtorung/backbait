@@ -104,7 +104,6 @@ body {
     flex-direction: row;
     justify-content: flex-start; /* Starta från vänster */
     box-sizing: border-box;
-    border: 1px solid #ccc; /* För felsökning */
 }
 
 .dropdown .column {
@@ -354,12 +353,12 @@ body {
 
     .dropdown {
         position: fixed;
-        top: 0; /* Direkt under menyraden */
+        top: 150px; /* Under header och meny på mobil */
         left: 0;
         right: 0;
         width: 100%; /* Full bredd på mobil */
         min-height: 200px; /* Säkerställ synlighet */
-        background-color: #ffffff; /* För felsökning */
+        background-color: #ffffff;
         border: 1px solid #ccc; /* För felsökning */
         flex-direction: column; /* Stapla kolumner vertikalt */
         opacity: 1; /* Säkerställ synlighet */

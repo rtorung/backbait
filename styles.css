@@ -94,7 +94,7 @@ body {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 400px;
+    width: 596px; /* Samma bredd som logotypen på desktop */
     background-color: #ffffff;
     list-style: none;
     padding: 20px;
@@ -107,6 +107,36 @@ body {
     transform: translateY(-10px);
     pointer-events: none;
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.dropdown .column {
+    flex: 1;
+    min-width: 0;
+    max-width: 298px; /* Hälften av 596px */
+}
+
+.dropdown li {
+    padding: 10px 20px;
+    text-align: center; /* Centrerad text */
+    box-sizing: border-box;
+}
+
+.dropdown li a {
+    color: #000000 !important;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.dropdown li a:hover {
+    background-color: #e0e0e0;
 }
 
 /* CSS-baserad hover för desktop */
@@ -123,32 +153,6 @@ body {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-}
-
-.dropdown .column {
-    display: flex;
-    flex-direction: column;
-    max-width: 200px;
-}
-
-.dropdown li {
-    padding: 10px 20px;
-    text-align: right; /* Högerjusterad text */
-    box-sizing: border-box;
-}
-
-.dropdown li a {
-    color: #000000 !important;
-    text-decoration: none;
-    display: block;
-    font-size: 14px;
-    font-family: "Roboto", Arial, sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.dropdown li a:hover {
-    background-color: #e0e0e0;
 }
 
 /* Huvudinnehåll */
@@ -242,7 +246,7 @@ body {
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
-    margin: 20px auto;
+    margin: 100px auto 20px; /* 100px från menyn, 20px nedanför */
     position: relative; /* För att positionera text över bilden */
 }
 
@@ -260,8 +264,9 @@ body {
     color: white;
     font-size: 48px;
     font-family: "Roboto", Arial, sans-serif;
-    font-weight: 600;
+    font-weight: 400; /* Fontvikt 400 */
     text-align: center;
+    z-index: 10; /* Över bilden */
 }
 
 /* Responsiv design för mobila enheter */
@@ -291,6 +296,21 @@ body {
         width: 400px !important; /* Ursprunglig storlek för logo400.jpg */
         height: auto;
         max-width: none;
+    }
+
+    .dropdown {
+        width: 100vw; /* Full bredd på mobil */
+        flex-direction: column; /* Stapla kolumner vertikalt på mobil */
+    }
+
+    .dropdown .column {
+        max-width: none;
+    }
+
+    .dropdown li {
+        flex: 0 0 100%;
+        padding: 10px 20px;
+        text-align: center; /* Centrerad text på mobil */
     }
 
     .page-content {
@@ -324,19 +344,9 @@ body {
         transition: opacity 0.2s ease-in-out;
     }
 
-    .dropdown .column {
-        max-width: none;
-    }
-
-    .dropdown li {
-        flex: 0 0 100%;
-        padding: 10px 20px;
-        text-align: right; /* Högerjusterad text på mobil */
-    }
-
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
-        margin: 10px auto;
+        margin: 100px auto 10px; /* 100px från menyn, 10px nedanför */
     }
 
     .image-text {

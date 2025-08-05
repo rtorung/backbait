@@ -29,12 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.addEventListener(eventType, function(event) {
                     event.preventDefault();
                     const isActive = parent.classList.contains('active');
+                    const mainMenu = document.querySelector('.main-menu');
+                    const menuRect = mainMenu.getBoundingClientRect();
+                    const topPosition = window.innerWidth <= 768 ? (menuRect.bottom + window.scrollY) + 'px' : '163px';
+
                     console.log(`${eventType} on dropdown:`, { 
                         isActive, 
                         parentId: parent.id || 'no-id', 
                         width: window.innerWidth, 
                         display: dropdown.style.display,
-                        computedDisplay: window.getComputedStyle(dropdown).display
+                        computedDisplay: window.getComputedStyle(dropdown).display,
+                        topPosition,
+                        menuBottom: menuRect.bottom
                     }); // Felsökningslogg
 
                     // Stäng andra dropdowns
@@ -47,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!isActive) {
                         parent.classList.add('active');
                         link.setAttribute('aria-expanded', 'true');
+                        dropdown.style.top = topPosition;
                         dropdown.style.display = window.innerWidth > 768 ? 'flex' : 'block';
                     } else {
                         parent.classList.remove('active');

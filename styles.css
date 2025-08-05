@@ -17,16 +17,16 @@ body {
 
 /* Logotyp */
 .header-logo {
-    width: 40%;
-    aspect-ratio: 479.85 / 96.95; /* Behåller ursprungligt bildförhållande */
+    width: clamp(200px, 40%, 479.85px);
+    aspect-ratio: 479.85 / 96.95;
     max-width: 479.85px;
     object-fit: contain;
-    margin: 20px auto; /* 20px marginal över och under, centrerad */
+    margin: 20px auto;
 }
 
 /* Huvudmeny */
 .main-menu {
-    width: 100vw; /* Full fönsterbredd */
+    width: 100vw;
     background-color: #333;
     color: white;
     position: relative;
@@ -34,7 +34,7 @@ body {
 }
 
 .menu-container {
-    width: 100%; /* Fyller hela menyraden */
+    width: 100%;
 }
 
 .menu-items {
@@ -77,14 +77,14 @@ body {
 
 .dropdown-parent:hover > a,
 .dropdown-parent.active > a {
-    color: #d16004; /* Orange textfärg */
+    color: #d16004;
 }
 
 .dropdown {
     position: absolute;
-    top: 100%; /* Direkt under menyraden */
+    top: 100%;
     left: 0;
-    width: 400px; /* Fast bredd för dropdown */
+    width: 400px;
     background-color: #ffffff;
     list-style: none;
     padding: 20px;
@@ -95,7 +95,7 @@ body {
     font-weight: 300;
     opacity: 0;
     transform: translateY(-10px);
-    pointer-events: none; /* Förhindra interaktion när gömd */
+    pointer-events: none;
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -104,7 +104,7 @@ body {
     .dropdown-parent:hover .dropdown {
         opacity: 1;
         transform: translateY(0);
-        pointer-events: auto; /* Tillåt interaktion när synlig */
+        pointer-events: auto;
     }
 }
 
@@ -226,7 +226,7 @@ body {
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
     .main-menu {
-        width: 100vw; /* Full fönsterbredd */
+        width: 100vw;
         overflow-x: auto;
         scrollbar-width: none;
         touch-action: pan-x;
@@ -242,10 +242,9 @@ body {
     }
 
     .header-logo {
-        width: 80%;
-        max-width: 342.75px;
+        width: clamp(200px, 80%, 342.75px);
         aspect-ratio: 479.85 / 96.95;
-        margin: 20px auto; /* 20px marginal över och under */
+        margin: 20px auto;
     }
 
     .page-content {
@@ -268,13 +267,14 @@ body {
 
     .dropdown {
         position: fixed;
-        top: 36px; /* Menyradens höjd */
+        top: 36px;
         left: 0;
         right: 0;
         width: 100vw;
         flex-direction: column;
-        min-height: 360px;
-        transform: none;
+        min-height: auto;
+        max-height: 80vh;
+        overflow-y: auto;
         transition: opacity 0.2s ease-in-out;
     }
 

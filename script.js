@@ -24,51 +24,36 @@ document.addEventListener('DOMContentLoaded', function() {
             const link = parent.querySelector('a');
             const dropdown = parent.querySelector('.dropdown');
 
-            // Hantera klick för både desktop och mobil
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const isActive = parent.classList.contains('active');
-                console.log('Dropdown clicked:', { isActive, parent, width: window.innerWidth }); // Felsökningslogg
+            // Hantera klick och touch
+            ['click', 'touchstart'].forEach(eventType => {
+                link.addEventListener(eventType, function(event) {
+                    event.preventDefault();
+                    const isActive = parent.classList.contains('active');
+                    console.log(`${eventType} on dropdown:`, { 
+                        isActive, 
+                        parentId: parent.id || 'no-id', 
+                        width: window.innerWidth, 
+                        display: dropdown.style.display,
+                        computedDisplay: window.getComputedStyle(dropdown).display
+                    }); // Felsökningslogg
 
-                // Stäng andra dropdowns
-                dropdownParents.forEach(p => {
-                    p.classList.remove('active');
-                    p.querySelector('a').setAttribute('aria-expanded', 'false');
-                    p.querySelector('.dropdown').style.display = 'none';
+                    // Stäng andra dropdowns
+                    dropdownParents.forEach(p => {
+                        p.classList.remove('active');
+                        p.querySelector('a').setAttribute('aria-expanded', 'false');
+                        p.querySelector('.dropdown').style.display = 'none';
+                    });
+
+                    if (!isActive) {
+                        parent.classList.add('active');
+                        link.setAttribute('aria-expanded', 'true');
+                        dropdown.style.display = window.innerWidth > 768 ? 'flex' : 'block';
+                    } else {
+                        parent.classList.remove('active');
+                        link.setAttribute('aria-expanded', 'false');
+                        dropdown.style.display = 'none';
+                    }
                 });
-
-                if (!isActive) {
-                    parent.classList.add('active');
-                    link.setAttribute('aria-expanded', 'true');
-                    dropdown.style.display = window.innerWidth > 768 ? 'flex' : 'block'; // Flex för desktop, block för mobil
-                } else {
-                    parent.classList.remove('active');
-                    link.setAttribute('aria-expanded', 'false');
-                    dropdown.style.display = 'none';
-                }
-            });
-
-            // Hantera touch för mobil
-            link.addEventListener('touchstart', function(event) {
-                event.preventDefault();
-                const isActive = parent.classList.contains('active');
-                console.log('Dropdown touched:', { isActive, parent, width: window.innerWidth }); // Felsökningslogg
-
-                dropdownParents.forEach(p => {
-                    p.classList.remove('active');
-                    p.querySelector('a').setAttribute('aria-expanded', 'false');
-                    p.querySelector('.dropdown').style.display = 'none';
-                });
-
-                if (!isActive) {
-                    parent.classList.add('active');
-                    link.setAttribute('aria-expanded', 'true');
-                    dropdown.style.display = 'block';
-                } else {
-                    parent.classList.remove('active');
-                    link.setAttribute('aria-expanded', 'false');
-                    dropdown.style.display = 'none';
-                }
             });
         });
 

@@ -1,0 +1,312 @@
+body {
+    margin: 0;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Huvudmeny */
+.main-menu {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    position: relative;
+    z-index: 1000;
+}
+
+.menu-container {
+    max-width: 100%;
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.menu-items li {
+    padding: 10px 10px;
+    text-align: center;
+    min-width: 100px;
+    position: relative;
+}
+
+.menu-items li:last-child {
+    margin-right: 0;
+}
+
+.menu-items li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600;
+}
+
+.menu-items li a:hover {
+    background-color: #555;
+}
+
+/* Dropdown-meny */
+.dropdown-parent {
+    position: relative;
+}
+
+/* Textfärg för dropdown-parent vid hover i skrivbordsvy */
+.dropdown-parent:hover a {
+    color: #d16004; /* Orange textfärg */
+}
+
+.dropdown {
+    display: none;
+    visibility: hidden; /* Gömmer dropdown helt när den inte är aktiv */
+    position: fixed;
+    top: 172.95px; /* Bild (96.95px) + margin-top (20px) + margin-bottom (20px) + menyhöjd (36px) */
+    left: 0;
+    right: 0;
+    width: 100vw; /* Full bredd av viewporten */
+    background-color: #ffffff; /* Vit bakgrund */
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1100;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+    opacity: 0;
+    pointer-events: none; /* Förhindra interaktion när dold */
+    display: flex;
+    flex-wrap: nowrap; /* Två spalter side-by-side */
+    min-height: 200px; /* Fast höjd för skrivbordsvy */
+    column-gap: 100px; /* Fast horisontellt avstånd mellan spalterna (100px) */
+    justify-content: flex-start; /* Vänsterjustera spalterna */
+}
+
+.dropdown-parent.active .dropdown {
+    display: flex;
+    visibility: visible; /* Visa dropdown när aktiv */
+    opacity: 1;
+    pointer-events: auto; /* Aktivera klick på dropdown-länkar */
+    z-index: 1200; /* Högre z-index för aktiv dropdown */
+}
+
+.dropdown .column {
+    display: flex;
+    flex-direction: column; /* Vertikal fyllning i varje spalt */
+    max-width: 200px; /* Maximal bredd för varje spalt */
+}
+
+.dropdown li {
+    padding: 10px 20px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.dropdown li a {
+    color: #000000 !important; /* Alltid svart text */
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600;
+    pointer-events: auto; /* Säkerställ att dropdown-länkar är klickbara */
+}
+
+.dropdown li a:hover {
+    color: #000000 !important; /* Säkerställ svart text vid hover */
+    background-color: #e0e0e0;
+}
+
+/* Huvudinnehåll */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 900;
+}
+
+.centered-image {
+    width: 479.85px;
+    height: 96.95px;
+    object-fit: contain;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Sidinnehåll */
+.page-content {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+    box-sizing: border-box;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+}
+
+.page-content h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.page-content p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Sidoruta */
+.sidebar {
+    position: fixed;
+    top: 20%;
+    right: 0;
+    height: 70%;
+    width: 500px;
+    background-color: #f4f4f4;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.tab {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    writing-mode: vertical-rl;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+    z-index: 1050;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600;
+}
+
+.sidebar.open .tab {
+    left: -40px;
+}
+
+.content {
+    padding: 20px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+}
+
+.content h2 {
+    margin-top: 0;
+}
+
+/* Responsiv design för mobila enheter */
+@media (max-width: 768px) {
+    .main-menu {
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+        touch-action: pan-x;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .main-menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    .menu-items {
+        justify-content: flex-start;
+    }
+
+    .centered-image {
+        width: 342.75px;
+        height: 69.25px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .page-content {
+        padding: 10px;
+    }
+
+    .page-content h1 {
+        font-size: 20px;
+    }
+
+    .page-content p {
+        font-size: 14px;
+    }
+
+    .sidebar {
+        width: calc(100% - 50px);
+        height: 70%;
+        top: 20%;
+        font-family: "Roboto", Arial, sans-serif;
+        font-weight: 300;
+    }
+
+    /* Inaktivera hover i mobilläge */
+    .dropdown-parent:hover .dropdown {
+        display: none;
+        visibility: hidden;
+    }
+
+    /* Textfärg för aktiv dropdown-parent i mobilläge */
+    .dropdown-parent.active a {
+        color: #d16004; /* Orange textfärg */
+    }
+
+    .dropdown-parent.active .dropdown {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed;
+        top: 145.25px; /* Bild (69.25px) + margin-top (20px) + margin-bottom (20px) + menyhöjd (36px) */
+        left: 0;
+        right: 0;
+        width: 100vw;
+        background-color: #ffffff;
+        z-index: 1200;
+        pointer-events: auto; /* Aktivera klick i mobilläge */
+    }
+
+    .dropdown {
+        flex-direction: column; /* Vertikal visning i mobilläge */
+        min-height: 360px; /* Fast höjd för mobilläge */
+        column-gap: 0; /* Inget spaltavstånd i mobilläge */
+        justify-content: flex-start; /* Ingen centrering i mobilläge */
+    }
+
+    .dropdown .column {
+        max-width: none; /* Ingen maxbredd i mobilläge */
+    }
+
+    .dropdown li {
+        flex: 0 0 100%; /* En per rad i mobilläge */
+        padding: 10px 0;
+    }
+
+    .dropdown li a {
+        color: #000000 !important; /* Alltid svart text */
+    }
+
+    .dropdown li a:hover {
+        color: #000000 !important; /* Säkerställ svart text vid hover */
+        background-color: #e0e0e0;
+    }
+}

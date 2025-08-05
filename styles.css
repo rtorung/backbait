@@ -271,19 +271,19 @@ body {
 
 /* Innehållsförteckning */
 .footer-toc {
-    max-width: 596px;
-    width: 100%;
-    margin: 20px auto;
+    width: 100vw;
+    background-color: #333; /* Samma som main-menu */
+    color: white;
+    padding: 20px 0;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
     font-family: "Roboto", Arial, sans-serif;
 }
 
 .footer-toc .toc-column {
-    width: 50%; /* Hälften av 596px */
-    min-width: 0;
+    width: 50%; /* Hälften av max 596px */
+    max-width: 298px;
     padding: 10px;
 }
 
@@ -291,7 +291,7 @@ body {
     font-size: 16px;
     font-weight: 600;
     margin: 0 0 10px;
-    color: #000000;
+    color: white;
     text-transform: uppercase;
 }
 
@@ -305,7 +305,7 @@ body {
 }
 
 .footer-toc li a {
-    color: #000000;
+    color: white;
     text-decoration: none;
     font-size: 14px;
     font-weight: 300;
@@ -352,7 +352,7 @@ body {
 
     .header-logo {
         margin: 17px auto;
-        width: 400px !important; /* Ursprunglig storlek för logo400.jpg */
+        width: 300px !important; /* Ny storlek för logo300.jpg */
         height: auto;
         max-width: none;
     }
@@ -365,6 +365,8 @@ body {
         width: 100vw; /* Full bredd på mobil */
         flex-direction: column; /* Stapla kolumner vertikalt */
         transform: none; /* Ingen transform på mobil */
+        opacity: 1; /* Säkerställ synlighet */
+        pointer-events: auto;
     }
 
     .dropdown .column {
@@ -404,11 +406,11 @@ body {
     }
 
     .footer-toc {
-        max-width: 100%;
-        flex-direction: column; /* Stapla kolumner vertikalt på mobil */
+        flex-direction: row; /* Två kolumner bredvid varandra */
     }
 
     .footer-toc .toc-column {
-        width: 100%;
+        width: 50%;
+        max-width: none;
     }
 }

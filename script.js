@@ -25,7 +25,11 @@ fetch('/Back-Fishing/header.html')
         document.getElementById('header').innerHTML = `
             <header class="site-header">
                 <a href="/Back-Fishing/index.html">
-                    <img src="/Back-Fishing/images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="/Back-Fishing/images/logo400.jpg">
+                        <source media="(min-width: 769px)" srcset="/Back-Fishing/images/logo596.jpg">
+                        <img src="/Back-Fishing/images/logo400.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
+                    </picture>
                 </a>
                 <nav class="main-menu" role="navigation">
                     <div class="menu-container">

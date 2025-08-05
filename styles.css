@@ -22,9 +22,10 @@ body {
 .header-logo {
     display: block;
     margin: 25px auto;
-    width: 596px !important; /* Ursprunglig storlek för logo596.jpg */
+    width: 596px !important; /* Ursprunglig storlek för desktop */
     height: auto;
-    max-width: none;
+    max-width: 100%; /* Undvik skalning */
+    image-rendering: crisp-edges; /* Förbättra rendering */
 }
 
 .site-header a, .site-header picture {
@@ -87,14 +88,13 @@ body {
 
 .dropdown-parent:hover > a,
 .dropdown-parent.active > a {
-    color: #3256a8; /* Ny färg vid hover/klick */
+    color: #3273a8; /* Ny färg vid hover/klick */
 }
 
 .dropdown {
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%); /* Initial centrering, justeras av JS */
+    left: 0; /* Direkt under FISKARTER på desktop */
     width: 596px; /* Samma bredd som logotypen på desktop */
     background-color: #ffffff;
     list-style: none;
@@ -105,7 +105,7 @@ body {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
     opacity: 0;
-    transform: translate(-50%, -10px);
+    transform: translateY(-10px);
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease; /* Mjuk animation */
     display: flex;
@@ -139,10 +139,10 @@ body {
     background-color: #e0e0e0;
 }
 
-/* JavaScript-kontrollerad för desktop och mobil */
+/* JavaScript-kontrollerad för mobil och tillgänglighet */
 .dropdown-parent.active .dropdown {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: translateY(0);
     pointer-events: auto;
 }
 
@@ -165,6 +165,7 @@ body {
     box-sizing: border-box;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
+    margin: 200px auto 20px; /* 200px från menyn */
 }
 
 .page-content h1 {
@@ -203,7 +204,7 @@ body {
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #3256a8; /* Ny färg */
+    background-color: #3273a8; /* Ny färg */
     color: white;
     padding: 10px;
     cursor: pointer;
@@ -237,7 +238,7 @@ body {
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
-    margin: 200px auto 20px; /* 200px från menyn, 20px nedanför */
+    margin: 200px auto 100px; /* 200px från menyn, 100px till footer-toc */
     position: relative; /* För att positionera text över bilden */
 }
 
@@ -245,6 +246,7 @@ body {
     width: 100%;
     height: auto;
     display: block;
+    image-rendering: crisp-edges; /* Förbättra rendering */
 }
 
 .image-text {
@@ -343,9 +345,10 @@ body {
 
     .header-logo {
         margin: 17px auto;
-        width: 300px !important; /* Ny storlek för logo300.jpg */
+        width: 300px !important; /* Storlek för logo300.webp */
         height: auto;
-        max-width: none;
+        max-width: 100%; /* Undvik skalning */
+        image-rendering: crisp-edges; /* Förbättra rendering */
     }
 
     .dropdown {
@@ -371,6 +374,7 @@ body {
 
     .page-content {
         padding: 10px;
+        margin: 200px auto 10px; /* 200px från menyn, 10px nedanför */
     }
 
     .page-content h1 {
@@ -389,7 +393,7 @@ body {
 
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
-        margin: 200px auto 10px; /* 200px från menyn, 10px nedanför */
+        margin: 200px auto 100px; /* 200px från menyn, 100px till footer-toc */
     }
 
     .image-text {

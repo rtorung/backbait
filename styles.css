@@ -7,6 +7,14 @@ body {
     min-height: 100vh;
 }
 
+/* Sidhuvud */
+.site-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 /* Huvudmeny */
 .main-menu {
     width: 100vw; /* Full fönsterbredd */
@@ -116,6 +124,15 @@ body {
     background-color: #e0e0e0;
 }
 
+/* Logotyp */
+.header-logo {
+    width: 40%;
+    aspect-ratio: 479.85 / 96.95; /* Behåller ursprungligt bildförhållande */
+    max-width: 479.85px;
+    object-fit: contain;
+    margin: 20px auto; /* Centrerad under menyraden */
+}
+
 /* Huvudinnehåll */
 .main-content {
     flex-grow: 1;
@@ -124,15 +141,6 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
-}
-
-.centered-image {
-    width: 40%;
-    aspect-ratio: 479.85 / 96.95; /* Behåller ursprungligt bildförhållande */
-    max-width: 479.85px;
-    object-fit: contain;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 /* Sidinnehåll */
@@ -226,12 +234,11 @@ body {
         justify-content: flex-start;
     }
 
-    .centered-image {
+    .header-logo {
         width: 80%;
         max-width: 342.75px;
         aspect-ratio: 479.85 / 96.95;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin: 20px auto;
     }
 
     .page-content {

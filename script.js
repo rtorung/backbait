@@ -24,7 +24,9 @@ fetch('/Back-Fishing/header.html')
         console.error('Fel vid laddning av header.html:', error.message);
         document.getElementById('header').innerHTML = `
             <header class="site-header">
-                <img src="/Back-Fishing/images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
+                <a href="/Back-Fishing/index.html">
+                    <img src="/Back-Fishing/images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
+                </a>
                 <nav class="main-menu" role="navigation">
                     <div class="menu-container">
                         <ul class="menu-items">
@@ -39,6 +41,27 @@ fetch('/Back-Fishing/header.html')
         initializeSidebar();
     });
 
+// Debounce-funktion för att begränsa resize-event
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Funktion för att stänga alla dropdowns
+function closeAllDropdowns() {
+    document.querySelectorAll('.dropdown-parent').forEach(parent => {
+        parent.classList.remove('active');
+        parent.querySelector('a').setAttribute('aria-expanded', 'false');
+    });
+}
+
 // Funktion för att initiera dropdown-menyer
 function initializeDropdowns() {
     const dropdownParents = document.querySelectorAll('.dropdown-parent');
@@ -52,14 +75,11 @@ function initializeDropdowns() {
             if (window.innerWidth <= 768) {
                 event.preventDefault();
                 const isActive = parent.classList.contains('active');
-                dropdownParents.forEach(otherParent => {
-                    otherParent.classList.remove('active');
-                    otherParent.querySelector('a').setAttribute('aria-expanded', 'false');
-                });
+                closeAllDropdowns();
                 if (!isActive) {
                     parent.classList.add('active');
                     link.setAttribute('aria-expanded', 'true');
-                    dropdown.querySelector('a').focus(); // Flytta fokus till första dropdown-länken
+                    dropdown.querySelector('a').focus();
                 }
             }
         });
@@ -70,10 +90,7 @@ function initializeDropdowns() {
                 event.preventDefault();
                 if (window.innerWidth <= 768) {
                     const isActive = parent.classList.contains('active');
-                    dropdownParents.forEach(otherParent => {
-                        otherParent.classList.remove('active');
-                        otherParent.querySelector('a').setAttribute('aria-expanded', 'false');
-                    });
+                    closeAllDropdowns();
                     if (!isActive) {
                         parent.classList.add('active');
                         link.setAttribute('aria-expanded', 'true');
@@ -81,8 +98,7 @@ function initializeDropdowns() {
                     }
                 }
             } else if (event.key === 'Escape') {
-                parent.classList.remove('active');
-                link.setAttribute('aria-expanded', 'false');
+                closeAllDropdowns();
                 link.focus();
             }
         });
@@ -90,10 +106,7 @@ function initializeDropdowns() {
         // Stäng dropdown vid klick utanför
         document.addEventListener('click', function(event) {
             if (window.innerWidth <= 768 && !event.target.closest('.dropdown-parent')) {
-                dropdownParents.forEach(p => {
-                    p.classList.remove('active');
-                    p.querySelector('a').setAttribute('aria-expanded', 'false');
-                });
+                closeAllDropdowns();
             }
         });
 
@@ -101,21 +114,15 @@ function initializeDropdowns() {
         dropdown.querySelectorAll('a').forEach(link => {
             link.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape') {
-                    parent.classList.remove('active');
-                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
+                    closeAllDropdowns();
                     parent.querySelector('a').focus();
                 }
             });
         });
     });
 
-    // Stäng dropdown vid fönsterstorleksändring
-    window.addEventListener('resize', function() {
-        dropdownParents.forEach(parent => {
-            parent.classList.remove('active');
-            parent.querySelector('a').setAttribute('aria-expanded', 'false');
-        });
-    });
+    // Stäng dropdown vid fönsterstorleksändring med debounce
+    window.addEventListener('resize', debounce(closeAllDropdowns, 100));
 }
 
 // Funktion för att initiera sidoruta
@@ -127,10 +134,11 @@ function initializeSidebar() {
         tab.addEventListener('click', function(event) {
             event.stopPropagation();
             sidebar.classList.toggle('open');
-            document.querySelectorAll('.dropdown-parent').forEach(parent => {
-                parent.classList.remove('active');
-                parent.querySelector('a').setAttribute('aria-expanded', 'false');
-            });
+            closeAllDropdowns();
+            if (sidebar.classList.contains('open')) {
+                const focusable = sidebar.querySelector('a, button, [tabindex="0"]');
+                if (focusable) focusable.focus();
+            }
         });
 
         document.addEventListener('click', function(event) {
@@ -139,15 +147,15 @@ function initializeSidebar() {
             }
         });
 
-        // Tangentbordsstöd för sidoruta
         tab.addEventListener('keydown', function(event) {
             if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
                 sidebar.classList.toggle('open');
-                document.querySelectorAll('.dropdown-parent').forEach(parent => {
-                    parent.classList.remove('active');
-                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
-                });
+                closeAllDropdowns();
+                if (sidebar.classList.contains('open')) {
+                    const focusable = sidebar.querySelector('a, button, [tabindex="0"]');
+                    if (focusable) focusable.focus();
+                }
             }
         });
     }

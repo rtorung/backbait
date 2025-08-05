@@ -12,7 +12,7 @@ body {
     width: 100%;
     background-color: #333;
     color: white;
-    position: absolute;
+    position: relative;
     z-index: 1000;
 }
 
@@ -67,7 +67,7 @@ body {
     display: none;
     visibility: hidden; /* Gömmer dropdown helt när den inte är aktiv */
     position: fixed;
-    top: 172.95px; /* Bild (96.95px) + margin-top (20px) + margin-bottom (20px) + menyhöjd (36px) */
+    top: 200px; /* Bild (96.95px) + margin-top (20px) + margin-bottom (20px) + menyhöjd (36px) */
     left: 0;
     right: 0;
     width: 100vw; /* Full bredd av viewporten */

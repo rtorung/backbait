@@ -9,7 +9,7 @@ body {
 
 /* Huvudmeny */
 .main-menu {
-    width: 100%;
+    width: 100vw; /* Full fönsterbredd */
     background-color: #333;
     color: white;
     position: relative;
@@ -17,7 +17,7 @@ body {
 }
 
 .menu-container {
-    max-width: 100%;
+    width: 100%; /* Fyller hela menyraden */
 }
 
 .menu-items {
@@ -65,7 +65,7 @@ body {
 
 .dropdown {
     position: absolute;
-    top: 100%;
+    top: 100%; /* Direkt under menyraden */
     left: 0;
     width: 400px; /* Fast bredd för dropdown */
     background-color: #ffffff;
@@ -211,7 +211,7 @@ body {
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
     .main-menu {
-        width: 100%;
+        width: 100vw; /* Full fönsterbredd */
         overflow-x: auto;
         scrollbar-width: none;
         touch-action: pan-x;
@@ -254,7 +254,7 @@ body {
 
     .dropdown {
         position: fixed;
-        top: 36px; /* Menyhöjd */
+        top: 36px; /* Menyradens höjd */
         left: 0;
         right: 0;
         width: 100vw;

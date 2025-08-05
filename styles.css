@@ -23,8 +23,8 @@ body {
     display: block;
     margin: 25px auto;
     width: 596px !important; /* Ursprunglig storlek för desktop */
+    max-width: 596px; /* Begränsa skalning */
     height: auto;
-    max-width: 100%; /* Undvik skalning */
     image-rendering: crisp-edges; /* Förbättra rendering */
 }
 
@@ -95,7 +95,7 @@ body {
     position: absolute;
     top: 100%;
     left: 0; /* Direkt under FISKARTER på desktop */
-    width: 596px; /* Samma bredd som logotypen på desktop */
+    width: 100vw; /* Hela fönstrets bredd */
     background-color: #ffffff;
     list-style: none;
     padding: 20px;
@@ -110,13 +110,16 @@ body {
     transition: opacity 0.3s ease, transform 0.3s ease; /* Mjuk animation */
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center; /* Centrera kolumnerna */
 }
 
 .dropdown .column {
-    width: 50%; /* Hälften av 596px */
+    width: calc(50% - 35px); /* Jämn fördelning, minus halva mellanrummet */
     min-width: 0;
+}
+
+.dropdown .column:nth-child(2) {
+    margin-left: 70px; /* 70px mellanrum mellan vänsterkanter */
 }
 
 .dropdown li {
@@ -144,6 +147,7 @@ body {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    display: block; /* Säkerställ visning på mobil */
 }
 
 /* Huvudinnehåll */
@@ -346,8 +350,8 @@ body {
     .header-logo {
         margin: 17px auto;
         width: 300px !important; /* Storlek för logo300.webp */
+        max-width: 300px; /* Begränsa skalning */
         height: auto;
-        max-width: 100%; /* Undvik skalning */
         image-rendering: crisp-edges; /* Förbättra rendering */
     }
 
@@ -361,10 +365,17 @@ body {
         transform: none; /* Ingen transform på mobil */
         opacity: 1; /* Säkerställ synlighet */
         pointer-events: auto;
+        display: none; /* Dold tills aktiverad */
+        z-index: 1200; /* Över andra element */
+    }
+
+    .dropdown-parent.active .dropdown {
+        display: block; /* Visa vid klick på mobil */
     }
 
     .dropdown .column {
         width: 100%; /* Full bredd per kolumn på mobil */
+        margin-left: 0; /* Ingen marginal på mobil */
     }
 
     .dropdown li {

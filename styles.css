@@ -15,6 +15,15 @@ body {
     width: 100%;
 }
 
+/* Logotyp */
+.header-logo {
+    width: 40%;
+    aspect-ratio: 479.85 / 96.95; /* Behåller ursprungligt bildförhållande */
+    max-width: 479.85px;
+    object-fit: contain;
+    margin: 20px auto; /* 20px marginal över och under, centrerad */
+}
+
 /* Huvudmeny */
 .main-menu {
     width: 100vw; /* Full fönsterbredd */
@@ -131,15 +140,6 @@ body {
     background-color: #e0e0e0;
 }
 
-/* Logotyp */
-.header-logo {
-    width: 40%;
-    aspect-ratio: 479.85 / 96.95; /* Behåller ursprungligt bildförhållande */
-    max-width: 479.85px;
-    object-fit: contain;
-    margin: 20px auto; /* Centrerad under menyraden */
-}
-
 /* Huvudinnehåll */
 .main-content {
     flex-grow: 1;
@@ -245,7 +245,7 @@ body {
         width: 80%;
         max-width: 342.75px;
         aspect-ratio: 479.85 / 96.95;
-        margin: 20px auto;
+        margin: 20px auto; /* 20px marginal över och under */
     }
 
     .page-content {

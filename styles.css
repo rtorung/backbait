@@ -94,7 +94,7 @@ body {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%); /* Centrera dropdown */
+    transform: translateX(-50%); /* Centrera i fönstret */
     width: 596px; /* Samma bredd som logotypen på desktop */
     background-color: #ffffff;
     list-style: none;
@@ -111,13 +111,12 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center; /* Centrera kolumnerna */
 }
 
 .dropdown .column {
-    flex: 1;
+    width: 50%; /* Hälften av 596px */
     min-width: 0;
-    max-width: 298px; /* Hälften av 596px */
 }
 
 .dropdown li {
@@ -300,18 +299,20 @@ body {
     }
 
     .dropdown {
-        width: 100vw; /* Full bredd på mobil */
-        flex-direction: column; /* Stapla kolumner vertikalt på mobil */
+        position: fixed;
+        top: 100%; /* Direkt under menyn */
         left: 0;
+        right: 0;
+        width: 100vw; /* Full bredd på mobil */
+        flex-direction: column; /* Stapla kolumner vertikalt */
         transform: none; /* Ingen transform på mobil */
     }
 
     .dropdown .column {
-        max-width: none;
+        width: 100%; /* Full bredd per kolumn på mobil */
     }
 
     .dropdown li {
-        flex: 0 0 100%;
         padding: 10px 20px;
         text-align: left; /* Vänsterjusterad text på mobil */
     }
@@ -332,19 +333,6 @@ body {
         width: calc(100% - 50px);
         height: 70%;
         top: 20%;
-    }
-
-    .dropdown {
-        position: fixed;
-        top: 100%; /* Direkt under menyn */
-        left: 0;
-        right: 0;
-        width: 100vw;
-        flex-direction: column;
-        min-height: auto;
-        max-height: 80vh;
-        overflow-y: auto;
-        transition: opacity 0.2s ease-in-out;
     }
 
     .image-card {

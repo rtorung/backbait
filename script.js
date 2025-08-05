@@ -24,26 +24,50 @@ document.addEventListener('DOMContentLoaded', function() {
             const link = parent.querySelector('a');
             const dropdown = parent.querySelector('.dropdown');
 
-            // Hantera klick för mobil och tillgänglighet
+            // Hantera klick för både desktop och mobil
             link.addEventListener('click', function(event) {
                 event.preventDefault();
                 const isActive = parent.classList.contains('active');
-                console.log('Dropdown clicked:', { isActive, parent }); // Felsökningslogg
+                console.log('Dropdown clicked:', { isActive, parent, width: window.innerWidth }); // Felsökningslogg
 
                 // Stäng andra dropdowns
                 dropdownParents.forEach(p => {
                     p.classList.remove('active');
                     p.querySelector('a').setAttribute('aria-expanded', 'false');
+                    p.querySelector('.dropdown').style.display = 'none';
                 });
 
                 if (!isActive) {
                     parent.classList.add('active');
                     link.setAttribute('aria-expanded', 'true');
-                    dropdown.style.display = 'block'; // Tvinga visning på mobil
+                    dropdown.style.display = window.innerWidth > 768 ? 'flex' : 'block'; // Flex för desktop, block för mobil
                 } else {
                     parent.classList.remove('active');
                     link.setAttribute('aria-expanded', 'false');
-                    dropdown.style.display = 'none'; // Dölj på mobil
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            // Hantera touch för mobil
+            link.addEventListener('touchstart', function(event) {
+                event.preventDefault();
+                const isActive = parent.classList.contains('active');
+                console.log('Dropdown touched:', { isActive, parent, width: window.innerWidth }); // Felsökningslogg
+
+                dropdownParents.forEach(p => {
+                    p.classList.remove('active');
+                    p.querySelector('a').setAttribute('aria-expanded', 'false');
+                    p.querySelector('.dropdown').style.display = 'none';
+                });
+
+                if (!isActive) {
+                    parent.classList.add('active');
+                    link.setAttribute('aria-expanded', 'true');
+                    dropdown.style.display = 'block';
+                } else {
+                    parent.classList.remove('active');
+                    link.setAttribute('aria-expanded', 'false');
+                    dropdown.style.display = 'none';
                 }
             });
         });
@@ -58,20 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-
-        // Hover för desktop
-        if (window.innerWidth > 768) {
-            dropdownParents.forEach(parent => {
-                parent.addEventListener('mouseenter', function() {
-                    parent.classList.add('active');
-                    parent.querySelector('a').setAttribute('aria-expanded', 'true');
-                });
-                parent.addEventListener('mouseleave', function() {
-                    parent.classList.remove('active');
-                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
-                });
-            });
-        }
     }
 
     // Sidoruta

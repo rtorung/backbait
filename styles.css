@@ -86,20 +86,20 @@ body {
     position: relative;
 }
 
-.dropdown-parent:hover > a,
 .dropdown-parent.active > a {
-    color: #3273a8; /* Ny färg vid hover/klick */
+    color: #3273a8; /* Färg vid klick */
 }
 
 .dropdown {
     position: absolute;
     top: 100%;
-    left: 0; /* Direkt under FISKARTER på desktop */
+    left: 0; /* Direkt under FISKARTER */
     width: 100vw; /* Hela fönstrets bredd */
+    max-width: 1200px; /* Begränsa på stora skärmar */
+    margin: 0 auto; /* Centrera inom fönstret */
     background-color: #ffffff;
     list-style: none;
     padding: 20px;
-    margin: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1100;
     font-family: "Roboto", Arial, sans-serif;
@@ -107,15 +107,20 @@ body {
     opacity: 0;
     transform: translateY(-10px);
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Mjuk animation */
+    transition: opacity 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: row;
     justify-content: center; /* Centrera kolumnerna */
+    box-sizing: border-box;
 }
 
 .dropdown .column {
     width: calc(50% - 35px); /* Jämn fördelning, minus halva mellanrummet */
     min-width: 0;
+}
+
+.dropdown .column:first-child {
+    padding-left: 20px; /* 20px från vänsterkanten */
 }
 
 .dropdown .column:nth-child(2) {
@@ -142,12 +147,12 @@ body {
     background-color: #e0e0e0;
 }
 
-/* JavaScript-kontrollerad för mobil och tillgänglighet */
+/* JavaScript-kontrollerad för desktop och mobil */
 .dropdown-parent.active .dropdown {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-    display: block; /* Säkerställ visning på mobil */
+    display: flex; /* Säkerställ visning */
 }
 
 /* Huvudinnehåll */
@@ -208,7 +213,7 @@ body {
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #3273a8; /* Ny färg */
+    background-color: #3273a8; /* Färg */
     color: white;
     padding: 10px;
     cursor: pointer;
@@ -357,16 +362,19 @@ body {
 
     .dropdown {
         position: fixed;
-        top: 100%; /* Direkt under menyn */
+        top: 110px; /* Under mobilhuvudet */
         left: 0;
         right: 0;
         width: 100vw; /* Full bredd på mobil */
+        max-width: none; /* Ingen maxbredd på mobil */
         flex-direction: column; /* Stapla kolumner vertikalt */
-        transform: none; /* Ingen transform på mobil */
+        transform: none; /* Ingen transform */
         opacity: 1; /* Säkerställ synlighet */
         pointer-events: auto;
         display: none; /* Dold tills aktiverad */
-        z-index: 1200; /* Över andra element */
+        z-index: 1300; /* Högre z-index */
+        padding: 20px;
+        box-sizing: border-box;
     }
 
     .dropdown-parent.active .dropdown {
@@ -375,12 +383,13 @@ body {
 
     .dropdown .column {
         width: 100%; /* Full bredd per kolumn på mobil */
-        margin-left: 0; /* Ingen marginal på mobil */
+        margin-left: 0; /* Ingen marginal */
+        padding-left: 0; /* Ingen padding på mobil */
     }
 
     .dropdown li {
         padding: 10px 20px;
-        text-align: left; /* Vänsterjusterad text på mobil */
+        text-align: left; /* Vänsterjusterad text */
     }
 
     .page-content {

@@ -24,6 +24,7 @@ fetch('/Back-Fishing/header.html')
         console.error('Fel vid laddning av header.html:', error.message);
         document.getElementById('header').innerHTML = `
             <header class="site-header">
+                <img src="/Back-Fishing/images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
                 <nav class="main-menu" role="navigation">
                     <div class="menu-container">
                         <ul class="menu-items">
@@ -32,7 +33,6 @@ fetch('/Back-Fishing/header.html')
                         </ul>
                     </div>
                 </nav>
-                <img src="/Back-Fishing/images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
             </header>
         `;
         initializeDropdowns();

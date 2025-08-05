@@ -17,9 +17,9 @@ body {
 
 /* Logotyp */
 .header-logo {
-    width: clamp(200px, 40%, 479.85px);
-    aspect-ratio: 479.85 / 96.95;
-    max-width: 479.85px;
+    width: clamp(200px, 40%, 596px);
+    aspect-ratio: 5.26 / 1;
+    max-width: 596px;
     object-fit: contain;
     margin: 20px auto;
 }
@@ -242,8 +242,8 @@ body {
     }
 
     .header-logo {
-        width: clamp(200px, 80%, 342.75px);
-        aspect-ratio: 479.85 / 96.95;
+        width: clamp(200px, 80%, 400px);
+        aspect-ratio: 5.26 / 1;
         margin: 20px auto;
     }
 

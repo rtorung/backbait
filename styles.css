@@ -15,18 +15,22 @@ body {
     justify-content: center;
     width: 100%;
     min-height: 163px; /* ~165px för desktop */
+    box-sizing: border-box;
 }
 
 /* Logotyp */
 .header-logo {
     display: block;
     margin: 25px auto;
-    width: 596px; /* Ursprunglig storlek för logo596.jpg */
+    width: 596px !important; /* Ursprunglig storlek för logo596.jpg */
+    height: auto;
+    max-width: none;
 }
 
 .site-header a, .site-header picture {
     display: block;
     text-align: center;
+    box-sizing: border-box;
 }
 
 /* Huvudmeny */
@@ -69,6 +73,7 @@ body {
     font-size: 16px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
+    text-transform: uppercase; /* Menytext i versaler */
 }
 
 .menu-items li a:hover {
@@ -139,6 +144,7 @@ body {
     font-size: 14px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
+    text-transform: uppercase; /* Dropdown-länkar i versaler */
 }
 
 .dropdown li a:hover {
@@ -252,7 +258,9 @@ body {
 
     .header-logo {
         margin: 17px auto;
-        width: 400px; /* Ursprunglig storlek för logo400.jpg */
+        width: 400px !important; /* Ursprunglig storlek för logo400.jpg */
+        height: auto;
+        max-width: none;
     }
 
     .page-content {

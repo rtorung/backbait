@@ -94,7 +94,7 @@ body {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%); /* Centrera i fönstret */
+    transform: translateX(-50%); /* Centrera i förhållande till header */
     width: 596px; /* Samma bredd som logotypen på desktop */
     background-color: #ffffff;
     list-style: none;
@@ -269,6 +269,65 @@ body {
     z-index: 10; /* Över bilden */
 }
 
+/* Innehållsförteckning */
+.footer-toc {
+    max-width: 596px;
+    width: 100%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: "Roboto", Arial, sans-serif;
+}
+
+.footer-toc .toc-column {
+    width: 50%; /* Hälften av 596px */
+    min-width: 0;
+    padding: 10px;
+}
+
+.footer-toc h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.footer-toc .toc-column:first-child h3 {
+    cursor: default; /* Oklickbar rubrik */
+}
+
+.footer-toc li {
+    list-style: none;
+    padding: 5px 0;
+}
+
+.footer-toc li a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.footer-toc li a:hover {
+    text-decoration: underline;
+}
+
+.footer-toc .toc-column:last-child a {
+    font-size: 16px;
+    font-weight: 600; /* Rubrikformatering för BETE, FILÈGUIDEN, RECEPT */
+}
+
+/* Sidfot */
+.footer {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+}
+
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
     .main-menu {
@@ -342,5 +401,14 @@ body {
 
     .image-text {
         font-size: 32px; /* Mindre fontstorlek för mobil */
+    }
+
+    .footer-toc {
+        max-width: 100%;
+        flex-direction: column; /* Stapla kolumner vertikalt på mobil */
+    }
+
+    .footer-toc .toc-column {
+        width: 100%;
     }
 }

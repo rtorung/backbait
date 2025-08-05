@@ -9,7 +9,8 @@ fetch('/Back-Fishing/header.html')
     })
     .then(data => {
         document.getElementById('header').innerHTML = data;
-        initializeEventListeners();
+        initializeDropdowns();
+        initializeSidebar();
         // Kontrollera att logotypen laddas
         const logo = document.querySelector('.header-logo');
         if (logo) {
@@ -34,48 +35,33 @@ fetch('/Back-Fishing/header.html')
                 <img src="/Back-Fishing/images/logo.jpg" alt="Fiskeguiden Logo" class="header-logo" loading="lazy">
             </header>
         `;
-        initializeEventListeners();
+        initializeDropdowns();
+        initializeSidebar();
     });
 
-// Funktion för att initiera händelsehanterare
-function initializeEventListeners() {
+// Funktion för att initiera dropdown-menyer
+function initializeDropdowns() {
     const dropdownParents = document.querySelectorAll('.dropdown-parent');
-    const sidebar = document.querySelector('.sidebar');
-    const tab = document.querySelector('.tab');
 
-    // Sidoruta
-    if (tab && sidebar) {
-        tab.addEventListener('click', function(event) {
-            event.stopPropagation();
-            sidebar.classList.toggle('open');
-            dropdownParents.forEach(parent => parent.classList.remove('active'));
-        });
-
-        document.addEventListener('click', function(event) {
-            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && !tab.contains(event.target)) {
-                sidebar.classList.remove('open');
-            }
-        });
-    }
-
-    // Dropdown-meny
     dropdownParents.forEach(parent => {
         const link = parent.querySelector('a');
-        link.setAttribute('tabindex', '0');
+        const dropdown = parent.querySelector('.dropdown');
 
         // Klick/touch för mobilläge
-        ['click', 'touchstart'].forEach(eventType => {
-            link.addEventListener(eventType, function(event) {
-                if (window.innerWidth <= 768) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    dropdownParents.forEach(otherParent => {
-                        if (otherParent !== parent) otherParent.classList.remove('active');
-                    });
-                    parent.classList.toggle('active');
-                    link.setAttribute('aria-expanded', parent.classList.contains('active'));
+        link.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault();
+                const isActive = parent.classList.contains('active');
+                dropdownParents.forEach(otherParent => {
+                    otherParent.classList.remove('active');
+                    otherParent.querySelector('a').setAttribute('aria-expanded', 'false');
+                });
+                if (!isActive) {
+                    parent.classList.add('active');
+                    link.setAttribute('aria-expanded', 'true');
+                    dropdown.querySelector('a').focus(); // Flytta fokus till första dropdown-länken
                 }
-            });
+            }
         });
 
         // Tangentbordsstöd
@@ -83,41 +69,43 @@ function initializeEventListeners() {
             if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
                 if (window.innerWidth <= 768) {
+                    const isActive = parent.classList.contains('active');
                     dropdownParents.forEach(otherParent => {
-                        if (otherParent !== parent) otherParent.classList.remove('active');
+                        otherParent.classList.remove('active');
+                        otherParent.querySelector('a').setAttribute('aria-expanded', 'false');
                     });
-                    parent.classList.toggle('active');
-                    link.setAttribute('aria-expanded', parent.classList.contains('active'));
+                    if (!isActive) {
+                        parent.classList.add('active');
+                        link.setAttribute('aria-expanded', 'true');
+                        dropdown.querySelector('a').focus();
+                    }
                 }
+            } else if (event.key === 'Escape') {
+                parent.classList.remove('active');
+                link.setAttribute('aria-expanded', 'false');
+                link.focus();
             }
         });
 
-        // Hover för skrivbordsvy
-        if (window.innerWidth > 768) {
-            parent.addEventListener('mouseenter', function() {
-                dropdownParents.forEach(otherParent => {
-                    if (otherParent !== parent) otherParent.classList.remove('active');
-                });
-                parent.classList.add('active');
-                link.setAttribute('aria-expanded', 'true');
-            });
-
-            parent.querySelector('.dropdown').addEventListener('mouseleave', function() {
-                parent.classList.remove('active');
-                link.setAttribute('aria-expanded', 'false');
-            });
-        }
-    });
-
-    // Stäng dropdown vid klick/touch utanför i mobilläge
-    ['click', 'touchstart'].forEach(eventType => {
-        document.addEventListener(eventType, function(event) {
+        // Stäng dropdown vid klick utanför
+        document.addEventListener('click', function(event) {
             if (window.innerWidth <= 768 && !event.target.closest('.dropdown-parent')) {
-                dropdownParents.forEach(parent => {
-                    parent.classList.remove('active');
-                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
+                dropdownParents.forEach(p => {
+                    p.classList.remove('active');
+                    p.querySelector('a').setAttribute('aria-expanded', 'false');
                 });
             }
+        });
+
+        // Hantera fokus för dropdown-länkar
+        dropdown.querySelectorAll('a').forEach(link => {
+            link.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    parent.classList.remove('active');
+                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
+                    parent.querySelector('a').focus();
+                }
+            });
         });
     });
 
@@ -128,4 +116,39 @@ function initializeEventListeners() {
             parent.querySelector('a').setAttribute('aria-expanded', 'false');
         });
     });
+}
+
+// Funktion för att initiera sidoruta
+function initializeSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const tab = document.querySelector('.tab');
+
+    if (tab && sidebar) {
+        tab.addEventListener('click', function(event) {
+            event.stopPropagation();
+            sidebar.classList.toggle('open');
+            document.querySelectorAll('.dropdown-parent').forEach(parent => {
+                parent.classList.remove('active');
+                parent.querySelector('a').setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (sidebar.classList.contains('open') && !sidebar.contains(event.target) && !tab.contains(event.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Tangentbordsstöd för sidoruta
+        tab.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                sidebar.classList.toggle('open');
+                document.querySelectorAll('.dropdown-parent').forEach(parent => {
+                    parent.classList.remove('active');
+                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    }
 }

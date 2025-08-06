@@ -161,7 +161,7 @@ body {
     box-sizing: border-box;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
-    margin: 20px auto; /* Justerad från 200px för att undvika extra utrymme */
+    margin: 0 auto 20px; /* Ingen topp-marginal, 20px botten */
 }
 
 /* Bildkort */
@@ -172,7 +172,7 @@ body {
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
-    margin: 20px auto 100px; /* Justerad från 200px för att undvika extra utrymme */
+    margin: 200px auto 100px; /* 200px från sidhuvudet, 100px till footer-toc */
     position: relative; /* För att behålla struktur */
 }
 
@@ -333,7 +333,7 @@ body {
 
     .page-content {
         padding: 10px;
-        margin: 10px auto; /* Justerad för mobil */
+        margin: 0 auto 10px; /* Ingen topp-marginal, 10px botten */
     }
 
     .page-content h1 {
@@ -346,7 +346,7 @@ body {
 
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
-        margin: 10px auto 50px; /* Justerad för mobil */
+        margin: 200px auto 50px; /* 200px från sidhuvudet, 50px till footer-toc */
     }
 
     .image-text {

@@ -79,10 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Markera aktiv sida
+    // Markera aktiv sida i både huvudmeny och dropdown
     function markActivePage() {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const menuLinks = document.querySelectorAll('.menu-items li a');
+        const menuLinks = document.querySelectorAll('.menu-items li a, .dropdown li a');
         menuLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (href === currentPage || (currentPage === '' && href === 'index.html')) {

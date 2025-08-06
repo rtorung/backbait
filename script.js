@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const isActive = parent.classList.contains('active');
                         const mainMenu = document.querySelector('.main-menu');
                         const menuRect = mainMenu.getBoundingClientRect();
-                        const topPosition = (menuRect.bottom + window.scrollY + 5) + 'px'; // Ökat offset till +5
+                        const topPosition = (menuRect.bottom + window.scrollY) + 'px'; // Ingen extra offset
 
                         console.log(`${eventType} on dropdown:`, { 
                             isActive, 
@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!event.target.closest('.dropdown-parent')) {
                 dropdownParents.forEach(parent => {
                     parent.classList.remove('active');
-                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
-                    parent.querySelector('.dropdown').style.display = 'none';
+                    p.querySelector('a').setAttribute('aria-expanded', 'false');
+                    p.querySelector('.dropdown').style.display = 'none';
                 });
             }
         });

@@ -86,7 +86,6 @@ body {
 
 .dropdown {
     position: fixed;
-    top: 163px; /* Under sidhuvudet på desktop */
     left: 0;
     right: 0; /* Säkerställ full bredd */
     width: 100%; /* Hela fönstrets bredd */
@@ -98,9 +97,9 @@ body {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
     opacity: 0;
-    transform: translateY(-10px); /* Startposition för animation */
+    transform: translateY(-10px); /* Startposition för slide-down */
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Smidig animation */
+    transition: opacity 1s ease, transform 1s ease; /* 1s animation */
     display: flex;
     flex-direction: row;
     justify-content: flex-start; /* Starta från vänster */
@@ -109,7 +108,7 @@ body {
 
 .dropdown-parent.active .dropdown {
     opacity: 1;
-    transform: translateY(0); /* Slutposition för animation */
+    transform: translateY(0); /* Slutposition för slide-down */
     pointer-events: auto;
     display: flex; /* Säkerställ visning */
 }
@@ -129,6 +128,7 @@ body {
 
 .dropdown li {
     padding: 10px 20px;
+    margin: 0; /* Säkerställ ingen extra marginal */
     text-align: left; /* Vänsterjusterad text */
     box-sizing: border-box;
 }
@@ -361,9 +361,9 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
         flex-direction: column; /* Stapla kolumner vertikalt */
         opacity: 0;
-        transform: translateY(-10px); /* Startposition för animation */
+        transform: translateY(-10px); /* Startposition för slide-down */
         pointer-events: none;
-        transition: opacity 0.3s ease, transform 0.3s ease; /* Smidig animation */
+        transition: opacity 1s ease, transform 1s ease; /* 1s animation */
         display: none; /* Dold tills aktiverad */
         z-index: 1500; /* Högre z-index */
         padding: 20px;
@@ -374,18 +374,19 @@ body {
     .dropdown-parent.active .dropdown {
         display: block; /* Visa vid klick på mobil */
         opacity: 1;
-        transform: translateY(0); /* Slutposition för animation */
+        transform: translateY(0); /* Slutposition för slide-down */
         pointer-events: auto;
     }
 
     .dropdown .column {
         width: 100%; /* Full bredd per kolumn på mobil */
         margin-left: 0; /* Ingen marginal */
-        padding-left: 0; /* Ingen padding på mobil */
+        padding-left: 0; /* Ingen extra padding */
     }
 
     .dropdown li {
-        padding: 10px 20px;
+        padding: 10px 20px; /* Konsekvent padding för vertikal justering */
+        margin: 0; /* Säkerställ ingen extra marginal */
         text-align: left; /* Vänsterjusterad text */
     }
 

@@ -1,33 +1,37 @@
-<header class="site-header">
-    <a href="/Back-Fishing/index.html">
-        <picture style="display: block;">
-            <source media="(max-width: 768px)" type="image/webp" srcset="/Back-Fishing/images/logo600.webp">
-            <source media="(max-width: 768px)" type="image/jpeg" srcset="/Back-Fishing/images/logo600.jpg">
-            <source media="(min-width: 769px)" type="image/webp" srcset="/Back-Fishing/images/logo1200.webp">
-            <source media="(min-width: 769px)" type="image/jpeg" srcset="/Back-Fishing/images/logo1200.jpg">
-            <img src="/Back-Fishing/images/logo300.jpg" alt="Backfishing Logo" class="header-logo" width="596" loading="lazy">
-        </picture>
-    </a>
-    <nav class="main-menu" role="navigation">
+<div class="site-header">
+    <img src="/Back-Fishing/images/logo600.webp" alt="Backfishing logotyp" class="header-logo">
+    <nav class="main-menu">
         <div class="menu-container">
             <ul class="menu-items">
+                <li><a href="index.html">BACKFISHING</a></li>
                 <li class="dropdown-parent">
-                    <a href="#" aria-expanded="false">FISKARTEN</a>
+                    <a href="#" aria-expanded="false">FISKARTER</a>
                     <ul class="dropdown">
-                        <li><a href="/Back-Fishing/abborre.html">ABBORRE</a></li>
-                        <li><a href="/Back-Fishing/gadda.html">GÄDDA</a></li>
-                        <li><a href="/Back-Fishing/gos.html">GÖS</a></li>
-                        <li><a href="/Back-Fishing/harr.html">HARR</a></li>
-                        <li><a href="/Back-Fishing/lax.html">LAX</a></li>
-                        <li><a href="/Back-Fishing/regnbage.html">REGNBÅGE</a></li>
-                        <li><a href="/Back-Fishing/roding.html">RÖDING</a></li>
-                        <li><a href="/Back-Fishing/oring.html">ÖRING</a></li>
+                        <div class="column">
+                            <li><a href="abborre.html">ABBORRE</a></li>
+                            <li><a href="gadda.html">GÄDDA</a></li>
+                            <li><a href="gos.html">GÖS</a></li>
+                            <li><a href="harr.html">HARR</a></li>
+                        </div>
+                        <div class="column">
+                            <li><a href="lax.html">LAX</a></li>
+                            <li><a href="regnbage.html">REGNBÅGE</a></li>
+                            <li><a href="roding.html">RÖDING</a></li>
+                            <li><a href="oring.html">ÖRING</a></li>
+                        </div>
                     </ul>
                 </li>
-                <li><a href="/Back-Fishing/bete.html">BETET</a></li>
-                <li><a href="/Back-Fishing/foradla.html">FÖRÄDLA</a></li>
-                <li><a href="/Back-Fishing/tallrik.html">PÅ TALLRIKEN</a></li>
+                <li><a href="betet.html">BETET</a></li>
+                <li class="dropdown-parent">
+                    <a href="#" aria-expanded="false">FÖRÄDLA</a>
+                    <ul class="dropdown">
+                        <div class="column">
+                            <li><a href="forbereda.html">FÖRBEREDA</a></li>
+                            <li><a href="recept.html">RECEPT</a></li>
+                        </div>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>
-</header>
+</div>

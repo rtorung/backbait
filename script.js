@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             document.getElementById('header').innerHTML = data;
             initializeDropdown();
-            markActivePage(); // Lägg till anrop för att markera aktiv sida
+            markActivePage(); // Markera aktiv sida efter header-laddning
         })
         .catch(error => console.error('Error loading header:', error));
 
@@ -36,16 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         const mainMenu = document.querySelector('.main-menu');
                         const menuRect = mainMenu.getBoundingClientRect();
                         const topPosition = (menuRect.bottom + window.scrollY) + 'px'; // Ingen extra offset
-
-                        console.log(`${eventType} on dropdown:`, { 
-                            isActive, 
-                            parentId: parent.id || 'no-id', 
-                            width: window.innerWidth, 
-                            display: dropdown.style.display,
-                            computedDisplay: window.getComputedStyle(dropdown).display,
-                            topPosition,
-                            menuBottom: menuRect.bottom
-                        }); // Felsökningslogg
 
                         // Stäng andra dropdowns
                         dropdownParents.forEach(p => {
@@ -94,7 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         const menuLinks = document.querySelectorAll('.menu-items li a');
         menuLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
+            const href = link.getAttribute('href');
+            if (href === currentPage || (currentPage === '' && href === 'index.html')) {
                 link.parentElement.classList.add('active-page');
             }
         });

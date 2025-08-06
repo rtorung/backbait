@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdownParents.forEach(parent => {
                     parent.classList.remove('active');
                     parent.querySelector('a').setAttribute('aria-expanded', 'false');
-                    parent.querySelector('.dropdown').style.display = 'none';
+                    p.querySelector('.dropdown').style.display = 'none';
                 });
             }
         });
@@ -90,12 +90,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Sidoruta
-    const sidebar = document.querySelector('.sidebar');
-    const tab = document.querySelector('.tab');
-
-    tab.addEventListener('click', function() {
-        sidebar.classList.toggle('open');
-    });
 });

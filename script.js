@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             document.getElementById('header').innerHTML = data;
             initializeDropdown();
+            markActivePage(); // Lägg till anrop för att markera aktiv sida
         })
         .catch(error => console.error('Error loading header:', error));
 
@@ -84,6 +85,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     parent.querySelector('a').setAttribute('aria-expanded', 'false');
                     parent.querySelector('.dropdown').style.display = 'none';
                 });
+            }
+        });
+    }
+
+    // Markera aktiv sida
+    function markActivePage() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const menuLinks = document.querySelectorAll('.menu-items li a');
+        menuLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.parentElement.classList.add('active-page');
             }
         });
     }

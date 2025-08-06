@@ -149,7 +149,6 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
-    margin-top: 163px; /* Matchar .site-header min-height i desktop */
 }
 
 /* Sidinnehåll */
@@ -172,7 +171,7 @@ body {
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
-    margin: 200px auto 100px; /* 200px från sidhuvudet, 100px till footer-toc */
+    margin: 200px auto 100px; /* 200px från sidhuvudets botten, 100px till footer-toc */
     position: relative; /* För att behålla struktur */
 }
 
@@ -328,7 +327,7 @@ body {
     }
 
     .main-content {
-        margin-top: 110px; /* Matchar .site-header min-height i mobil */
+        /* Ingen margin-top, eftersom .image-card hanterar avstånd */
     }
 
     .page-content {
@@ -346,7 +345,7 @@ body {
 
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
-        margin: 200px auto 50px; /* 200px från sidhuvudet, 50px till footer-toc */
+        margin: 200px auto 50px; /* 200px från sidhuvudets botten, 50px till footer-toc */
     }
 
     .image-text {

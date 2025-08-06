@@ -195,7 +195,7 @@ body {
 .small-image-card img {
     width: 100%;
     height: auto;
-    aspect-ratio: 3 / 2; /* 3:2-förhållande */
+    aspect-ratio: 1 / 1; /* 1:1-förhållande */
     display: block;
     image-rendering: auto; /* Standard rendering */
 }
@@ -429,7 +429,7 @@ body {
     }
 
     .small-image-card {
-        width: 288px; /* 250px * 1.15, ökad med 15% */
+        width: 331px; /* 288px * 1.15, ytterligare 15% ökning */
         flex-shrink: 0; /* Förhindra att kort krymper */
         margin: 0 10px; /* 20px mellan kort */
         padding: 10px;
@@ -450,7 +450,7 @@ body {
     .small-image-card img {
         width: 100%;
         height: auto;
-        aspect-ratio: 3 / 2; /* 3:2-förhållande */
+        aspect-ratio: 1 / 1; /* 1:1-förhållande */
         display: block;
         image-rendering: auto;
     }

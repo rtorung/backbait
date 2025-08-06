@@ -172,7 +172,7 @@ body {
 /* Sidoruta */
 .sidebar {
     position: fixed;
-    top: 20%;
+    top: 220px; /* Justera för att matcha mobilvyns proportionella avstånd */
     right: 0;
     height: 70%;
     width: 500px;
@@ -192,8 +192,8 @@ body {
 .tab {
     position: absolute;
     left: -40px;
-    top: 0; /* Flytta till överkant */
-    transform: none; /* Ta bort centrering */
+    top: 0; /* Överkant av sidorutan */
+    transform: none; /* Ingen transformering */
     background-color: #3273a8; /* Färg */
     color: white;
     padding: 10px;
@@ -401,7 +401,7 @@ body {
     .sidebar {
         width: calc(100% - 50px);
         height: 70%;
-        top: 20%;
+        top: 20%; /* Behåll ursprunglig position i mobilvyn */
     }
 
     .image-card {

@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const isActive = parent.classList.contains('active');
                         const mainMenu = document.querySelector('.main-menu');
                         const menuRect = mainMenu.getBoundingClientRect();
-                        const topPosition = (menuRect.bottom + window.scrollY + 2) + 'px'; // Dynamisk position under main-menu
+                        const topPosition = (menuRect.bottom + window.scrollY + 5) + 'px'; // Ökat offset till +5
 
                         console.log(`${eventType} on dropdown:`, { 
                             isActive, 

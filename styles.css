@@ -362,7 +362,7 @@ body {
         opacity: 0;
         transform: translateY(-10px); /* Startposition för slide-down */
         pointer-events: none;
-        transition: opacity 1s ease, transform 1s ease; /* 1s animation */
+        transition: opacity 0,3s ease, transform 0,3s ease; /* 1s animation */
         display: none; /* Dold tills aktiverad */
         z-index: 1500; /* Högre z-index */
         padding: 20px;
@@ -412,7 +412,7 @@ body {
         margin-top: 10px; /* 10px under bilden */
         margin-bottom: 10px; /* 10px till nedre ramen */
         margin-left: 0; /* I linje med bildens vänsterkant */
-        color: white; /* Samma som menu-container */
+        color: #333;
         font-size: 32px; /* Mindre fontstorlek för mobil */
         text-align: left; /* Vänsterjusterad */
     }

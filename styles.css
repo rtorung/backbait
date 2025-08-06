@@ -93,17 +93,25 @@ body {
     background-color: #ffffff;
     list-style: none;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Förbättrad skugga */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
     z-index: 1100;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
     opacity: 0;
+    transform: translateY(-10px); /* Startposition för animation */
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smidig animation */
     display: flex;
     flex-direction: row;
     justify-content: flex-start; /* Starta från vänster */
     box-sizing: border-box;
+}
+
+.dropdown-parent.active .dropdown {
+    opacity: 1;
+    transform: translateY(0); /* Slutposition för animation */
+    pointer-events: auto;
+    display: flex; /* Säkerställ visning */
 }
 
 .dropdown .column {
@@ -137,13 +145,6 @@ body {
 
 .dropdown li a:hover {
     background-color: #e0e0e0;
-}
-
-/* JavaScript-kontrollerad för desktop och mobil */
-.dropdown-parent.active .dropdown {
-    opacity: 1;
-    pointer-events: auto;
-    display: flex; /* Säkerställ visning */
 }
 
 /* Huvudinnehåll */
@@ -352,16 +353,17 @@ body {
     }
 
     .dropdown {
-        position: fixed;
         left: 0;
         right: 0;
         width: 100%; /* Full bredd på mobil */
         min-height: 200px; /* Säkerställ synlighet */
         background-color: #ffffff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Förbättrad skugga */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
         flex-direction: column; /* Stapla kolumner vertikalt */
-        opacity: 1; /* Säkerställ synlighet */
-        pointer-events: auto;
+        opacity: 0;
+        transform: translateY(-10px); /* Startposition för animation */
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Smidig animation */
         display: none; /* Dold tills aktiverad */
         z-index: 1500; /* Högre z-index */
         padding: 20px;
@@ -371,6 +373,9 @@ body {
 
     .dropdown-parent.active .dropdown {
         display: block; /* Visa vid klick på mobil */
+        opacity: 1;
+        transform: translateY(0); /* Slutposition för animation */
+        pointer-events: auto;
     }
 
     .dropdown .column {

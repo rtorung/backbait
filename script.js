@@ -1,67 +1,98 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Hantera dropdown-menyer
-    const dropdownParents = document.querySelectorAll(".dropdown-parent");
+    // Ladda header och footer dynamiskt
+    fetch("/Back-Fishing/header.html")
+        .then(response => {
+            if (!response.ok) throw new Error("Kunde inte ladda header.html");
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById("header").innerHTML = data;
+            console.log("Header laddad");
+            initializeMenu(); // Initiera meny efter att header är laddad
+        })
+        .catch(error => {
+            console.error("Fel vid laddning av header:", error);
+        });
 
-    dropdownParents.forEach(parent => {
-        parent.addEventListener("click", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
+    fetch("/Back-Fishing/footer.html")
+        .then(response => {
+            if (!response.ok) throw new Error("Kunde inte ladda footer.html");
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById("footer").innerHTML = data;
+            console.log("Footer laddad");
+        })
+        .catch(error => {
+            console.error("Fel vid laddning av footer:", error);
+        });
 
-            const dropdown = this.querySelector(".dropdown");
-            const isActive = this.classList.contains("active");
+    // Funktion för att initiera meny (dropdowns och aktiv sida)
+    function initializeMenu() {
+        // Hantera dropdown-menyer
+        const dropdownParents = document.querySelectorAll(".dropdown-parent");
 
-            // Stäng alla andra dropdown-menyer
-            dropdownParents.forEach(p => {
-                if (p !== this) {
-                    p.classList.remove("active");
-                    const otherDropdown = p.querySelector(".dropdown");
-                    if (otherDropdown) {
-                        otherDropdown.style.display = "none";
-                        console.log("Closed dropdown:", p.textContent);
+        dropdownParents.forEach(parent => {
+            parent.addEventListener("click", function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const dropdown = this.querySelector(".dropdown");
+                const isActive = this.classList.contains("active");
+
+                // Stäng alla andra dropdown-menyer
+                dropdownParents.forEach(p => {
+                    if (p !== this) {
+                        p.classList.remove("active");
+                        const otherDropdown = p.querySelector(".dropdown");
+                        if (otherDropdown) {
+                            otherDropdown.style.display = "none";
+                            console.log("Closed dropdown:", p.textContent);
+                        }
                     }
+                });
+
+                // Växla denna dropdown
+                if (!isActive) {
+                    this.classList.add("active");
+                    dropdown.style.display = "flex"; // Desktop: flex, Mobil: block (hanteras i CSS)
+                    const header = document.querySelector(".site-header");
+                    const mainMenu = document.querySelector(".main-menu");
+                    const topPosition = header.offsetHeight + mainMenu.offsetHeight;
+                    dropdown.style.top = `${topPosition}px`;
+                    console.log("Opened dropdown:", this.textContent, "Top position:", topPosition);
+                } else {
+                    this.classList.remove("active");
+                    dropdown.style.display = "none";
+                    console.log("Closed dropdown:", this.textContent);
                 }
             });
+        });
 
-            // Växla denna dropdown
-            if (!isActive) {
-                this.classList.add("active");
-                dropdown.style.display = "flex"; // Desktop: flex, Mobil: block (hanteras i CSS)
-                const header = document.querySelector(".site-header");
-                const mainMenu = document.querySelector(".main-menu");
-                const topPosition = header.offsetHeight + mainMenu.offsetHeight;
-                dropdown.style.top = `${topPosition}px`;
-                console.log("Opened dropdown:", this.textContent, "Top position:", topPosition);
-            } else {
-                this.classList.remove("active");
-                dropdown.style.display = "none";
-                console.log("Closed dropdown:", this.textContent);
+        // Stäng dropdown vid klick utanför
+        document.addEventListener("click", function(event) {
+            if (!event.target.closest(".dropdown-parent")) {
+                dropdownParents.forEach(parent => {
+                    parent.classList.remove("active");
+                    const dropdown = parent.querySelector(".dropdown");
+                    if (dropdown) {
+                        dropdown.style.display = "none";
+                        console.log("Click outside dropdown detected, closed:", parent.textContent);
+                    }
+                });
             }
         });
-    });
 
-    // Stäng dropdown vid klick utanför
-    document.addEventListener("click", function(event) {
-        if (!event.target.closest(".dropdown-parent")) {
-            dropdownParents.forEach(parent => {
-                parent.classList.remove("active");
-                const dropdown = parent.querySelector(".dropdown");
-                if (dropdown) {
-                    dropdown.style.display = "none";
-                    console.log("Click outside dropdown detected, closed:", parent.textContent);
-                }
-            });
-        }
-    });
-
-    // Markera aktiv sida
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
-    const menuLinks = document.querySelectorAll(".menu-items a, .dropdown a");
-    menuLinks.forEach(link => {
-        const href = link.getAttribute("href").split("/").pop();
-        if (href === currentPath) {
-            link.parentElement.classList.add("active-page");
-        }
-    });
+        // Markera aktiv sida
+        const currentPath = window.location.pathname.split("/").pop() || "index.html";
+        const menuLinks = document.querySelectorAll(".menu-items a, .dropdown a");
+        menuLinks.forEach(link => {
+            const href = link.getAttribute("href").split("/").pop();
+            if (href === currentPath) {
+                link.parentElement.classList.add("active-page");
+            }
+        });
+    }
 
     // Hantera prickindikatorer för små bildkort i mobil
     const container = document.querySelector(".small-image-card-container");

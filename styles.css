@@ -326,9 +326,15 @@ body {
     align-items: center;
 }
 
-.footer-right {
+.footer-center {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.footer-right {
+    display: flex;
     align-items: center;
 }
 
@@ -337,7 +343,6 @@ body {
     font-size: 14px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
-    margin-right: 10px;
 }
 
 .footer a {
@@ -547,10 +552,14 @@ body {
     }
 
     .footer-left {
-        margin-bottom: 10px; /* Utrymme mellan vänster och höger innehåll */
+        margin-bottom: 10px; /* Utrymme till center i mobil */
+    }
+
+    .footer-center {
+        margin: 0;
     }
 
     .footer-right {
-        margin-top: 10px;
+        margin-top: 10px; /* Utrymme från center i mobil */
     }
 }

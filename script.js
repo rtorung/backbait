@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!event.target.closest('.dropdown-parent')) {
                 dropdownParents.forEach(parent => {
                     parent.classList.remove('active');
-                    p.querySelector('a').setAttribute('aria-expanded', 'false');
-                    p.querySelector('.dropdown').style.display = 'none';
+                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
+                    parent.querySelector('.dropdown').style.display = 'none';
                 });
             }
         });

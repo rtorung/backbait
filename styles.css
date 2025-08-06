@@ -171,7 +171,7 @@ body {
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
-    margin: 250px auto 100px; /* 250px från sidhuvudets botten, 100px till footer-toc */
+    margin: 250px auto 100px !important; /* 250px från sidhuvudets botten, 100px till footer-toc */
     position: relative; /* För att behålla struktur */
 }
 
@@ -345,7 +345,7 @@ body {
 
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
-        margin: 400px auto 50px; /* 400px från sidhuvudets botten, 50px till footer-toc */
+        margin: 400px auto 50px !important; /* 400px från sidhuvudets botten, 50px till footer-toc */
     }
 
     .image-text {

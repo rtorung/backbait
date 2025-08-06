@@ -8,7 +8,39 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <header class="site-header" id="header"></header>
+    <header class="site-header">
+        <a href="/Back-Fishing/index.html">
+            <img class="header-logo" 
+                 src="/Back-Fishing/images/logo600.webp" 
+                 srcset="/Back-Fishing/images/logo600-300.webp 300w, /Back-Fishing/images/logo600.webp 596w" 
+                 sizes="(max-width: 768px) 300px, 596px" 
+                 alt="Backfishing logotyp" 
+                 loading="lazy">
+        </a>
+        <nav class="main-menu">
+            <div class="menu-container">
+                <ul class="menu-items">
+                    <li><a href="/Back-Fishing/index.html">HEM</a></li>
+                    <li class="dropdown-parent">
+                        <a href="#">FISKARTER</a>
+                        <ul class="dropdown">
+                            <li><a href="/Back-Fishing/abborre.html">Abborre</a></li>
+                            <li><a href="/Back-Fishing/gadda.html">Gädda</a></li>
+                            <li><a href="/Back-Fishing/gos.html">Gös</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-parent">
+                        <a href="#">FÖRÄDLA</a>
+                        <ul class="dropdown">
+                            <li><a href="/Back-Fishing/forbereda.html">Förbereda</a></li>
+                            <li><a href="/Back-Fishing/recept.html">Recept</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/Back-Fishing/kontakt.html">KONTAKT</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
     <main class="main-content">
         <div class="small-image-card-container">
             <div class="small-image-card">
@@ -64,7 +96,29 @@
             <p>Backfishing är dedikerat till att främja hållbart fiske och dela kunskap om Sveriges rika fiskemiljöer.</p>
         </div>
     </main>
-    <footer class="footer-toc" id="footer"></footer>
+    <footer class="footer-toc">
+        <div class="toc-column">
+            <h3>FISKARTER</h3>
+            <ul>
+                <li><a href="/Back-Fishing/abborre.html">Abborre</a></li>
+                <li><a href="/Back-Fishing/gadda.html">Gädda</a></li>
+                <li><a href="/Back-Fishing/gos.html">Gös</a></li>
+            </ul>
+        </div>
+        <div class="toc-column">
+            <h3>FÖRÄDLA</h3>
+            <ul>
+                <li><a href="/Back-Fishing/forbereda.html">Förbereda</a></li>
+                <li><a href="/Back-Fishing/recept.html">Recept</a></li>
+            </ul>
+        </div>
+        <div class="toc-column">
+            <h3>KONTAKT</h3>
+            <ul>
+                <li><a href="/Back-Fishing/kontakt.html">Kontakta oss</a></li>
+            </ul>
+        </div>
+    </footer>
     <div class="footer"></div>
 </body>
 </html>

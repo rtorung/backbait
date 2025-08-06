@@ -163,7 +163,49 @@ body {
     margin: 0 auto 20px; /* Ingen topp-marginal, 20px botten */
 }
 
-/* Bildkort */
+/* Container för små bildkort */
+.small-image-card-container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 250px auto 20px !important; /* 250px från sidhuvudet, 20px till nästa kort */
+    box-sizing: border-box;
+}
+
+/* Små bildkort */
+.small-image-card {
+    width: calc((100% - 40px) / 3); /* Dela bredden minus 2x20px marginaler */
+    background-color: white;
+    padding: 10px; /* 10px vit marginal runt bilden */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Samma skugga som .image-card */
+    box-sizing: border-box;
+    margin: 0 10px; /* 20px total marginal mellan kort (10px per sida) */
+}
+
+.small-image-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2; /* 3:2-förhållande */
+    display: block;
+    image-rendering: auto; /* Standard rendering */
+}
+
+.small-image-card .image-text {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0;
+    color: #333;
+    font-size: 24px; /* Mindre än .image-card för att matcha mindre kort */
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600;
+    text-align: left;
+    z-index: 10;
+}
+
+/* Stort bildkort */
 .image-card {
     max-width: 1100px;
     width: 100%;
@@ -171,7 +213,7 @@ body {
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
-    margin: 250px auto 100px !important; /* 250px från sidhuvudets botten, 100px till footer-toc */
+    margin: 20px auto 100px !important; /* 20px från små kort, 100px till footer-toc */
     position: relative; /* För att behålla struktur */
 }
 
@@ -343,16 +385,51 @@ body {
         font-size: 14px;
     }
 
+    .small-image-card-container {
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column; /* Stapla kort vertikalt i mobil */
+        margin: 400px auto 20px !important; /* 400px från sidhuvudet, 20px till nästa kort */
+        box-sizing: border-box;
+    }
+
+    .small-image-card {
+        width: 100%; /* Full bredd i mobil */
+        margin: 0 auto 20px; /* 20px mellan korten vertikalt */
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+    }
+
+    .small-image-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2; /* 3:2-förhållande */
+        display: block;
+        image-rendering: auto;
+    }
+
+    .small-image-card .image-text {
+        font-size: 20px; /* Mindre för mobil */
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 0;
+        color: #333;
+        text-align: left;
+    }
+
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
-        margin: 400px auto 50px !important; /* 400px från sidhuvudets botten, 50px till footer-toc */
+        margin: 20px auto 50px !important; /* 20px från små kort, 50px till footer-toc */
     }
 
     .image-text {
         position: relative; /* Relativ positionering */
         margin-top: 10px; /* 10px under bilden */
         margin-bottom: 10px; /* 10px till nedre ramen */
-        margin-left: 0; /* I linje med bildens vänsterkant */
+        margin-left: 0; /* I linje med bildens vänkerkant */
         color: #333;
         font-size: 24px; /* Mindre fontstorlek för mobil */
         text-align: left; /* Vänsterjusterad */

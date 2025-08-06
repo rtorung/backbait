@@ -69,6 +69,7 @@ body {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; /* Ta bort blå klickeffekt i mobil */
 }
 
 .menu-items li.active-page a {
@@ -130,6 +131,7 @@ body {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; /* Ta bort blå klickeffekt i mobil */
 }
 
 .dropdown li.active-page a {
@@ -204,6 +206,7 @@ body {
     z-index: 1050;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
+    -webkit-tap-highlight-color: transparent; /* Ta bort blå klickeffekt i mobil */
 }
 
 .sidebar.open .tab {
@@ -303,6 +306,7 @@ body {
     font-size: 14px;
     font-weight: 300;
     text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent; /* Ta bort blå klickeffekt i mobil */
 }
 
 .footer-toc li a:hover {

@@ -28,6 +28,10 @@ body {
     image-rendering: auto; /* Standard rendering */
 }
 
+.site-header a {
+    text-decoration: none; /* Ta bort understrykning för logglänken */
+}
+
 /* Huvudmeny */
 .main-menu {
     width: 100%;
@@ -98,7 +102,7 @@ body {
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     display: flex;
-    flex-direction: row;
+    flex-direction: column; /* Enkel lista i desktop */
     justify-content: center; /* Centrera innehåll */
     box-sizing: border-box;
 }
@@ -108,12 +112,6 @@ body {
     transform: translateY(0); /* Slutposition för slide-down */
     pointer-events: auto;
     display: flex; /* Säkerställ visning */
-}
-
-.dropdown .column {
-    width: calc(50% - 35px); /* Jämn fördelning */
-    min-width: 0;
-    margin: 0 35px; /* Symmetriskt mellanrum för centrering */
 }
 
 .dropdown li {
@@ -194,8 +192,8 @@ body {
 .tab {
     position: absolute;
     left: -40px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0; /* Flytta till överkant */
+    transform: none; /* Ta bort centrering */
     background-color: #3273a8; /* Färg */
     color: white;
     padding: 10px;

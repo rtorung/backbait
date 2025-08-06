@@ -30,20 +30,24 @@ document.addEventListener('DOMContentLoaded', function() {
             ['click', 'touchstart'].forEach(eventType => {
                 link.addEventListener(eventType, function(event) {
                     event.preventDefault();
-                    event.stopPropagation(); // Förhindra att klick bubblar upp och triggar stängning
+                    event.stopPropagation(); // Förhindra att klick bubblar upp
                     clearTimeout(timeout);
                     timeout = setTimeout(() => {
                         const isActive = parent.classList.contains('active');
                         const mainMenu = document.querySelector('.main-menu');
                         const menuRect = mainMenu.getBoundingClientRect();
-                        const topPosition = (menuRect.bottom + window.scrollY) + 'px'; // Ingen extra offset
+                        const topPosition = (menuRect.bottom + window.scrollY) + 'px';
 
                         // Stäng andra dropdowns
                         dropdownParents.forEach(p => {
-                            if (p !== parent) { // Undvik att stänga den aktiva dropdownen
+                            if (p !== parent) {
                                 p.classList.remove('active');
-                                p.querySelector('a').setAttribute('aria-expanded', 'false');
-                                p.querySelector('.dropdown').style.display = 'none';
+                                const pLink = p.querySelector('a');
+                                const pDropdown = p.querySelector('.dropdown');
+                                if (pLink && pDropdown) {
+                                    pLink.setAttribute('aria-expanded', 'false');
+                                    pDropdown.style.display = 'none';
+                                }
                             }
                         });
 
@@ -52,10 +56,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             link.setAttribute('aria-expanded', 'true');
                             dropdown.style.top = topPosition;
                             dropdown.style.display = window.innerWidth > 768 ? 'flex' : 'block';
+                            console.log(`Opened dropdown: ${link.textContent}`); // Felsökningslogg
                         } else {
                             parent.classList.remove('active');
                             link.setAttribute('aria-expanded', 'false');
                             dropdown.style.display = 'none';
+                            console.log(`Closed dropdown: ${link.textContent}`); // Felsökningslogg
                         }
                     }, 100); // Debounce 100ms
                 });
@@ -65,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
+                    event.stopPropagation(); // Förhindra att tangentbordsstöd bubblar
                     link.dispatchEvent(new Event('click'));
                 }
             });
@@ -76,9 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!target.closest('.dropdown-parent')) {
                 console.log('Click outside dropdown detected'); // Felsökningslogg
                 dropdownParents.forEach(parent => {
-                    parent.classList.remove('active');
-                    parent.querySelector('a').setAttribute('aria-expanded', 'false');
-                    parent.querySelector('.dropdown').style.display = 'none';
+                    const link = parent.querySelector('a');
+                    const dropdown = parent.querySelector('.dropdown');
+                    if (link && dropdown) {
+                        parent.classList.remove('active');
+                        link.setAttribute('aria-expanded', 'false');
+                        dropdown.style.display = 'none';
+                    }
                 });
             }
         });

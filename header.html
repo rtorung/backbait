@@ -1,33 +1,57 @@
-<header class="site-header">
-    <a href="/Back-Fishing/index.html">
-        <picture style="display: block;">
-            <source media="(max-width: 768px)" type="image/webp" srcset="/Back-Fishing/images/logo600.webp">
-            <source media="(max-width: 768px)" type="image/jpeg" srcset="/Back-Fishing/images/logo600.jpg">
-            <source media="(min-width: 769px)" type="image/webp" srcset="/Back-Fishing/images/logo1200.webp">
-            <source media="(min-width: 769px)" type="image/jpeg" srcset="/Back-Fishing/images/logo1200.jpg">
-            <img src="/Back-Fishing/images/logo300.jpg" alt="Backfishing Logo" class="header-logo" width="596" loading="lazy">
-        </picture>
-    </a>
-    <nav class="main-menu" role="navigation">
-        <div class="menu-container">
-            <ul class="menu-items">
-                <li class="dropdown-parent">
-                    <a href="#" aria-expanded="false">FISKARTEN</a>
-                    <ul class="dropdown">
-                        <li><a href="/Back-Fishing/abborre.html">ABBORRE</a></li>
-                        <li><a href="/Back-Fishing/gadda.html">GÄDDA</a></li>
-                        <li><a href="/Back-Fishing/gos.html">GÖS</a></li>
-                        <li><a href="/Back-Fishing/harr.html">HARR</a></li>
-                        <li><a href="/Back-Fishing/lax.html">LAX</a></li>
-                        <li><a href="/Back-Fishing/regnbage.html">REGNBÅGE</a></li>
-                        <li><a href="/Back-Fishing/roding.html">RÖDING</a></li>
-                        <li><a href="/Back-Fishing/oring.html">ÖRING</a></li>
-                    </ul>
-                </li>
-                <li><a href="/Back-Fishing/bete.html">BETET</a></li>
-                <li><a href="/Back-Fishing/foradla.html">FÖRÄDLA</a></li>
-                <li><a href="/Back-Fishing/tallrik.html">PÅ TALLRIKEN</a></li>
-            </ul>
-        </div>
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header class="site-header">
+        <img src="./images/logo600.webp" alt="Backfishing logotyp" class="header-logo" loading="lazy">
+    </header>
+    <nav class="main-menu">
+        <ul class="menu-items">
+            <li class="dropdown-parent" id="fiskarten-parent">
+                <a href="#" aria-expanded="false" aria-controls="fiskarten-dropdown">FISKARTEN</a>
+                <ul class="dropdown" id="fiskarten-dropdown">
+                    <div class="column">
+                        <li><a href="./abborre.html">ABBORRE</a></li>
+                        <li><a href="./gadda.html">GÄDDA</a></li>
+                        <li><a href="./gos.html">GÖS</a></li>
+                        <li><a href="./harr.html">HARR</a></li>
+                    </div>
+                    <div class="column">
+                        <li><a href="./lax.html">LAX</a></li>
+                        <li><a href="./regnbage.html">REGNBÅGE</a></li>
+                        <li><a href="./roding.html">RÖDING</a></li>
+                        <li><a href="./oring.html">ÖRING</a></li>
+                    </div>
+                </ul>
+            </li>
+            <li class="dropdown-parent" id="betet-parent">
+                <a href="#" aria-expanded="false" aria-controls="betet-dropdown">BETET</a>
+                <ul class="dropdown" id="betet-dropdown">
+                    <div class="column">
+                        <li><a href="./bete.html">BETE</a></li>
+                    </div>
+                </ul>
+            </li>
+            <li class="dropdown-parent" id="foradla-parent">
+                <a href="#" aria-expanded="false" aria-controls="foradla-dropdown">FÖRÄDLA</a>
+                <ul class="dropdown" id="foradla-dropdown">
+                    <div class="column">
+                        <li><a href="./fileguiden.html">FILÈGUIDEN</a></li>
+                    </div>
+                </ul>
+            </li>
+            <li class="dropdown-parent" id="tallriken-parent">
+                <a href="#" aria-expanded="false" aria-controls="tallriken-dropdown">PÅ TALLRIKEN</a>
+                <ul class="dropdown" id="tallriken-dropdown">
+                    <div class="column">
+                        <li><a href="./recept.html">RECEPT</a></li>
+                    </div>
+                </ul>
+            </li>
+        </ul>
     </nav>
-</header>
+</body>
+</html>

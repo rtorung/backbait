@@ -176,12 +176,20 @@ body {
 
 /* Små bildkort */
 .small-image-card {
-    width: calc((100% - 40px) / 3); /* Dela bredden minus 2x20px marginaler */
+    width: calc((100% - 60px) / 4); /* Dela bredden minus 3x20px marginaler */
     background-color: white;
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Samma skugga som .image-card */
     box-sizing: border-box;
     margin: 0 10px; /* 20px total marginal mellan kort (10px per sida) */
+}
+
+.small-image-card:first-child {
+    margin-left: 0; /* Ingen marginal till vänster för första kortet */
+}
+
+.small-image-card:last-child {
+    margin-right: 0; /* Ingen marginal till höger för sista kortet */
 }
 
 .small-image-card img {
@@ -203,6 +211,24 @@ body {
     font-weight: 600;
     text-align: left;
     z-index: 10;
+}
+
+/* Prickindikatorer (endast mobil) */
+.card-indicator {
+    display: none; /* Dold i desktop */
+}
+
+.indicator-dot {
+    width: 2px;
+    height: 2px;
+    background-color: #ccc; /* Inaktiv prick */
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px; /* 5px mellan prickar */
+}
+
+.indicator-dot.active {
+    background-color: #333; /* Aktiv prick */
 }
 
 /* Stort bildkort */
@@ -369,7 +395,7 @@ body {
     }
 
     .main-content {
-        /* Ingen margin-top, eftersom .image-card hanterar avstånd */
+        /* Ingen margin-top, eftersom .small-image-card-container hanterar avstånd */
     }
 
     .page-content {
@@ -389,18 +415,36 @@ body {
         max-width: 100%;
         width: 100%;
         display: flex;
-        flex-direction: column; /* Stapla kort vertikalt i mobil */
+        flex-direction: row; /* Horisontell scroll */
+        overflow-x: auto; /* Aktivera horisontell scroll */
+        scroll-snap-type: x mandatory; /* Snäpp till kort */
         margin: 400px auto 20px !important; /* 400px från sidhuvudet, 20px till nästa kort */
         box-sizing: border-box;
+        -webkit-overflow-scrolling: touch; /* Smidig scroll i mobil */
+        scrollbar-width: none; /* Dölj scrollbar */
+    }
+
+    .small-image-card-container::-webkit-scrollbar {
+        display: none; /* Dölj scrollbar i WebKit */
     }
 
     .small-image-card {
-        width: 100%; /* Full bredd i mobil */
-        margin: 0 auto 20px; /* 20px mellan korten vertikalt */
+        width: 250px; /* Fast bredd för konsistens med desktop */
+        flex-shrink: 0; /* Förhindra att kort krymper */
+        margin: 0 10px; /* 20px mellan kort */
         padding: 10px;
         background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
+        scroll-snap-align: center; /* Centrera kort vid scroll */
+    }
+
+    .small-image-card:first-child {
+        margin-left: 20px; /* 20px från vänsterkanten */
+    }
+
+    .small-image-card:last-child {
+        margin-right: 20px; /* 20px från högerkanten */
     }
 
     .small-image-card img {
@@ -420,19 +464,25 @@ body {
         text-align: left;
     }
 
+    .card-indicator {
+        display: flex; /* Visa prickar i mobil */
+        justify-content: center;
+        margin: 10px auto 20px; /* 10px från kort, 20px till stort kort */
+    }
+
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
         margin: 20px auto 50px !important; /* 20px från små kort, 50px till footer-toc */
     }
 
     .image-text {
-        position: relative; /* Relativ positionering */
-        margin-top: 10px; /* 10px under bilden */
-        margin-bottom: 10px; /* 10px till nedre ramen */
-        margin-left: 0; /* I linje med bildens vänkerkant */
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 0;
         color: #333;
         font-size: 24px; /* Mindre fontstorlek för mobil */
-        text-align: left; /* Vänsterjusterad */
+        text-align: left;
     }
 
     .footer-toc {

@@ -96,9 +96,18 @@ document.addEventListener("DOMContentLoaded", function() {
             const cardWidth = 331 + 20; // Kortbredd (331px) + marginal (20px)
             const scrollPosition = container.scrollLeft;
             const containerWidth = container.clientWidth;
+            const maxScroll = container.scrollWidth - containerWidth;
 
-            // Beräkna vilket kort som är mest synligt (majoritet i viewport)
-            const visibleCardIndex = Math.round((scrollPosition + containerWidth / 2) / cardWidth);
+            // Beräkna vilket kort som är mest synligt (baserat på centrum av viewport)
+            let visibleCardIndex = Math.round(scrollPosition / cardWidth);
+
+            // Begränsa index till giltiga värden (0–3 för 4 kort)
+            visibleCardIndex = Math.max(0, Math.min(visibleCardIndex, dots.length - 1));
+
+            // Särskild hantering för sista kortet
+            if (scrollPosition >= maxScroll - 10) { // 10px tolerans för att fånga sista kortet
+                visibleCardIndex = dots.length - 1;
+            }
 
             // Uppdatera aktiva pricken
             dots.forEach((dot, index) => {

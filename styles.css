@@ -195,7 +195,7 @@ body {
 .small-image-card img {
     width: 100%;
     height: auto;
-    aspect-ratio: 1 / 1; /* 1:1-förhållande */
+    aspect-ratio: 3 / 2; /* 3:2-förhållande */
     display: block;
     image-rendering: auto; /* Standard rendering */
 }
@@ -450,7 +450,7 @@ body {
     .small-image-card img {
         width: 100%;
         height: auto;
-        aspect-ratio: 1 / 1; /* 1:1-förhållande */
+        aspect-ratio: 3 / 2; /* 3:2-förhållande */
         display: block;
         image-rendering: auto;
     }

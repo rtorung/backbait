@@ -272,6 +272,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: flex-start; /* Säkerställ att kolumner börjar från toppen */
     font-family: "Roboto", Arial, sans-serif;
 }
 
@@ -279,6 +280,11 @@ body {
     width: 50%; /* Hälften av max 596px */
     max-width: 298px;
     padding: 10px;
+}
+
+.footer-toc .toc-column:last-child {
+    padding-top: 0; /* Ta bort topp-padding för att justera "BETE" */
+    margin-top: 0; /* Säkerställ ingen topp-marginal */
 }
 
 .footer-toc h3 {
@@ -359,7 +365,7 @@ body {
         min-height: 200px; /* Säkerställ synlighet */
         background-color: #ffffff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
-        flex-direction: column; /* Stapla kolumner vertikalt */
+        flex-direction: column; /* En vertikal lista */
         opacity: 0;
         transform: translateY(-10px); /* Startposition för slide-down */
         pointer-events: none;
@@ -376,12 +382,6 @@ body {
         opacity: 1;
         transform: translateY(0); /* Slutposition för slide-down */
         pointer-events: auto;
-    }
-
-    .dropdown .column {
-        width: 100%; /* Full bredd per kolumn på mobil */
-        margin-left: 0; /* Ingen marginal */
-        padding-left: 0; /* Ingen extra padding */
     }
 
     .dropdown li {
@@ -420,10 +420,16 @@ body {
 
     .footer-toc {
         flex-direction: row; /* Två kolumner bredvid varandra */
+        align-items: flex-start; /* Säkerställ att kolumner börjar från toppen */
     }
 
     .footer-toc .toc-column {
         width: 50%;
         max-width: none;
+    }
+
+    .footer-toc .toc-column:last-child {
+        padding-top: 0; /* Ta bort topp-padding för att justera "BETE" */
+        margin-top: 0; /* Säkerställ ingen topp-marginal */
     }
 }

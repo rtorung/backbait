@@ -85,7 +85,7 @@ body {
     left: 0;
     right: 0; /* Säkerställ full bredd */
     width: 100%; /* Hela fönstrets bredd */
-    background-color: #f4f4f4; /* Samma som sidorutan */
+    background-color: white;
     list-style: none;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
@@ -356,7 +356,7 @@ body {
         right: 0;
         width: 100%; /* Full bredd på mobil */
         min-height: 200px; /* Säkerställ synlighet */
-        background-color: #f4f4f4; /* Samma som sidorutan */
+        background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
         flex-direction: column; /* En vertikal lista */
         opacity: 0;

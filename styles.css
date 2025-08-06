@@ -128,7 +128,7 @@ body {
 }
 
 .dropdown li a {
-    color: #000000 !important;
+    color: #000000;
     text-decoration: none;
     display: block;
     font-size: 14px;
@@ -137,8 +137,8 @@ body {
     text-transform: uppercase;
 }
 
-.dropdown li a:hover {
-    background-color: #e0e0e0;
+.dropdown li.active-page a {
+    text-decoration: underline;
 }
 
 .dropdown li a:focus {

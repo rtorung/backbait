@@ -16,6 +16,11 @@ body {
     width: 100%;
     min-height: 163px; /* ~165px för desktop */
     box-sizing: border-box;
+    position: fixed; /* Fixera sidhuvudet högst upp */
+    top: 0;
+    left: 0;
+    z-index: 2000; /* Högre än andra element */
+    background-color: white; /* Säkerställ bakgrund för att undvika genomskinlighet */
 }
 
 /* Logotyp */
@@ -144,6 +149,7 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
+    margin-top: 163px; /* Matchar .site-header min-height i desktop */
 }
 
 /* Sidinnehåll */
@@ -155,18 +161,7 @@ body {
     box-sizing: border-box;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
-    margin: 200px auto 20px; /* 200px från menyn */
-}
-
-.page-content h1 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.page-content p {
-    font-size: 16px;
-    margin-bottom: 10px;
+    margin: 20px auto; /* Justerad från 200px för att undvika extra utrymme */
 }
 
 /* Bildkort */
@@ -177,7 +172,7 @@ body {
     padding: 10px; /* 10px vit marginal runt bilden */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
-    margin: 200px auto 100px; /* 200px från menyn, 100px till footer-toc */
+    margin: 20px auto 100px; /* Justerad från 200px för att undvika extra utrymme */
     position: relative; /* För att behålla struktur */
 }
 
@@ -332,9 +327,13 @@ body {
         text-align: left; /* Vänsterjusterad text */
     }
 
+    .main-content {
+        margin-top: 110px; /* Matchar .site-header min-height i mobil */
+    }
+
     .page-content {
         padding: 10px;
-        margin: 100px auto 10px; /* Minska från 200px/10px */
+        margin: 10px auto; /* Justerad för mobil */
     }
 
     .page-content h1 {
@@ -347,7 +346,7 @@ body {
 
     .image-card {
         max-width: 100%; /* Responsiv bredd för mobil */
-        margin: 100px auto 50px; /* Minska från 200px/100px */
+        margin: 10px auto 50px; /* Justerad för mobil */
     }
 
     .image-text {

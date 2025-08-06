@@ -89,7 +89,7 @@ body {
     left: 0;
     right: 0; /* Säkerställ full bredd */
     width: 100%; /* Hela fönstrets bredd */
-    background-color: #ffffff;
+    background-color: #dedede; /* Ny färg */
     list-style: none;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
@@ -99,10 +99,10 @@ body {
     opacity: 0;
     transform: translateY(-10px); /* Startposition för slide-down */
     pointer-events: none;
-    transition: opacity 1s ease, transform 1s ease; /* 1s animation */
+    transition: opacity 1.5s ease, transform 1.5s ease; /* 1.5s animation */
     display: flex;
     flex-direction: row;
-    justify-content: flex-start; /* Starta från vänster */
+    justify-content: center; /* Centrera innehåll */
     box-sizing: border-box;
 }
 
@@ -114,16 +114,9 @@ body {
 }
 
 .dropdown .column {
-    width: calc(50% - 35px); /* Jämn fördelning, minus halva mellanrummet */
+    width: calc(50% - 35px); /* Jämn fördelning */
     min-width: 0;
-}
-
-.dropdown .column:first-child {
-    padding-left: 20px; /* 20px från vänsterkanten */
-}
-
-.dropdown .column:nth-child(2) {
-    margin-left: 70px; /* 70px mellanrum mellan vänsterkanter */
+    margin: 0 35px; /* Symmetriskt mellanrum för centrering */
 }
 
 .dropdown li {
@@ -363,13 +356,13 @@ body {
         right: 0;
         width: 100%; /* Full bredd på mobil */
         min-height: 200px; /* Säkerställ synlighet */
-        background-color: #ffffff;
+        background-color: #dedede; /* Ny färg */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
         flex-direction: column; /* En vertikal lista */
         opacity: 0;
         transform: translateY(-10px); /* Startposition för slide-down */
         pointer-events: none;
-        transition: opacity 1s ease, transform 1s ease; /* 1s animation */
+        transition: opacity 1.5s ease, transform 1.5s ease; /* 1.5s animation */
         display: none; /* Dold tills aktiverad */
         z-index: 1500; /* Högre z-index */
         padding: 20px;

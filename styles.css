@@ -437,6 +437,8 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
         scroll-snap-align: center; /* Centrera kort vid scroll */
+        position: relative; /* Säkerställ att kortet ligger över andra element */
+        z-index: 10; /* Högre än .card-indicator */
     }
 
     .small-image-card:first-child {
@@ -467,7 +469,7 @@ body {
     .card-indicator {
         display: flex; /* Visa prickar i mobil */
         justify-content: center;
-        margin: 20px auto 20px; /* 20px från kort, 20px till stort kort */
+        margin: 30px auto 20px; /* 30px från kort, 20px till stort kort */
     }
 
     .image-card {

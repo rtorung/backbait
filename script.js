@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ['click', 'touchstart'].forEach(eventType => {
                 link.addEventListener(eventType, function(event) {
                     event.preventDefault();
+                    event.stopPropagation(); // Förhindra att klick bubblar upp och triggar stängning
                     clearTimeout(timeout);
                     timeout = setTimeout(() => {
                         const isActive = parent.classList.contains('active');
@@ -39,9 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         // Stäng andra dropdowns
                         dropdownParents.forEach(p => {
-                            p.classList.remove('active');
-                            p.querySelector('a').setAttribute('aria-expanded', 'false');
-                            p.querySelector('.dropdown').style.display = 'none';
+                            if (p !== parent) { // Undvik att stänga den aktiva dropdownen
+                                p.classList.remove('active');
+                                p.querySelector('a').setAttribute('aria-expanded', 'false');
+                                p.querySelector('.dropdown').style.display = 'none';
+                            }
                         });
 
                         if (!isActive) {
@@ -69,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Stäng dropdown vid klick utanför
         document.addEventListener('click', function(event) {
-            if (!event.target.closest('.dropdown-parent')) {
+            const target = event.target;
+            if (!target.closest('.dropdown-parent')) {
+                console.log('Click outside dropdown detected'); // Felsökningslogg
                 dropdownParents.forEach(parent => {
                     parent.classList.remove('active');
                     parent.querySelector('a').setAttribute('aria-expanded', 'false');

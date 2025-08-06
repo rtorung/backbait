@@ -1,98 +1,40 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Ladda header
-    fetch('/Back-Fishing/header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-            initializeDropdown();
-        })
-        .catch(error => console.error('Error loading header:', error));
-
-    // Ladda footer
-    fetch('/Back-Fishing/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-
-    // Dropdown-menyhantering
-    function initializeDropdown() {
-        const dropdownParents = document.querySelectorAll('.dropdown-parent');
-        let timeout;
-
-        dropdownParents.forEach(parent => {
-            const link = parent.querySelector('a');
-            const dropdown = parent.querySelector('.dropdown');
-
-            // Hantera klick och touch med debounce
-            ['click', 'touchstart'].forEach(eventType => {
-                link.addEventListener(eventType, function(event) {
-                    event.preventDefault();
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        const isActive = parent.classList.contains('active');
-                        const mainMenu = document.querySelector('.main-menu');
-                        const menuRect = mainMenu.getBoundingClientRect();
-                        const topPosition = (menuRect.bottom + window.scrollY) + 'px'; // Ingen extra offset
-
-                        console.log(`${eventType} on dropdown:`, { 
-                            isActive, 
-                            parentId: parent.id || 'no-id', 
-                            width: window.innerWidth, 
-                            display: dropdown.style.display,
-                            computedDisplay: window.getComputedStyle(dropdown).display,
-                            topPosition,
-                            menuBottom: menuRect.bottom
-                        }); // Felsökningslogg
-
-                        // Stäng andra dropdowns
-                        dropdownParents.forEach(p => {
-                            p.classList.remove('active');
-                            p.querySelector('a').setAttribute('aria-expanded', 'false');
-                            p.querySelector('.dropdown').style.display = 'none';
-                        });
-
-                        if (!isActive) {
-                            parent.classList.add('active');
-                            link.setAttribute('aria-expanded', 'true');
-                            dropdown.style.top = topPosition;
-                            dropdown.style.display = window.innerWidth > 768 ? 'flex' : 'block';
-                        } else {
-                            parent.classList.remove('active');
-                            link.setAttribute('aria-expanded', 'false');
-                            dropdown.style.display = 'none';
-                        }
-                    }, 100); // Debounce 100ms
-                });
-            });
-
-            // Tangentbordsstöd för tillgänglighet
-            link.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    link.dispatchEvent(new Event('click'));
-                }
-            });
-        });
-
-        // Stäng dropdown vid klick utanför
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.dropdown-parent')) {
-                dropdownParents.forEach(parent => {
-                    parent.classList.remove('active');
-                    p.querySelector('a').setAttribute('aria-expanded', 'false');
-                    p.querySelector('.dropdown').style.display = 'none';
-                });
-            }
-        });
-    }
-
-    // Sidoruta
-    const sidebar = document.querySelector('.sidebar');
-    const tab = document.querySelector('.tab');
-
-    tab.addEventListener('click', function() {
-        sidebar.classList.toggle('open');
-    });
-});
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Backfishing främjar hållbart fiske och delar kunskap om Sveriges rika fiskemiljöer.">
+    <meta name="keywords" content="fiske, hållbart fiske, Sverige, fiskarter">
+    <meta property="og:title" content="Backfishing - Hållbart fiske i Sverige">
+    <meta property="og:description" content="Backfishing främjar hållbart fiske och delar kunskap om Sveriges rika fiskemiljöer.">
+    <meta property="og:image" content="./images/logo.jpg">
+    <title>Backfishing</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div id="header"></div>
+    <main class="main-content">
+        <div class="image-card">
+            <img src="./images/backfishing-low.jpg" 
+                 srcset="./images/backfishing-low.jpg 300w, ./images/backfishing.jpg 1100w"
+                 sizes="(max-width: 768px) 300px, 1100px"
+                 alt="Bild på en fiskemiljö från Backfishing"
+                 loading="lazy">
+            <div class="image-text">BACKFISHING</div>
+        </div>
+        <article class="page-content">
+            <h1>Om Oss</h1>
+            <p>Backfishing är dedikerat till att främja hållbart fiske och dela kunskap om Sveriges rika fiskemiljöer.</p>
+        </article>
+        <div class="sidebar">
+            <div class="tab">Mer Info</div>
+            <div class="content">
+                <h2>Om Backfishing</h2>
+                <p>Vi arbetar för att sprida kunskap om hållbara fiskemetoder och bevara Sveriges vattenmiljöer.</p>
+            </div>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script src="./script.js"></script>
+</body>
+</html>

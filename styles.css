@@ -229,7 +229,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga */
     box-sizing: border-box;
     margin: 200px auto 100px; /* 200px från menyn, 100px till footer-toc */
-    position: relative; /* För att positionera text över bilden */
+    position: relative; /* För att behålla struktur */
 }
 
 .image-card img {
@@ -240,16 +240,15 @@ body {
 }
 
 .image-text {
-    position: absolute;
-    bottom: 20%; /* 20% upp från underkanten */
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative; /* Ändrat till relativ positionering */
+    margin-top: 10px; /* 10px under bilden */
+    margin-bottom: 10px; /* 10px till nedre ramen */
     color: white;
     font-size: 48px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600; /* Fontvikt 600 */
     text-align: center;
-    z-index: 10; /* Över bilden */
+    z-index: 10; /* Behåll z-index för säkerhet */
 }
 
 /* Innehållsförteckning */
@@ -282,6 +281,8 @@ body {
     margin: 0 0 10px;
     color: white;
     text-transform: uppercase;
+    display: flex; /* Säkerställ exakt justering */
+    align-items: baseline; /* Justera baslinje för rubriker */
 }
 
 .footer-toc .toc-column:first-child h3 {
@@ -404,6 +405,9 @@ body {
     }
 
     .image-text {
+        position: relative; /* Ändrat till relativ positionering */
+        margin-top: 10px; /* 10px under bilden */
+        margin-bottom: 10px; /* 10px till nedre ramen */
         font-size: 32px; /* Mindre fontstorlek för mobil */
     }
 
@@ -420,5 +424,10 @@ body {
     .footer-toc .toc-column:last-child {
         padding-top: 0; /* Ta bort topp-padding för att justera "BETE" */
         margin-top: 0; /* Säkerställ ingen topp-marginal */
+    }
+
+    .footer-toc h3 {
+        display: flex; /* Säkerställ exakt justering */
+        align-items: baseline; /* Justera baslinje för rubriker */
     }
 }

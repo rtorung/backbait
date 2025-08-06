@@ -219,12 +219,12 @@ body {
 }
 
 .indicator-dot {
-    width: 2px;
-    height: 2px;
+    width: 6px;
+    height: 6px;
     background-color: #ccc; /* Inaktiv prick */
     border-radius: 50%;
     display: inline-block;
-    margin: 0 5px; /* 5px mellan prickar */
+    margin: 0 10px; /* 10px mellan prickar */
 }
 
 .indicator-dot.active {
@@ -429,7 +429,7 @@ body {
     }
 
     .small-image-card {
-        width: 250px; /* Fast bredd för konsistens med desktop */
+        width: 288px; /* 250px * 1.15, ökad med 15% */
         flex-shrink: 0; /* Förhindra att kort krymper */
         margin: 0 10px; /* 20px mellan kort */
         padding: 10px;

@@ -95,7 +95,7 @@ body {
     opacity: 0;
     transform: translateY(-10px); /* Startposition för slide-down */
     pointer-events: none;
-    transition: opacity 0,3s ease, transform 0,3s ease; /* 1s animation */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Fix: 0,3s -> 0.3s */
     display: flex;
     flex-direction: row;
     justify-content: center; /* Centrera innehåll */
@@ -362,7 +362,7 @@ body {
         opacity: 0;
         transform: translateY(-10px); /* Startposition för slide-down */
         pointer-events: none;
-        transition: opacity 0,3s ease, transform 0,3s ease; /* 1s animation */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Fix: 0,3s -> 0.3s */
         display: none; /* Dold tills aktiverad */
         z-index: 1500; /* Högre z-index */
         padding: 20px;

@@ -71,6 +71,11 @@ body {
     text-transform: uppercase;
 }
 
+.menu-items li a:focus {
+    outline: 2px solid #3273a8;
+    outline-offset: 2px;
+}
+
 /* Dropdown-meny */
 .dropdown-parent {
     position: relative;
@@ -95,7 +100,7 @@ body {
     opacity: 0;
     transform: translateY(-10px); /* Startposition för slide-down */
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Fix: 0,3s -> 0.3s */
+    transition: opacity 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: row;
     justify-content: center; /* Centrera innehåll */
@@ -134,6 +139,11 @@ body {
 
 .dropdown li a:hover {
     background-color: #e0e0e0;
+}
+
+.dropdown li a:focus {
+    outline: 2px solid #3273a8;
+    outline-offset: 2px;
 }
 
 /* Huvudinnehåll */
@@ -362,7 +372,7 @@ body {
         opacity: 0;
         transform: translateY(-10px); /* Startposition för slide-down */
         pointer-events: none;
-        transition: opacity 0.3s ease, transform 0.3s ease; /* Fix: 0,3s -> 0.3s */
+        transition: opacity 0.3s ease, transform 0.3s ease;
         display: none; /* Dold tills aktiverad */
         z-index: 1500; /* Högre z-index */
         padding: 20px;

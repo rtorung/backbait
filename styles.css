@@ -93,7 +93,7 @@ body {
     background-color: #ffffff;
     list-style: none;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Förbättrad skugga */
     z-index: 1100;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
@@ -353,13 +353,12 @@ body {
 
     .dropdown {
         position: fixed;
-        top: 150px; /* Under header och meny på mobil */
         left: 0;
         right: 0;
         width: 100%; /* Full bredd på mobil */
         min-height: 200px; /* Säkerställ synlighet */
         background-color: #ffffff;
-        border: 1px solid #ccc; /* För felsökning */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Förbättrad skugga */
         flex-direction: column; /* Stapla kolumner vertikalt */
         opacity: 1; /* Säkerställ synlighet */
         pointer-events: auto;

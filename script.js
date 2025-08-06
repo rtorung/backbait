@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const isActive = parent.classList.contains('active');
                     const mainMenu = document.querySelector('.main-menu');
                     const menuRect = mainMenu.getBoundingClientRect();
-                    const topPosition = window.innerWidth <= 768 ? (menuRect.bottom + window.scrollY) + 'px' : '163px';
+                    const topPosition = window.innerWidth <= 768 ? (menuRect.bottom + window.scrollY + 2) + 'px' : '163px';
 
                     console.log(`${eventType} on dropdown:`, { 
                         isActive, 

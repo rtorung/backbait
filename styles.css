@@ -418,7 +418,7 @@ body {
         flex-direction: row; /* Horisontell scroll */
         overflow-x: auto; /* Aktivera horisontell scroll */
         scroll-snap-type: x mandatory; /* Snäpp till kort */
-        margin: 400px auto 20px !important; /* 400px från sidhuvudet, 20px till nästa kort */
+        margin: 250px auto 20px !important; /* 250px från sidhuvudet, 20px till nästa kort */
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch; /* Smidig scroll i mobil */
         scrollbar-width: none; /* Dölj scrollbar */
@@ -467,7 +467,7 @@ body {
     .card-indicator {
         display: flex; /* Visa prickar i mobil */
         justify-content: center;
-        margin: 10px auto 20px; /* 10px från kort, 20px till stort kort */
+        margin: 20px auto 20px; /* 20px från kort, 20px till stort kort */
     }
 
     .image-card {

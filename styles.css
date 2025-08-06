@@ -71,11 +71,6 @@ body {
     text-transform: uppercase;
 }
 
-.menu-items li a:focus {
-    outline: 2px solid #3273a8;
-    outline-offset: 2px;
-}
-
 .menu-items li.active-page a {
     text-decoration: underline;
 }
@@ -139,11 +134,6 @@ body {
 
 .dropdown li.active-page a {
     text-decoration: underline;
-}
-
-.dropdown li a:focus {
-    outline: 2px solid #3273a8;
-    outline-offset: 2px;
 }
 
 /* Huvudinnehåll */

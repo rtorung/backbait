@@ -77,17 +77,12 @@ body {
 }
 
 .menu-items li.active-page a {
-    color: #3273a8;
     text-decoration: underline;
 }
 
 /* Dropdown-meny */
 .dropdown-parent {
     position: relative;
-}
-
-.dropdown-parent.active > a {
-    color: #3273a8; /* Färg vid klick */
 }
 
 .dropdown {

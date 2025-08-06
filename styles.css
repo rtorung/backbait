@@ -269,7 +269,7 @@ body {
 }
 
 .footer-toc .toc-column {
-    width: 50%; /* Hälften av max 596px */
+    width: calc(100% / 3); /* Jämn fördelning för tre kolumner */
     max-width: 298px;
     padding: 0 10px; /* Enhetlig padding */
     margin: 0; /* Säkerställ ingen marginal */

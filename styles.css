@@ -250,7 +250,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start; /* Säkerställ att kolumner börjar från toppen */
+    align-items: center;
     font-family: "Roboto", Arial, sans-serif;
 }
 

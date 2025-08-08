@@ -206,7 +206,7 @@ body {
     margin-bottom: 10px;
     margin-left: 0;
     color: #333;
-    font-size: 20px; /* Mindre än tidigare .image-card för att matcha mindre kort */
+    font-size: 16px; /* Mindre än tidigare .image-card för att matcha mindre kort */
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-align: left;
@@ -482,7 +482,7 @@ body {
     }
 
     .small-image-card .image-text {
-        font-size: 20px; /* Mindre för mobil */
+        font-size: 12px; /* Mindre för mobil */
         margin-top: 10px;
         margin-bottom: 10px;
         margin-left: 0;

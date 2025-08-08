@@ -482,7 +482,7 @@ body {
     }
 
     .small-image-card .image-text {
-        font-size: 12px; /* Mindre för mobil */
+        font-size: 16px; /* Mindre för mobil */
         margin-top: 10px;
         margin-bottom: 10px;
         margin-left: 0;

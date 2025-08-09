@@ -287,11 +287,9 @@ body {
     width: 100vw; /* Full fönsterbredd */
     background-color: #333;
     color: white;
-    padding: 20px 0;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     font-family: "Roboto", Arial, sans-serif;
 }
 
@@ -301,6 +299,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+	align-items: center;
     box-sizing: border-box;
 }
 

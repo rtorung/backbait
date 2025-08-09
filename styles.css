@@ -44,7 +44,7 @@ body {
     color: white;
     position: fixed;
     top: 163px;
-    z-index: 1000;
+    z-index: 1500; /* Ökat z-index för att undvika överlappning */
     height: 30px;
     display: flex;
     align-items: center;
@@ -98,7 +98,7 @@ body {
 }
 
 .menu-items li {
-    padding: 5px 10px;
+    padding: 3px 10px; /* Minskat padding för att säkerställa att menyn ryms inom 30px */
     text-align: center;
     min-width: 100px;
     position: relative;
@@ -112,7 +112,7 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    font-size: 14px;
+    font-size: 13px; /* Minskat fontstorlek för att rymmas */
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
@@ -142,9 +142,9 @@ body {
     width: 100%;
     background-color: white;
     list-style: none;
-    padding: 20px;
+    padding: 0 20px 20px; /* Tagit bort padding-top för att börja direkt vid kanten */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1100;
+    z-index: 1600; /* Högre än main-menu */
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
     display: none;
@@ -209,7 +209,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 250px auto 20px !important;
+    margin: 50px auto 20px !important; /* Minskat till 50px från menyraden */
     box-sizing: border-box;
 }
 
@@ -398,10 +398,11 @@ body {
         top: 110px;
         width: 100%;
         height: auto;
-        min-height: 60px;
+        min-height: 70px; /* Ökat för att rymma vertikal stapling */
         overflow-x: auto;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
+        z-index: 1500; /* Samma z-index som desktop */
     }
 
     .main-menu::-webkit-scrollbar {
@@ -412,7 +413,7 @@ body {
         flex-direction: column;
         align-items: stretch;
         padding: 5px 0;
-        min-height: 60px;
+        min-height: 70px;
     }
 
     .menu-left {
@@ -437,6 +438,11 @@ body {
         min-height: 30px;
     }
 
+    .menu-items li {
+        padding: 5px 10px; /* Ökat padding något för mobil */
+        font-size: 14px; /* Återställt till större fontstorlek för läsbarhet */
+    }
+
     .menu-right {
         width: 100%;
         justify-content: center;
@@ -456,8 +462,8 @@ body {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         flex-direction: column;
         display: none;
-        z-index: 1500;
-        padding: 20px;
+        z-index: 1600;
+        padding: 0 20px 20px; /* Tagit bort padding-top */
         box-sizing: border-box;
         overflow-y: auto;
     }
@@ -473,20 +479,7 @@ body {
     }
 
     .main-content {
-        margin-top: 170px; /* site-header (110px) + main-menu (min 60px) */
-    }
-
-    .page-content {
-        padding: 10px;
-        margin: 0 auto 10px;
-    }
-
-    .page-content h1 {
-        font-size: 20px;
-    }
-
-    .page-content p {
-        font-size: 14px;
+        margin-top: 180px; /* site-header (110px) + main-menu (min 70px) */
     }
 
     .small-image-card-container {
@@ -496,7 +489,7 @@ body {
         flex-direction: row;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        margin: 150px auto 20px !important;
+        margin: 50px auto 20px !important; /* Minskat till 50px från menyraden */
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;

@@ -302,7 +302,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     box-sizing: border-box;
 }
 
@@ -344,7 +344,7 @@ body {
     color: white;
     min-height: 50px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     font-family: "Roboto", Arial, sans-serif;
     z-index: 1000;
@@ -354,6 +354,8 @@ body {
     max-width: 1200px;
     width: 100%;
     box-sizing: border-box;
+	align-items: center;
+    justify-content: center;
 }
 
 .footer-content {
@@ -464,8 +466,8 @@ body {
     }
 
     .menu-social-icon {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
 
     .dropdown {

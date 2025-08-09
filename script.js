@@ -1,24 +1,30 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Ladda header och footer dynamiskt
+    const headerElement = document.getElementById("header");
+    if (!headerElement) {
+        console.error("Header element with id='header' not found in the DOM");
+        return;
+    }
+
     fetch("header.html")
         .then(response => {
-            if (!response.ok) throw new Error("Failed to load header");
+            if (!response.ok) throw new Error(`Failed to load header: ${response.statusText}`);
             return response.text();
         })
         .then(data => {
-            document.getElementById("header").innerHTML = data;
+            headerElement.innerHTML = data;
             console.log("Header loaded successfully");
             // Återinitiera dropdown-hanterare efter att header har laddats
             initializeDropdowns();
         })
         .catch(error => {
             console.error("Error loading header:", error);
-            document.getElementById("header").innerHTML = "<p>Kunde inte ladda sidhuvudet. Försök igen senare.</p>";
+            headerElement.innerHTML = "<p>Kunde inte ladda sidhuvudet. Försök igen senare.</p>";
         });
 
     fetch("footer.html")
         .then(response => {
-            if (!response.ok) throw new Error("Failed to load footer");
+            if (!response.ok) throw new Error(`Failed to load footer: ${response.statusText}`);
             return response.text();
         })
         .then(data => {
@@ -34,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function initializeDropdowns() {
         const dropdownParents = document.querySelectorAll(".dropdown-parent");
         if (dropdownParents.length === 0) {
-            console.warn("No dropdown parents found");
+            console.warn("No dropdown parents found in the DOM");
             return;
         }
 
@@ -109,21 +115,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (container && dots.length > 0) {
         container.addEventListener("scroll", () => {
-            const cardWidth = 331 + 20; // Kortbredd (331px) + marginal (20px)
+            const cardWidth = 331 + 20;
             const scrollPosition = container.scrollLeft;
             const containerWidth = container.clientWidth;
             const maxScroll = container.scrollWidth - containerWidth;
 
-            // Beräkna vilket kort som är mest synligt
             let visibleCardIndex = Math.round(scrollPosition / cardWidth);
             visibleCardIndex = Math.max(0, Math.min(visibleCardIndex, dots.length - 1));
 
-            // Särskild hantering för sista kortet
             if (scrollPosition >= maxScroll - 10) {
                 visibleCardIndex = dots.length - 1;
             }
 
-            // Uppdatera aktiva pricken
             dots.forEach((dot, index) => {
                 dot.classList.toggle("active", index === visibleCardIndex);
             });

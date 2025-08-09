@@ -243,7 +243,9 @@ body {
 
 /* Innehållsförteckning */
 .footer-toc {
-    width: 100%;
+    max-width: 1100px; /* Matcha background-image */
+    width: 100%; /* Full bredd upp till max-width */
+    margin: 0 auto; /* Centrera horisontellt */
     background-color: #333; /* Samma som main-menu */
     color: white;
     padding: 20px 0;
@@ -260,77 +262,6 @@ body {
     padding: 0 20px;
     margin: 0;
     box-sizing: border-box;
-}
-
-.footer-toc h3 {
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.footer-toc ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-toc li {
-    margin: 5px 0;
-}
-
-.footer-toc a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 300;
-}
-
-.footer-toc a:hover {
-    text-decoration: underline;
-}
-
-.footer-toc .toc-column:last-child a {
-    font-size: 14px; /* Samma storlek som fiskarterna */
-    font-weight: 300; /* Matchar fiskarternas vikt */
-}
-
-/* Sidfot */
-.footer {
-    width: 100%;
-    height: 50px;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1100px;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-.footer-left {
-    display: flex;
-    align-items: center;
-}
-
-.footer-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-}
-
-.footer-right {
-    display: flex;
-    align-items: center;
 }
 
 .footer span {

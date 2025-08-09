@@ -1,26 +1,42 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Ladda header och footer dynamiskt
     fetch("header.html")
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to load header");
+            return response.text();
+        })
         .then(data => {
             document.getElementById("header").innerHTML = data;
             console.log("Header loaded successfully");
             // Återinitiera dropdown-hanterare efter att header har laddats
             initializeDropdowns();
         })
-        .catch(error => console.error("Error loading header:", error));
+        .catch(error => {
+            console.error("Error loading header:", error);
+            document.getElementById("header").innerHTML = "<p>Kunde inte ladda sidhuvudet. Försök igen senare.</p>";
+        });
 
     fetch("footer.html")
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to load footer");
+            return response.text();
+        })
         .then(data => {
             document.getElementById("footer").innerHTML = data;
             console.log("Footer loaded successfully");
         })
-        .catch(error => console.error("Error loading footer:", error));
+        .catch(error => {
+            console.error("Error loading footer:", error);
+            document.getElementById("footer").innerHTML = "<p>Kunde inte ladda sidfoten. Försök igen senare.</p>";
+        });
 
     // Funktion för att initiera dropdown-hanterare
     function initializeDropdowns() {
         const dropdownParents = document.querySelectorAll(".dropdown-parent");
+        if (dropdownParents.length === 0) {
+            console.warn("No dropdown parents found");
+            return;
+        }
 
         dropdownParents.forEach(parent => {
             parent.addEventListener("click", function(event) {
@@ -48,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Växla denna dropdown
                 if (!isActive) {
                     this.classList.add("active");
-                    dropdown.style.display = "flex"; // Desktop: flex, Mobil: block (hanteras i CSS)
+                    dropdown.style.display = "flex";
                     const header = document.querySelector(".site-header");
                     const mainMenu = document.querySelector(".main-menu");
                     const topPosition = header.offsetHeight + mainMenu.offsetHeight;
@@ -98,14 +114,12 @@ document.addEventListener("DOMContentLoaded", function() {
             const containerWidth = container.clientWidth;
             const maxScroll = container.scrollWidth - containerWidth;
 
-            // Beräkna vilket kort som är mest synligt (baserat på centrum av viewport)
+            // Beräkna vilket kort som är mest synligt
             let visibleCardIndex = Math.round(scrollPosition / cardWidth);
-
-            // Begränsa index till giltiga värden (0–3 för 4 kort)
             visibleCardIndex = Math.max(0, Math.min(visibleCardIndex, dots.length - 1));
 
             // Särskild hantering för sista kortet
-            if (scrollPosition >= maxScroll - 10) { // 10px tolerans för att fånga sista kortet
+            if (scrollPosition >= maxScroll - 10) {
                 visibleCardIndex = dots.length - 1;
             }
 

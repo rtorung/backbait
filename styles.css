@@ -309,7 +309,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     box-sizing: border-box;
 }
 
@@ -612,6 +612,7 @@ body {
 
     .footer-content-wrapper {
         padding: 0 10px;
+		align-items: center;
     }
 
     .footer-content {

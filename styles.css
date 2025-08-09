@@ -14,27 +14,27 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 163px;
+    min-height: 163px; /* ~165px för desktop */
     box-sizing: border-box;
-    position: fixed;
+    position: fixed; /* Fixera sidhuvudet högst upp */
     top: 0;
     left: 0;
-    z-index: 2000;
-    background-color: white;
+    z-index: 2000; /* Högre än andra element */
+    background-color: white; /* Säkerställ bakgrund för att undvika genomskinlighet */
 }
 
 /* Logotyp */
 .header-logo {
     display: block;
     margin: 25px auto;
-    width: 596px;
-    max-width: 100%;
+    width: 596px; /* Basstorlek för desktop */
+    max-width: 100%; /* Responsiv skalning */
     height: auto;
-    image-rendering: auto;
+    image-rendering: auto; /* Standard rendering */
 }
 
 .site-header a {
-    text-decoration: none;
+    text-decoration: none; /* Ta bort understrykning för logglänken */
 }
 
 /* Huvudmeny */
@@ -78,7 +78,7 @@ body {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; /* Ta bort blå klickeffekt i mobil */
 }
 
 .menu-items li.active-page a {
@@ -93,36 +93,36 @@ body {
 .dropdown {
     position: fixed;
     left: 0;
-    right: 0;
-    width: 100%;
+    right: 0; /* Säkerställ full bredd */
+    width: 100%; /* Hela fönstrets bredd */
     background-color: white;
     list-style: none;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
     z-index: 1100;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-10px); /* Startposition för slide-down */
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column; /* Enkel lista i desktop */
+    justify-content: center; /* Centrera innehåll */
     box-sizing: border-box;
 }
 
 .dropdown-parent.active .dropdown {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); /* Slutposition för slide-down */
     pointer-events: auto;
-    display: flex;
+    display: flex; /* Säkerställ visning */
 }
 
 .dropdown li {
     padding: 10px 20px;
-    margin: 0;
-    text-align: left;
+    margin: 0; /* Säkerställ ingen extra marginal */
+    text-align: left; /* Vänsterjusterad text */
     box-sizing: border-box;
 }
 
@@ -134,7 +134,7 @@ body {
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; /* Ta bort blå klickeffekt i mobil */
 }
 
 .dropdown li.active-page a {
@@ -160,7 +160,7 @@ body {
     box-sizing: border-box;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 300;
-    margin: 0 auto 20px;
+    margin: 0 auto 20px; /* Ingen topp-marginal, 20px botten */
 }
 
 /* Container för små bildkort */
@@ -170,34 +170,34 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 250px auto 20px !important;
+    margin: 250px auto 20px !important; /* 250px från sidhuvudet, 20px till nästa kort */
     box-sizing: border-box;
 }
 
 /* Små bildkort */
 .small-image-card {
-    width: calc((100% - 60px) / 4);
+    width: calc((100% - 60px) / 4); /* Dela bredden minus 3x20px marginaler */
     background-color: white;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px; /* 10px vit marginal runt bilden */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Samma skugga som tidigare .image-card */
     box-sizing: border-box;
-    margin: 0 10px;
+    margin: 0 10px; /* 20px total marginal mellan kort (10px per sida) */
 }
 
 .small-image-card:first-child {
-    margin-left: 0;
+    margin-left: 0; /* Ingen marginal till vänster för första kortet */
 }
 
 .small-image-card:last-child {
-    margin-right: 0;
+    margin-right: 0; /* Ingen marginal till höger för sista kortet */
 }
 
 .small-image-card img {
     width: 100%;
     height: auto;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 3 / 2; /* 3:2-förhållande */
     display: block;
-    image-rendering: auto;
+    image-rendering: auto; /* Standard rendering */
 }
 
 .small-image-card .image-text {
@@ -206,7 +206,7 @@ body {
     margin-bottom: 10px;
     margin-left: 0;
     color: #333;
-    font-size: 16px;
+    font-size: 16px; /* Mindre än tidigare .image-card för att matcha mindre kort */
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-align: left;
@@ -215,20 +215,20 @@ body {
 
 /* Prickindikatorer (endast mobil) */
 .card-indicator {
-    display: none;
+    display: none; /* Dold i desktop */
 }
 
 .indicator-dot {
     width: 6px;
     height: 6px;
-    background-color: #ccc;
+    background-color: #ccc; /* Inaktiv prick */
     border-radius: 50%;
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 10px; /* 10px mellan prickar */
 }
 
 .indicator-dot.active {
-    background-color: #333;
+    background-color: #333; /* Aktiv prick */
 }
 
 /* Bakgrundsbild */
@@ -237,14 +237,14 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    margin: 20px auto 100px !important;
+    margin: 20px auto 100px !important; /* Samma marginaler som tidigare .image-card */
     image-rendering: auto;
 }
 
 /* Innehållsförteckning */
 .footer-toc {
     width: 100%;
-    background-color: #333;
+    background-color: #333; /* Samma som main-menu */
     color: white;
     padding: 20px 0;
     display: flex;
@@ -255,41 +255,82 @@ body {
 }
 
 .footer-toc .toc-column {
-    width: calc(100% / 3);
+    width: calc(100% / 3); /* Jämn fördelning för tre kolumner */
     max-width: 300px;
     padding: 0 20px;
     margin: 0;
     box-sizing: border-box;
 }
 
-/* Footer */
-.footer {
-    width: 100%;
-    background-color: #333;
-    color: white;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Roboto", Arial, sans-serif;
-    z-index: 1000;
+.footer-toc h3 {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
-.footer-content-wrapper {
-    position: relative; /* Gör det möjligt att justera position */
-    max-width: 1100px; /* Samma max-bredd som andra element */
+.footer-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-toc li {
+    margin: 5px 0;
+}
+
+.footer-toc a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.footer-toc a:hover {
+    text-decoration: underline;
+}
+
+.footer-toc .toc-column:last-child a {
+    font-size: 14px; /* Samma storlek som fiskarterna */
+    font-weight: 300; /* Matchar fiskarternas vikt */
+}
+
+/* Sidfot */
+.footer {
     width: 100%;
+    height: 50px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
 }
 
 .footer-content {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    max-width: 1100px;
     padding: 0 20px;
     box-sizing: border-box;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+}
+
+.footer-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
 }
 
 .footer span {
@@ -336,51 +377,51 @@ body {
     }
 
     .site-header {
-        min-height: 110px;
+        min-height: 110px; /* 110px för mobil */
     }
 
     .header-logo {
         margin: 17px auto;
-        width: 300px;
-        max-width: 100%;
+        width: 300px; /* Storlek för logo600.webp */
+        max-width: 100%; /* Responsiv skalning */
         height: auto;
-        image-rendering: auto;
+        image-rendering: auto; /* Standard rendering */
     }
 
     .dropdown {
         left: 0;
         right: 0;
-        width: 100%;
+        width: 100%; /* Full bredd på mobil */
         background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        flex-direction: column;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtil skugga */
+        flex-direction: column; /* En vertikal lista */
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-10px); /* Startposition för slide-down */
         pointer-events: none;
         transition: opacity 0.3s ease, transform 0.3s ease;
-        display: none;
-        z-index: 1500;
+        display: none; /* Dold tills aktiverad */
+        z-index: 1500; /* Högre z-index */
         padding: 20px;
         box-sizing: border-box;
-        overflow-y: auto;
+        overflow-y: auto; /* Hantera långa menyer */
     }
 
     .dropdown-parent.active .dropdown {
-        display: block;
+        display: block; /* Visa vid klick på mobil */
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0); /* Slutposition för slide-down */
         pointer-events: auto;
     }
 
     .dropdown li {
-        padding: 10px 20px;
-        margin: 0;
-        text-align: left;
+        padding: 10px 20px; /* Konsekvent padding för vertikal justering */
+        margin: 0; /* Säkerställ ingen extra marginal */
+        text-align: left; /* Vänsterjusterad text */
     }
 
     .page-content {
         padding: 10px;
-        margin: 0 auto 10px;
+        margin: 0 auto 10px; /* Ingen topp-marginal, 10px botten */
     }
 
     .page-content h1 {
@@ -395,53 +436,53 @@ body {
         max-width: 100%;
         width: 100%;
         display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        margin: 150px auto 20px !important;
+        flex-direction: row; /* Horisontell scroll */
+        overflow-x: auto; /* Aktivera horisontell scroll */
+        scroll-snap-type: x mandatory; /* Snäpp till kort */
+        margin: 150px auto 20px !important; /* 150px från sidhuvudet, 20px till nästa kort */
         box-sizing: border-box;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        position: relative;
-        z-index: 10;
-        padding-bottom: 20px;
+        -webkit-overflow-scrolling: touch; /* Smidig scroll i mobil */
+        scrollbar-width: none; /* Dölj scrollbar */
+        position: relative; /* Säkerställ att containern ligger över prickarna */
+        z-index: 10; /* Högre än .card-indicator */
+        padding-bottom: 20px; /* Minskat utrymme för .card-indicator */
     }
 
     .small-image-card-container::-webkit-scrollbar {
-        display: none;
+        display: none; /* Dölj scrollbar i WebKit */
     }
 
     .small-image-card {
-        width: 331px;
-        flex-shrink: 0;
-        margin: 0 10px;
+        width: 331px; /* 288px * 1.15, ytterligare 15% ökning */
+        flex-shrink: 0; /* Förhindra att kort krymper */
+        margin: 0 10px; /* 20px mellan kort */
         padding: 10px;
         background-color: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         box-sizing: border-box;
-        scroll-snap-align: center;
-        position: relative;
-        z-index: 10;
+        scroll-snap-align: center; /* Centrera kort vid scroll */
+        position: relative; /* Säkerställ att kortet ligger över andra element */
+        z-index: 10; /* Högre än .card-indicator */
     }
 
     .small-image-card:first-child {
-        margin-left: 20px;
+        margin-left: 20px; /* 20px från vänsterkanten */
     }
 
     .small-image-card:last-child {
-        margin-right: 20px;
+        margin-right: 20px; /* 20px från högerkanten */
     }
 
     .small-image-card img {
         width: 100%;
         height: auto;
-        aspect-ratio: 3 / 2;
+        aspect-ratio: 3 / 2; /* 3:2-förhållande */
         display: block;
         image-rendering: auto;
     }
 
     .small-image-card .image-text {
-        font-size: 16px;
+        font-size: 16px; /* Mindre för mobil */
         margin-top: 10px;
         margin-bottom: 10px;
         margin-left: 0;
@@ -450,63 +491,59 @@ body {
     }
 
     .card-indicator {
-        display: flex;
+        display: flex; /* Visa prickar i mobil */
         justify-content: center;
-        margin: 10px auto 20px;
-        position: relative;
-        z-index: 5;
+        margin: 10px auto 20px; /* 10px från kort, 20px till nästa element */
+        position: relative; /* Kontrollera positionering */
+        z-index: 5; /* Lägre än .small-image-card-container */
     }
 
     .background-image {
-        max-width: 100%;
+        max-width: 100%; /* Responsiv bredd för mobil */
         width: 100%;
         height: auto;
         display: block;
-        margin: 20px auto 50px !important;
+        margin: 20px auto 50px !important; /* 20px från prickar, 50px till footer-toc */
         image-rendering: auto;
     }
 
     .footer-toc {
-        flex-direction: row;
-        align-items: flex-start;
+        flex-direction: row; /* Två kolumner bredvid varandra */
+        align-items: flex-start; /* Säkerställ att kolumner börjar från toppen */
     }
 
     .footer-toc .toc-column {
         width: 50%;
         max-width: none;
-        padding: 0 10px;
-        margin: 0;
+        padding: 0 10px; /* Enhetlig padding */
+        margin: 0; /* Säkerställ ingen marginal */
     }
 
     .footer-toc .toc-column:last-child {
-        padding-top: 0;
-        margin-top: 0;
+        padding-top: 0; /* Ta bort topp-padding */
+        margin-top: 0; /* Säkerställ ingen topp-marginal */
     }
 
     .footer-toc h3 {
-        display: flex;
-        align-items: baseline;
-        line-height: 1.2;
+        display: flex; /* Säkerställ exakt justering */
+        align-items: baseline; /* Justera baslinje för rubriker */
+        line-height: 1.2; /* Normalisera textbaslinje */
     }
 
     .footer {
-        height: auto;
+        height: auto; /* Tillåt höjd att växa i mobil */
         min-height: 50px;
         padding: 10px 0;
     }
 
-    .footer-content-wrapper {
-        padding: 0 10px; /* Mindre padding på mobil */
-    }
-
     .footer-content {
-        flex-direction: column;
+        flex-direction: column; /* Stapla element vertikalt i mobil */
         align-items: center;
         text-align: center;
     }
 
     .footer-left {
-        margin-bottom: 15px; /* Ökat från 10px för bättre läsbarhet */
+        margin-bottom: 10px; /* Utrymme till center i mobil */
     }
 
     .footer-center {
@@ -514,6 +551,6 @@ body {
     }
 
     .footer-right {
-        margin-top: 15px; /* Ökat från 10px för bättre läsbarhet */
+        margin-top: 10px; /* Utrymme från center i mobil */
     }
 }

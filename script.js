@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     dropdown.style.display = "flex";
                     const header = document.querySelector(".site-header");
                     const mainMenu = document.querySelector(".main-menu");
-                    const topPosition = header.offsetHeight + mainMenu.offsetHeight - 1; /* Justera för exakt underkant */
+                    const topPosition = header.offsetHeight + mainMenu.offsetHeight - 1;
                     dropdown.style.top = `${topPosition}px`;
                     console.log("Opened dropdown:", this.textContent, "Top position:", topPosition);
                 } else {

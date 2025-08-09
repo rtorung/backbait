@@ -342,7 +342,7 @@ body {
     width: 100%;
     background-color: black;
     color: white;
-    min-height: 80px;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;

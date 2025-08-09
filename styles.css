@@ -48,6 +48,7 @@ body {
 
 .menu-container {
     width: 100%;
+    position: relative; /* För absolut positionering av footer-x-icon */
 }
 
 .menu-items {
@@ -83,6 +84,17 @@ body {
 
 .menu-items li.active-page a {
     text-decoration: underline;
+}
+
+/* X-icon i header */
+.footer-x-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    position: absolute;
+    right: 20px; /* Samma avstånd från kanten som i footer */
+    top: 50%; /* Centrera vertikalt */
+    transform: translateY(-50%); /* Justera för perfekt vertikal centrering */
 }
 
 /* Dropdown-meny */
@@ -262,77 +274,6 @@ body {
     box-sizing: border-box;
 }
 
-.footer-toc h3 {
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.footer-toc ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-toc li {
-    margin: 5px 0;
-}
-
-.footer-toc a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 300;
-}
-
-.footer-toc a:hover {
-    text-decoration: underline;
-}
-
-.footer-toc .toc-column:last-child a {
-    font-size: 14px; /* Samma storlek som fiskarterna */
-    font-weight: 300; /* Matchar fiskarternas vikt */
-}
-
-/* Sidfot */
-.footer {
-    width: 100%;
-    height: 50px;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1100px;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-.footer-left {
-    display: flex;
-    align-items: center;
-}
-
-.footer-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-}
-
-.footer-right {
-    display: flex;
-    align-items: center;
-}
-
 .footer span {
     color: #fff;
     font-size: 14px;
@@ -352,12 +293,6 @@ body {
     text-decoration: underline;
 }
 
-.footer .footer-x-icon {
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-}
-
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
     .main-menu {
@@ -374,6 +309,10 @@ body {
 
     .menu-items {
         justify-content: flex-start;
+    }
+
+    .footer-x-icon {
+        right: 10px; /* Mindre avstånd i mobil */
     }
 
     .site-header {

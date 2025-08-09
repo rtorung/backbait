@@ -284,23 +284,32 @@ body {
 
 /* Innehållsförteckning */
 .footer-toc {
-    width: 100vw; /* Full fönsterbredd */
+    width: 100vw;
     background-color: #333;
     color: white;
     display: flex;
-	padding: 20px 0;
+    padding: 20px 0;
     justify-content: center;
     align-items: center;
     font-family: "Roboto", Arial, sans-serif;
 }
 
-.footer-toc-content-wrapper {
-    max-width: 1100px; /* Centrerar kolumnerna */
+.footer-toc .footer-content-wrapper {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.footer-toc .footer-content {
+    max-width: 1100px;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-	align-items: center;
+    align-items: flex-start;
     box-sizing: border-box;
 }
 

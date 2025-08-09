@@ -327,6 +327,12 @@ body {
     margin-bottom: 10px;
 }
 
+.footer-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 .footer-toc li a {
     color: white;
     text-decoration: none;

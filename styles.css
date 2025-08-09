@@ -45,7 +45,7 @@ body {
     position: fixed;
     top: 163px;
     z-index: 1500;
-    height: 50px; /* Ökat till 50px */
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +64,7 @@ body {
 }
 
 .menu-left {
-    width: 450px;
+    width: 350px; /* Minskat från 450px */
     flex-shrink: 0;
 }
 
@@ -75,7 +75,7 @@ body {
 }
 
 .menu-right {
-    width: 450px;
+    width: 350px; /* Minskat från 450px */
     flex-shrink: 0;
     display: flex;
     justify-content: flex-end;
@@ -85,7 +85,7 @@ body {
 
 .menu-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 400px; /* Minskat från 600px för att balansera med mindre menu-left och menu-right */
 }
 
 .menu-items {
@@ -99,7 +99,7 @@ body {
 }
 
 .menu-items li {
-    padding: 5px 10px; /* Återställt padding för större höjd */
+    padding: 5px 10px;
     text-align: center;
     min-width: 100px;
     position: relative;
@@ -113,7 +113,7 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    font-size: 14px; /* Återställt till större fontstorlek */
+    font-size: 14px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
@@ -127,7 +127,7 @@ body {
 
 /* Sociala ikoner i menyn */
 .menu-social-icon {
-    width: 30px; /* Ökat till 30px */
+    width: 30px;
     height: 30px;
     display: block;
 }
@@ -189,7 +189,7 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
-    margin-top: 213px; /* site-header (163px) + main-menu (50px) */
+    margin-top: 213px;
 }
 
 /* Sidinnehåll */
@@ -400,7 +400,7 @@ body {
         top: 110px;
         width: 100%;
         height: auto;
-        min-height: 90px; /* Ökat för att rymma vertikal stapling och större ikoner */
+        min-height: 90px;
         overflow-x: auto;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
@@ -419,7 +419,7 @@ body {
     }
 
     .menu-left {
-        width: 100%;
+        width: 100%; /* Oförändrat, eftersom vertikal stapling används */
         min-height: 10px;
         margin-bottom: 5px;
     }
@@ -441,18 +441,18 @@ body {
     }
 
     .menu-items li {
-        padding: 6px 10px; /* Ökat för mobil */
-        font-size: 15px; /* Återställt till större fontstorlek */
+        padding: 6px 10px;
+        font-size: 15px;
     }
 
     .menu-right {
-        width: 100%;
+        width: 100%; /* Oförändrat, eftersom vertikal stapling används */
         justify-content: center;
         margin-top: 5px;
     }
 
     .menu-social-icon {
-        width: 30px; /* Ökat till 30px */
+        width: 30px;
         height: 30px;
     }
 
@@ -481,7 +481,7 @@ body {
     }
 
     .main-content {
-        margin-top: 200px; /* site-header (110px) + main-menu (90px) */
+        margin-top: 200px;
     }
 
     .small-image-card-container {

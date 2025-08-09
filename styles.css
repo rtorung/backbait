@@ -313,14 +313,6 @@ body {
     box-sizing: border-box;
 }
 
-.footer-toc .toc-column {
-    width: calc(100% / 3);
-    max-width: 366px;
-    padding: 0 20px;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 .footer-toc h3 {
     font-size: 16px;
     font-weight: 600;

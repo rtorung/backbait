@@ -113,7 +113,7 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
@@ -624,10 +624,12 @@ body {
 
     .footer-left {
         margin-bottom: 15px;
+		justify-content: center;
     }
 
     .footer-center {
         margin-top: 15px;
+		justify-content: center;
     }
 
     .footer-right {

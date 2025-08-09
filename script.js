@@ -28,12 +28,20 @@ document.addEventListener("DOMContentLoaded", function() {
             return response.text();
         })
         .then(data => {
-            document.getElementById("footer").innerHTML = data;
-            console.log("Footer loaded successfully");
+            const footerElement = document.getElementById("footer");
+            if (footerElement) {
+                footerElement.innerHTML = data;
+                console.log("Footer loaded successfully");
+            } else {
+                console.error("Footer element with id='footer' not found in the DOM");
+            }
         })
         .catch(error => {
             console.error("Error loading footer:", error);
-            document.getElementById("footer").innerHTML = "<p>Kunde inte ladda sidfoten. Försök igen senare.</p>";
+            const footerElement = document.getElementById("footer");
+            if (footerElement) {
+                footerElement.innerHTML = "<p>Kunde inte ladda sidfoten. Försök igen senare.</p>";
+            }
         });
 
     // Funktion för att initiera dropdown-hanterare

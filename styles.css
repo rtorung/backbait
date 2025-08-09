@@ -45,6 +45,8 @@ body {
     position: relative;
     z-index: 1000;
     height: 30px; /* Uppdaterad höjd till ca 30px */
+    display: flex; /* Säkerställ att menyn är synlig */
+    align-items: center;
 }
 
 .menu-content-wrapper {
@@ -81,7 +83,7 @@ body {
 
 .menu-container {
     width: 100%;
-    max-width: 600px; /* Begränsa bredden för menyerna för att matcha nuvarande layout */
+    max-width: 600px; /* Begränsa bredden för menyerna */
 }
 
 .menu-items {
@@ -91,10 +93,11 @@ body {
     display: flex;
     justify-content: center;
     white-space: nowrap;
+    align-items: center;
 }
 
 .menu-items li {
-    padding: 5px 10px; /* Mindre padding för att passa 30px höjd */
+    padding: 5px 10px; /* Mindre padding för 30px höjd */
     text-align: center;
     min-width: 100px;
     position: relative;
@@ -147,7 +150,7 @@ body {
     transform: translateY(-10px);
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    display: flex;
+    display: none; /* Ändrat till none för att undvika rendering innan aktivering */
     flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
@@ -190,6 +193,7 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
+    margin-top: 193px; /* Justera för site-header (163px) + main-menu (30px) */
 }
 
 /* Sidinnehåll */
@@ -303,12 +307,35 @@ body {
     box-sizing: border-box;
 }
 
+.footer-toc h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.footer-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-toc li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.footer-toc li a:hover {
+    text-decoration: underline;
+}
+
 /* Footer */
 .footer {
     width: 100%;
     background-color: #333;
     color: white;
-    height: 80px;
+    min-height: 80px; /* Återställd till ursprunglig höjd */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -366,7 +393,8 @@ body {
         scrollbar-width: none;
         touch-action: pan-x;
         -webkit-overflow-scrolling: touch;
-        height: 30px; /* Bibehåll 30px höjd */
+        height: auto; /* Tillåt höjd att växa för att undvika att menyn försvinner */
+        min-height: 30px;
     }
 
     .main-menu::-webkit-scrollbar {
@@ -374,14 +402,14 @@ body {
     }
 
     .menu-content-wrapper {
-        flex-direction: column; /* Stapla containrar vertikalt på mobil */
-        height: auto; /* Tillåt höjd att växa */
+        flex-direction: column; /* Stapla containrar vertikalt */
+        align-items: stretch;
         padding: 5px 0;
     }
 
     .menu-left {
         width: 100%;
-        height: 20px; /* Mindre höjd för tom container */
+        min-height: 20px; /* Minimal höjd för tom container */
         margin-bottom: 5px;
     }
 
@@ -398,6 +426,7 @@ body {
 
     .menu-items {
         justify-content: flex-start;
+        min-height: 30px; /* Säkerställ att menyerna är synliga */
     }
 
     .menu-right {
@@ -452,6 +481,10 @@ body {
         padding: 10px 20px;
         margin: 0;
         text-align: left;
+    }
+
+    .main-content {
+        margin-top: 140px; /* Justera för site-header (110px) + main-menu (min 30px) */
     }
 
     .page-content {
@@ -566,7 +599,6 @@ body {
     }
 
     .footer {
-        height: auto;
         min-height: 50px;
         padding: 10px 0;
     }

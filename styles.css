@@ -683,7 +683,7 @@ th {
 
 /* Mini-weather-card för startsidan */
 .mini-weather-card {
-    height: 50px; /* Ca 50px högt som begärt */
+    height: 40px; /* Ca 40px högt som begärt */
     overflow: hidden; /* Dölj overflow för rullande effekt */
     background-color: #f9f9f9; /* Ljus bakgrund för läsbarhet */
     border: 1px solid #ddd;

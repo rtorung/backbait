@@ -674,10 +674,54 @@ th {
     cursor: pointer;
 }
 
+/* Effekt för sökknapp vid klick */
+#search-btn.clicked {
+    transform: scale(0.95); /* Lätt intryckning för att visa klick */
+    opacity: 0.8; /* Lite genomskinlighet för feedback */
+    transition: transform 0.1s ease, opacity 0.1s ease; /* Mjuk övergång */
+}
+
+/* Mini-weather-card för startsidan */
+.mini-weather-card {
+    height: 50px; /* Ca 50px högt som begärt */
+    overflow: hidden; /* Dölj overflow för rullande effekt */
+    background-color: #f9f9f9; /* Ljus bakgrund för läsbarhet */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px auto; /* Centrera och marginal */
+    max-width: 100%; /* Full bredd i mobil */
+    white-space: nowrap; /* Förhindra radbrytning */
+    font-size: 14px; /* Liten text för att passa */
+    line-height: 50px; /* Centrera vertikalt */
+    position: relative;
+}
+
+.mini-weather-card .marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite; /* Rullande åt vänster, justera tid för hastighet */
+    padding-left: 100%; /* Starta utanför skärmen för seamless loop */
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Flytta hälften för att loopa (eftersom texten upprepas 2x) */
+    }
+}
+
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
      .site-header {
         height: 110px;
+    }
+	
+	.mini-weather-card {
+        font-size: 12px; /* Mindre text i mobil */
+        height: 40px; /* Anpassa höjd om nödvändigt */
+        line-height: 40px;
     }
 
     .header-logo {

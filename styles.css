@@ -113,7 +113,7 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
@@ -172,7 +172,7 @@ body {
     display: block;
     font-size: 14px;
     font-family: "Roboto", Arial, sans-serif;
-    font-weight: 600;
+    font-weight: 300;
     text-transform: uppercase;
     -webkit-tap-highlight-color: transparent;
 }
@@ -447,7 +447,7 @@ body {
 .sidebar-items a {
     color: white;
     text-decoration: none;
-    font-size: 14px; /* Matchar desktop .menu-items li a */
+    font-size: 16px; /* Matchar desktop .menu-items li a */
     font-family: "Roboto", Arial, sans-serif;
     font-weight: 600; /* Matchar desktop .menu-items li a */
     text-transform: uppercase; /* Matchar desktop .menu-items li a */
@@ -469,7 +469,7 @@ body {
     text-decoration: none;
     font-size: 14px; /* Matchar desktop .dropdown li a */
     font-family: "Roboto", Arial, sans-serif;
-    font-weight: 600; /* Matchar desktop .dropdown li a */
+    font-weight: 300; /* Matchar desktop .dropdown li a */
     text-transform: uppercase; /* Matchar desktop .dropdown li a */
     display: block;
 }

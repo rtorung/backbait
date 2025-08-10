@@ -184,7 +184,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (container && dots.length > 0) {
         container.addEventListener("scroll", () => {
-            const cardWidth = 331 + 20;
+            const firstCard = container.querySelector(".small-image-card");
+            if (!firstCard) {
+                console.warn("No small-image-card found in container");
+                return;
+            }
+            // Hämta kortbredd dynamiskt (inkluderar width + padding, exkluderar marginaler)
+            const cardWidth = firstCard.offsetWidth + 20; // Lägg till marginaler (10px vänster + 10px höger)
             const scrollPosition = container.scrollLeft;
             const containerWidth = container.clientWidth;
             const maxScroll = container.scrollWidth - containerWidth;

@@ -488,7 +488,16 @@ body {
 }
 	
 .footer-left {
-	width: 125px
+	width: 125px;
+}
+
+.footer-center {
+	width: 125px;
+	justify-content: center;
+}
+
+.footer-center {
+	width: 125px;
 }
 
 .footer span {

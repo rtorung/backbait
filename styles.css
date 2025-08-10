@@ -681,7 +681,7 @@ th {
 .mini-weather-card {
     height: 40px; /* Ca 40px högt som begärt */
     overflow: hidden; /* Dölj overflow för rullande effekt */
-    background-color: #828282; /* Ljus bakgrund för läsbarhet */
+    background-color: #f4f4f4; /* Ljus bakgrund för läsbarhet */
     border: 1px solid #ddd;
     border-radius: 8px;
     margin: 10px auto; /* Centrera och marginal */
@@ -690,7 +690,6 @@ th {
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */
     position: relative;
-	color: white;
 	margin-top: 263px;
 }
 

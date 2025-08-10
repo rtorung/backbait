@@ -720,6 +720,7 @@ th {
         font-size: 14px; /* Mindre text i mobil */
         height: 40px; /* Anpassa höjd om nödvändigt */
         line-height: 40px;
+		margin-top: 160px;
     }
 
     .header-logo {
@@ -800,7 +801,7 @@ th {
     }
 
     .main-content {
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     .small-image-card-container {
@@ -810,7 +811,7 @@ th {
         flex-direction: row;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        margin: 30px auto 20px !important;
+        margin: 10px auto 20px !important;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;

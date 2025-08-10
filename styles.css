@@ -297,7 +297,7 @@ body {
     display: block;
 }
 
-/* Huvudinnehåll */
+/* Huvudinnehåll index*/
 .main-content {
     flex-grow: 1;
     display: flex;
@@ -306,6 +306,17 @@ body {
     width: 100%;
     z-index: 900;
     margin-top: 20px;
+}
+
+/* Huvudinnehåll övrigt*/
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 900;
+    margin-top: 263px;
 }
 
 /* Sidinnehåll */

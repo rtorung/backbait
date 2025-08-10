@@ -305,7 +305,7 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
-    margin-top: 263px;
+    margin-top: 313px;
 }
 
 /* Sidinnehåll */
@@ -691,6 +691,7 @@ th {
     line-height: 40px; /* Centrera vertikalt */
     position: relative;
 	color: white;
+	margin-top: 253px;
 }
 
 .mini-weather-card .marquee {

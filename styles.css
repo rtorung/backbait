@@ -58,7 +58,7 @@ body {
     margin: 0 auto;
     display: row;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
     height: 100%;
     box-sizing: border-box;
 }
@@ -78,7 +78,6 @@ body {
     flex-shrink: 0;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
     gap: 10px;
 }
 

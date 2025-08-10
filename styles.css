@@ -39,7 +39,7 @@ body {
 
 /* Huvudmeny */
 .main-menu {
-    width: 100%;
+    width: 100vw;
     background-color: #333;
     color: white;
     position: fixed;
@@ -69,14 +69,11 @@ body {
 
 .menu-center {
     flex-grow: 1;
-    display: flex;
-    justify-content: center;
 }
 
 .menu-right {
     flex-shrink: 0;
-    display: flex;
-    justify-content: flex-end;
+	justify-content: flex-end;
 }
 
 .menu-container {

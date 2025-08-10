@@ -644,6 +644,8 @@ th {
     margin-bottom: 20px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	max-width: 300px; /* Begränsa storlek för att inte ta för mycket plats */
+    margin: 0 auto 20px;
 }
 
 .weather-card h2 {
@@ -653,6 +655,23 @@ th {
 .weather-card .icon {
     font-size: 2em;
     margin-right: 10px;
+}
+
+#search-container {
+    margin-bottom: 20px;
+}
+
+#location-search {
+    padding: 8px;
+    width: 200px;
+}
+
+#search-btn {
+    padding: 8px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
 /* Responsiv design för mobila enheter */

@@ -346,7 +346,6 @@ body {
     align-items: center;
     justify-content: center;
     font-family: "Roboto", Arial, sans-serif;
-    z-index: 1000;
 }
 
 .footer-content-wrapper {

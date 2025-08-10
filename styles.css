@@ -43,7 +43,7 @@ body {
     background-color: #333;
     color: white;
     position: fixed;
-    top: 213px;
+    top: 100px;
     z-index: 1500;
     height: 50px;
     display: flex;
@@ -75,11 +75,11 @@ body {
 }
 
 .menu-right {
+	width: auto;
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 10px;
 }
 
 .menu-container {

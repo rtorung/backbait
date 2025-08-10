@@ -486,6 +486,10 @@ body {
 	align-items: center;
     box-sizing: border-box;
 }
+	
+.footer-left {
+	width: 125px
+}
 
 .footer span {
     color: #fff;

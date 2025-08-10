@@ -684,15 +684,16 @@ th {
 .mini-weather-card {
     height: 40px; /* Ca 40px högt som begärt */
     overflow: hidden; /* Dölj overflow för rullande effekt */
-    background-color: #f9f9f9; /* Ljus bakgrund för läsbarhet */
+    background-color: #828282; /* Ljus bakgrund för läsbarhet */
     border: 1px solid #ddd;
     border-radius: 8px;
     margin: 10px auto; /* Centrera och marginal */
-    max-width: 250px; /* Full bredd i mobil */
+    max-width: 150px; /* Full bredd i mobil */
     white-space: nowrap; /* Förhindra radbrytning */
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */
     position: relative;
+	color: white;
 }
 
 .mini-weather-card .marquee {

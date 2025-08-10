@@ -65,18 +65,15 @@ body {
 
 .menu-left {
 	width: auto; /* Changed from 350px to collapse empty space */
-    flex-shrink: 0;
 }
 
 .menu-center {
-    flex-grow: 1;
     display: flex;
     justify-content: center;
 }
 
 .menu-right {
 	width: auto;
-    flex-grow: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;

@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             headerElement.innerHTML = data;
             console.log("Header loaded successfully");
-            // Återinitiera dropdown-hanterare efter att header har laddats
-            initializeDropdowns();
+            // Initiera menyhantering efter att header har laddats
+            initializeMenus();
         })
         .catch(error => {
             console.error("Error loading header:", error);
@@ -44,120 +44,133 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-    // Funktion för att initiera dropdown-hanterare
-    function initializeDropdowns() {
+    // Funktion för att initiera både dropdowns och hamburgermeny
+    function initializeMenus() {
+        // Dropdown-hantering för desktop
         const dropdownParents = document.querySelectorAll(".dropdown-parent");
         if (dropdownParents.length === 0) {
             console.warn("No dropdown parents found in the DOM");
-            return;
-        }
+        } else {
+            dropdownParents.forEach(parent => {
+                parent.addEventListener("click", function(event) {
+                    if (!event.target.closest(".dropdown a")) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
 
-        dropdownParents.forEach(parent => {
-            parent.addEventListener("click", function(event) {
-                // Endast förhindra standardbeteende om klicket är på föräldern, inte på en länk i dropdown
-                if (!event.target.closest(".dropdown a")) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+                    const dropdown = this.querySelector(".dropdown");
+                    const isActive = this.classList.contains("active");
 
-                const dropdown = this.querySelector(".dropdown");
-                const isActive = this.classList.contains("active");
-
-                // Stäng alla andra dropdown-menyer
-                dropdownParents.forEach(p => {
-                    if (p !== this) {
-                        p.classList.remove("active");
-                        const otherDropdown = p.querySelector(".dropdown");
-                        if (otherDropdown) {
-                            otherDropdown.style.display = "none";
-                            console.log("Closed dropdown:", p.textContent);
+                    // Stäng andra dropdowns
+                    dropdownParents.forEach(p => {
+                        if (p !== this) {
+                            p.classList.remove("active");
+                            const otherDropdown = p.querySelector(".dropdown");
+                            if (otherDropdown) {
+                                otherDropdown.style.display = "none";
+                                console.log("Closed dropdown:", p.textContent);
+                            }
                         }
+                    });
+
+                    // Växla denna dropdown
+                    if (!isActive) {
+                        this.classList.add("active");
+                        dropdown.style.display = "flex";
+                        const header = document.querySelector(".site-header");
+                        const mainMenu = document.querySelector(".main-menu");
+                        const topPosition = header.offsetHeight + mainMenu.offsetHeight - 1;
+                        dropdown.style.top = `${topPosition}px`;
+                        console.log("Opened dropdown:", this.textContent, "Top position:", topPosition);
+                    } else {
+                        this.classList.remove("active");
+                        dropdown.style.display = "none";
+                        console.log("Closed dropdown:", this.textContent);
                     }
                 });
+            });
 
-                // Växla denna dropdown
-                if (!isActive) {
-                    this.classList.add("active");
-                    dropdown.style.display = "flex";
-                    const header = document.querySelector(".site-header");
-                    const mainMenu = document.querySelector(".main-menu");
-                    const topPosition = header.offsetHeight + mainMenu.offsetHeight - 1;
-                    dropdown.style.top = `${topPosition}px`;
-                    console.log("Opened dropdown:", this.textContent, "Top position:", topPosition);
-                } else {
-                    this.classList.remove("active");
-                    dropdown.style.display = "none";
-                    console.log("Closed dropdown:", this.textContent);
+            // Stäng dropdown vid klick utanför
+            document.addEventListener("click", function(event) {
+                if (!event.target.closest(".dropdown-parent")) {
+                    dropdownParents.forEach(parent => {
+                        parent.classList.remove("active");
+                        const dropdown = parent.querySelector(".dropdown");
+                        if (dropdown) {
+                            dropdown.style.display = "none";
+                            console.log("Click outside dropdown detected, closed:", parent.textContent);
+                        }
+                    });
                 }
             });
-        });
+        }
 
-        // Stäng dropdown vid klick utanför
-        document.addEventListener("click", function(event) {
-            if (!event.target.closest(".dropdown-parent")) {
-                dropdownParents.forEach(parent => {
-                    parent.classList.remove("active");
-                    const dropdown = parent.querySelector(".dropdown");
-                    if (dropdown) {
-                        dropdown.style.display = "none";
-                        console.log("Click outside dropdown detected, closed:", parent.textContent);
-                    }
+        // Hamburgermeny-hantering för mobil
+        const hamburgerIcon = document.querySelector(".hamburger-icon");
+        const mobileSidebar = document.querySelector(".mobile-sidebar");
+        const closeSidebar = document.querySelector(".close-sidebar");
+        const sidebarOverlay = document.querySelector(".sidebar-overlay") || document.createElement("div");
+
+        // Skapa overlay om den inte redan finns
+        if (!document.querySelector(".sidebar-overlay")) {
+            sidebarOverlay.classList.add("sidebar-overlay");
+            document.body.appendChild(sidebarOverlay);
+        }
+
+        if (hamburgerIcon && mobileSidebar && closeSidebar) {
+            hamburgerIcon.addEventListener("click", () => {
+                mobileSidebar.classList.add("active");
+                sidebarOverlay.classList.add("active");
+                console.log("Opened mobile sidebar");
+            });
+
+            closeSidebar.addEventListener("click", () => {
+                mobileSidebar.classList.remove("active");
+                sidebarOverlay.classList.remove("active");
+                console.log("Closed mobile sidebar");
+            });
+
+            sidebarOverlay.addEventListener("click", () => {
+                mobileSidebar.classList.remove("active");
+                sidebarOverlay.classList.remove("active");
+                console.log("Closed mobile sidebar via overlay");
+            });
+
+            // Hantera undermenyer i sidomeny (accordion-stil)
+            const sidebarParents = document.querySelectorAll(".sidebar-dropdown-parent");
+            if (sidebarParents.length === 0) {
+                console.warn("No sidebar dropdown parents found in the DOM");
+            } else {
+                sidebarParents.forEach(parent => {
+                    parent.addEventListener("click", (event) => {
+                        if (event.target.tagName !== "A") return; // Endast på föräldralänk
+                        parent.classList.toggle("active");
+                        console.log("Toggled sidebar dropdown:", parent.textContent);
+                    });
                 });
             }
-        });
 
-        // Markera aktiv sida
+            // Markera aktiv sida i sidomeny
+            const currentPath = window.location.pathname.split("/").pop() || "index.html";
+            const sidebarLinks = document.querySelectorAll(".sidebar-items a");
+            sidebarLinks.forEach(link => {
+                const href = link.getAttribute("href").split("/").pop();
+                if (href === currentPath) {
+                    link.parentElement.classList.add("active-page");
+                }
+            });
+        } else {
+            console.error("Hamburger menu elements not found:", {
+                hamburgerIcon: !!hamburgerIcon,
+                mobileSidebar: !!mobileSidebar,
+                closeSidebar: !!closeSidebar
+            });
+        }
+
+        // Markera aktiv sida i huvudmeny
         const currentPath = window.location.pathname.split("/").pop() || "index.html";
         const menuLinks = document.querySelectorAll(".menu-items a, .dropdown a");
         menuLinks.forEach(link => {
-            const href = link.getAttribute("href").split("/").pop();
-            if (href === currentPath) {
-                link.parentElement.classList.add("active-page");
-            }
-        });
-    }
-
-    // Hamburgermeny-hantering
-    const hamburgerIcon = document.querySelector(".hamburger-icon");
-    const mobileSidebar = document.querySelector(".mobile-sidebar");
-    const closeSidebar = document.querySelector(".close-sidebar");
-    const sidebarOverlay = document.createElement("div"); // Skapa overlay dynamiskt
-    sidebarOverlay.classList.add("sidebar-overlay");
-    document.body.appendChild(sidebarOverlay);
-
-    if (hamburgerIcon && mobileSidebar && closeSidebar) {
-        hamburgerIcon.addEventListener("click", () => {
-            mobileSidebar.classList.add("active");
-            sidebarOverlay.classList.add("active");
-            console.log("Opened mobile sidebar");
-        });
-
-        closeSidebar.addEventListener("click", () => {
-            mobileSidebar.classList.remove("active");
-            sidebarOverlay.classList.remove("active");
-            console.log("Closed mobile sidebar");
-        });
-
-        sidebarOverlay.addEventListener("click", () => {
-            mobileSidebar.classList.remove("active");
-            sidebarOverlay.classList.remove("active");
-            console.log("Closed mobile sidebar via overlay");
-        });
-
-        // Hantera undermenyer i sidomeny (accordion-stil)
-        const sidebarParents = document.querySelectorAll(".sidebar-dropdown-parent");
-        sidebarParents.forEach(parent => {
-            parent.addEventListener("click", (event) => {
-                if (event.target.tagName !== "A") return; // Endast på föräldralänk
-                parent.classList.toggle("active");
-                console.log("Toggled sidebar dropdown:", parent.textContent);
-            });
-        });
-
-        // Markera aktiv sida i sidomeny (kopiera från befintlig kod)
-        const currentPath = window.location.pathname.split("/").pop() || "index.html";
-        const sidebarLinks = document.querySelectorAll(".sidebar-items a");
-        sidebarLinks.forEach(link => {
             const href = link.getAttribute("href").split("/").pop();
             if (href === currentPath) {
                 link.parentElement.classList.add("active-page");

@@ -327,7 +327,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 50px auto 20px !important;
+    margin: 10px auto 20px !important;
     box-sizing: border-box;
 }
 

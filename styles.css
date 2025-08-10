@@ -600,7 +600,7 @@ body {
         flex-direction: row;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        margin: 50px auto 20px !important;
+        margin: 30px auto 20px !important;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
@@ -654,7 +654,7 @@ body {
     .card-indicator {
         display: flex;
         justify-content: center;
-        margin: 10px auto 20px;
+        margin: 10px auto 15px;
         position: relative;
         z-index: 5;
     }

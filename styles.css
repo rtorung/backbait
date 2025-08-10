@@ -75,7 +75,7 @@ body {
 }
 
 .menu-right {
-    width: auto; /* Changed from 350px to collapse empty space */
+    width: 250; /* Changed from 350px to collapse empty space */
     flex-shrink: 0;
     display: flex;
     justify-content: flex-end;

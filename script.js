@@ -117,6 +117,54 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Hamburgermeny-hantering
+    const hamburgerIcon = document.querySelector(".hamburger-icon");
+    const mobileSidebar = document.querySelector(".mobile-sidebar");
+    const closeSidebar = document.querySelector(".close-sidebar");
+    const sidebarOverlay = document.createElement("div"); // Skapa overlay dynamiskt
+    sidebarOverlay.classList.add("sidebar-overlay");
+    document.body.appendChild(sidebarOverlay);
+
+    if (hamburgerIcon && mobileSidebar && closeSidebar) {
+        hamburgerIcon.addEventListener("click", () => {
+            mobileSidebar.classList.add("active");
+            sidebarOverlay.classList.add("active");
+            console.log("Opened mobile sidebar");
+        });
+
+        closeSidebar.addEventListener("click", () => {
+            mobileSidebar.classList.remove("active");
+            sidebarOverlay.classList.remove("active");
+            console.log("Closed mobile sidebar");
+        });
+
+        sidebarOverlay.addEventListener("click", () => {
+            mobileSidebar.classList.remove("active");
+            sidebarOverlay.classList.remove("active");
+            console.log("Closed mobile sidebar via overlay");
+        });
+
+        // Hantera undermenyer i sidomeny (accordion-stil)
+        const sidebarParents = document.querySelectorAll(".sidebar-dropdown-parent");
+        sidebarParents.forEach(parent => {
+            parent.addEventListener("click", (event) => {
+                if (event.target.tagName !== "A") return; // Endast på föräldralänk
+                parent.classList.toggle("active");
+                console.log("Toggled sidebar dropdown:", parent.textContent);
+            });
+        });
+
+        // Markera aktiv sida i sidomeny (kopiera från befintlig kod)
+        const currentPath = window.location.pathname.split("/").pop() || "index.html";
+        const sidebarLinks = document.querySelectorAll(".sidebar-items a");
+        sidebarLinks.forEach(link => {
+            const href = link.getAttribute("href").split("/").pop();
+            if (href === currentPath) {
+                link.parentElement.classList.add("active-page");
+            }
+        });
+    }
+
     // Hantera prickindikatorer för små bildkort i mobil
     const container = document.querySelector(".small-image-card-container");
     const dots = document.querySelectorAll(".indicator-dot");

@@ -64,7 +64,6 @@ body {
 }
 
 .menu-left {
-    width: 350px;
     flex-shrink: 0;
 }
 
@@ -75,7 +74,6 @@ body {
 }
 
 .menu-right {
-    width: 350px;
     flex-shrink: 0;
     display: flex;
     justify-content: flex-end;

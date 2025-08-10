@@ -506,12 +506,6 @@ body {
     text-decoration: underline;
 }
 
-.footer .footer-x-icon {
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-}
-
 /* Hamburgermeny-ikon (dold i desktop) */
 .hamburger-icon {
     display: none;

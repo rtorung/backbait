@@ -76,7 +76,7 @@ body {
 
 .menu-right {
     width: 250; /* Changed from 350px to collapse empty space */
-    flex-shrink: 0;
+    flex-grow: 1;
     display: flex;
     justify-content: flex-end;
     align-items: center;

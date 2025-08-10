@@ -801,7 +801,7 @@ th {
     }
 
     .main-content {
-        margin-top: 190px;
+        margin-top: 180px;
     }
 
     .small-image-card-container {
@@ -977,5 +977,8 @@ th {
     .menu-right {
 		display: flex;
         justify-content: flex-end;
+		width: auto;
+        min-height: auto;
+        margin-bottom: 0;
     }
 }

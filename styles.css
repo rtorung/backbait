@@ -489,19 +489,16 @@ body {
 	
 .footer-left {
 	width: 125px;
-	justify-content: center;
 	align-items: center;
 }
 
 .footer-center {
 	width: 125px;
-	justify-content: center;
 	align-items: center;
 }
 
 .footer-right {
 	width: 125px;
-	justify-content: center;
 	align-items: center;
 }
 
@@ -840,20 +837,14 @@ body {
 
     .footer-left {
         margin-bottom: 15px;
-		justify-content: center;
-		align-items: center;
     }
 
     .footer-center {
         margin: 0;
-		justify-content: center;
-		align-items: center;
     }
 
     .footer-right {
         margin-top: 15px;
-		justify-content: center;
-		align-items: center;
     }
 	
     .menu-left {

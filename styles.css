@@ -489,17 +489,17 @@ body {
 	
 .footer-left {
 	width: 125px;
-	align-items: center;
+	justify-content: center;
 }
 
 .footer-center {
 	width: 125px;
-	align-items: center;
+	justify-content: center;
 }
 
 .footer-right {
 	width: 125px;
-	align-items: center;
+	justify-content: center;
 }
 
 .footer span {
@@ -836,17 +836,17 @@ body {
 
     .footer-left {
         margin-bottom: 15px;
-		align-items: center;
+		justify-content: center;
     }
 
     .footer-center {
         margin: 0;
-		align-items: center;
+		justify-content: center;
     }
 
     .footer-right {
         margin-top: 15px;
-		align-items: center;
+		justify-content: center;
     }
 	
     .menu-left {

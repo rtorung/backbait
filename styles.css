@@ -75,7 +75,6 @@ body {
 }
 
 .menu-right {
-    width: 250; /* Changed from 350px to collapse empty space */
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
@@ -694,7 +693,6 @@ th {
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */
     position: relative;
-	margin-top: 263px;
 }
 
 .mini-weather-card .marquee {

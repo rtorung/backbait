@@ -696,7 +696,7 @@ th {
     border: 1px solid #ddd;
     border-radius: 8px;
     margin: 10px auto; /* Centrera och marginal */
-    max-width: 450px; /* Full bredd i mobil */
+    max-width: 1100px; /* Full bredd i mobil */
     white-space: nowrap; /* Förhindra radbrytning */
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */

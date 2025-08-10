@@ -463,7 +463,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const rating = getRating(total);
 
         // Rullande text
-        const infoText = `Aktuellt väder i ${place}: ${iconData.icon} ${iconData.desc}, Fiske idag: ${rating}, Temp: ${current.t} °C, Vind: ${current.ws} m/s, Tryck: ${current.msl} hPa, Fukt: ${current.r} %   `; // Extra space för loop
+        const infoText = `     Aktuellt väder i ${place}: ${iconData.icon} ${iconData.desc}, Fiske idag: ${rating}, Temp: ${current.t} °C, Vind: ${current.ws} m/s, Tryck: ${current.msl} hPa, Fukt: ${current.r} %   `; // Extra space för loop
 
         let html = `
             <div class="mini-weather-card">

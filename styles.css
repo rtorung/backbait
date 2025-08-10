@@ -688,7 +688,7 @@ th {
     border: 1px solid #ddd;
     border-radius: 8px;
     margin: 10px auto; /* Centrera och marginal */
-    max-width: 150px; /* Full bredd i mobil */
+    max-width: 200px; /* Full bredd i mobil */
     white-space: nowrap; /* Förhindra radbrytning */
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */
@@ -719,7 +719,7 @@ th {
     }
 	
 	.mini-weather-card {
-        font-size: 12px; /* Mindre text i mobil */
+        font-size: 14px; /* Mindre text i mobil */
         height: 40px; /* Anpassa höjd om nödvändigt */
         line-height: 40px;
     }

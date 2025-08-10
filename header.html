@@ -1,21 +1,21 @@
-<header class="site-header">
+<div class="site-header">
     <a href="index.html">
-        <img src="images/logo600.webp" alt="Backbait Logo" class="header-logo">
+        <img src="images/logo.png" alt="Logotyp" class="header-logo">
     </a>
-</header>
+</div>
 
 <div class="main-menu">
     <div class="menu-content-wrapper">
         <div class="menu-left">
-            <!-- Tom container för framtida innehåll -->
+            <!-- Ny: Hamburgermeny-ikon (dold i desktop) -->
+            <button class="hamburger-icon" aria-label="Öppna meny">&#9776;</button> <!-- &#9776; är hamburgersymbol -->
         </div>
         <div class="menu-center">
             <div class="menu-container">
                 <ul class="menu-items">
-                    <li class="dropdown-parent">
-                        <a href="#">FISKARTER</a>
+                    <li class="dropdown-parent"><a href="#">FISKARTER</a>
                         <ul class="dropdown">
-                            <li><a href="abborre.html">ABBORRE</a></li>
+                            <li><a href="#">ABBORRE</a></li>
                             <li><a href="#">GÄDDA</a></li>
                             <li><a href="#">GÖS</a></li>
                             <li><a href="#">HARR</a></li>
@@ -26,8 +26,7 @@
                         </ul>
                     </li>
                     <li><a href="#">BETET</a></li>
-                    <li class="dropdown-parent">
-                        <a href="#">FÖRÄDLA</a>
+                    <li class="dropdown-parent"><a href="#">FÖRÄDLA</a>
                         <ul class="dropdown">
                             <li><a href="#">FÖRBEREDA</a></li>
                             <li><a href="#">RECEPT</a></li>
@@ -37,12 +36,39 @@
             </div>
         </div>
         <div class="menu-right">
-            <a href="https://x.com" target="_blank" aria-label="Följ oss på X">
-                <img src="images/X/logo-white.png" alt="X Social Media Icon" class="menu-social-icon">
+            <!-- Befintliga sociala ikoner (x.com och iFiske orörda) -->
+            <a href="https://x.com/youraccount" target="_blank">
+                <img src="images/x-icon.png" alt="X.com" class="menu-social-icon">
             </a>
-            <a href="https://ifiske.se" target="_blank" aria-label="Besök iFiske">
-                <img src="images/ifiske.webp" alt="iFiske Logo" class="menu-social-icon">
+            <a href="https://ifiske.se" target="_blank">
+                <img src="images/ifiske-icon.png" alt="iFiske" class="menu-social-icon">
             </a>
         </div>
     </div>
 </div>
+
+<!-- Ny: Sidomeny för mobil (dold initialt) -->
+<nav class="mobile-sidebar">
+    <button class="close-sidebar" aria-label="Stäng meny">&times;</button> <!-- Stängknapp -->
+    <ul class="sidebar-items">
+        <li class="sidebar-dropdown-parent"><a href="#">FISKARTER</a>
+            <ul class="sidebar-dropdown">
+                <li><a href="#">ABBORRE</a></li>
+                <li><a href="#">GÄDDA</a></li>
+                <li><a href="#">GÖS</a></li>
+                <li><a href="#">HARR</a></li>
+                <li><a href="#">LAX</a></li>
+                <li><a href="#">REGNBÅGE</a></li>
+                <li><a href="#">RÖDING</a></li>
+                <li><a href="#">ÖRING</a></li>
+            </ul>
+        </li>
+        <li><a href="#">BETET</a></li>
+        <li class="sidebar-dropdown-parent"><a href="#">FÖRÄDLA</a>
+            <ul class="sidebar-dropdown">
+                <li><a href="#">FÖRBEREDA</a></li>
+                <li><a href="#">RECEPT</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>

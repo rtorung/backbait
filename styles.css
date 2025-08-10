@@ -64,7 +64,7 @@ body {
 }
 
 .menu-left {
-    width: 350px;
+	width: auto; /* Changed from 350px to collapse empty space */
     flex-shrink: 0;
 }
 

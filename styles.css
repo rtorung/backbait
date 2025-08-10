@@ -637,6 +637,24 @@ th {
     background-color: #f2f2f2; 
 }
 
+.weather-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.weather-card h2 {
+    margin-top: 0;
+}
+
+.weather-card .icon {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
      .site-header {

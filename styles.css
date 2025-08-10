@@ -600,7 +600,7 @@ body {
         flex-direction: row;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        margin: 50px auto 20px !important;
+        margin: 30px auto 20px !important;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
@@ -614,7 +614,7 @@ body {
     }
 
     .small-image-card {
-        width: 331px;
+        width: 200px;
         flex-shrink: 0;
         margin: 0 10px;
         padding: 10px;

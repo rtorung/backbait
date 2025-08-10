@@ -429,7 +429,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			});
 	}
 
-	// Hämta GPS och starta
+    // Visa grundläggande prognos baserat på månfas direkt
+    displayPrognos(null, null, null);
+
+	// Hämta GPS och uppdatera om möjligt
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(
 			pos => {
@@ -439,10 +442,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			},
 			error => {
 				console.error('Geolocation-fel:', error);
-				displayPrognos(null, null, null); // Visa utan plats/väder
-			}
+                // Grundläggande prognos redan visad
+			},
+            { timeout: 10000 } // Timeout efter 10 sekunder
 		);
-	} else {
-		displayPrognos(null, null, null);
 	}
 });

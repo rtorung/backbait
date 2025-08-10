@@ -446,3 +446,4 @@ if (navigator.geolocation) {
 } else {
     displayPrognos(null, null, null);
 }
+}

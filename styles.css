@@ -490,18 +490,18 @@ body {
 .footer-left {
 	width: 125px;
 	display: flex;
-	align-items: center;
+	justify-content: center;
 }
 
 .footer-center {
 	width: 125px;
 	display: flex;
-	align-items: center;
+	justify-content: center;
 }
 
 .footer-right {
 	width: 125px;
-	align-items: center;
+	justify-content: center;
 }
 
 .footer span {

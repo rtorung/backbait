@@ -392,6 +392,91 @@ body {
     vertical-align: middle;
 }
 
+/* Hamburgermeny-ikon (dold i desktop) */
+.hamburger-icon {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Sidomeny (off-canvas) */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    z-index: 2000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.sidebar-items {
+    list-style: none;
+    padding: 0;
+    margin: 50px 0 0;
+}
+
+.sidebar-items li {
+    padding: 15px 0;
+    border-bottom: 1px solid #555;
+}
+
+.sidebar-items a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.sidebar-dropdown {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+}
+
+.sidebar-dropdown-parent.active .sidebar-dropdown {
+    display: block;
+}
+
+/* Overlay för att dölja bakgrund när meny öppen */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
     .site-header {
@@ -405,7 +490,7 @@ body {
         height: auto;
         image-rendering: auto;
     }
-
+	
     .main-menu {
         position: fixed;
         top: 110px;
@@ -632,5 +717,41 @@ body {
 
     .footer-right {
         margin-top: 15px;
+    }
+	
+	.menu-left {
+        display: flex;
+        justify-content: flex-start;
+        width: auto; /* Återställ width för att undvika konflikt */
+        min-height: auto; /* Ta bort min-height */
+        margin-bottom: 0; /* Ta bort marginal */
+    }
+
+    .hamburger-icon {
+        display: block;
+    }
+
+    .menu-center {
+        display: none; /* Dölj befintlig meny */
+    }
+
+    .main-menu {
+        height: 50px; /* Fast höjd */
+        min-height: auto; /* Explicit nollställ min-height */
+        overflow-x: hidden; /* Säkerställ ingen scroll */
+    }
+
+    .menu-content-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-height: auto; /* Ta bort min-height */
+        padding: 0; /* Minska padding om nödvändigt */
+    }
+
+    .menu-right {
+        width: auto; /* Justera för att bara ta upp nödvändigt utrymme */
+        justify-content: flex-end;
+        margin-top: 0;
     }
 }

@@ -144,7 +144,7 @@ body {
     width: 100%;
     background-color: white;
     list-style: none;
-    padding: 0 20px 20px;
+    padding: 40px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1600;
     font-family: "Roboto", Arial, sans-serif;

@@ -600,7 +600,7 @@ body {
         flex-direction: row;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        margin: 30px auto 20px !important;
+        margin: 50px auto 20px !important;
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
@@ -614,7 +614,7 @@ body {
     }
 
     .small-image-card {
-        width: 200px;
+        width: 220px; /* Ändrat från 331px till 220px */
         flex-shrink: 0;
         margin: 0 10px;
         padding: 10px;
@@ -732,7 +732,7 @@ body {
         margin-top: 15px;
     }
 	
-	.menu-left {
+    .menu-left {
         display: flex;
         justify-content: flex-start;
         width: auto;

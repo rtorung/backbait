@@ -692,7 +692,7 @@ th {
     max-width: 400px; /* Full bredd i mobil */
     white-space: nowrap; /* Förhindra radbrytning */
     font-size: 14px; /* Liten text för att passa */
-    line-height: 50px; /* Centrera vertikalt */
+    line-height: 40px; /* Centrera vertikalt */
     position: relative;
 	margin-top: 263px;
 }

@@ -346,74 +346,121 @@ document.addEventListener("DOMContentLoaded", function() {
 		return params;
 	}
 
-	// Visa aktuell väderkort
-	async function displayCurrentWeather(lat, lon, weatherData) {
-		const container = document.getElementById('current-weather');
-		if (!lat || !lon || !weatherData) {
-			container.innerHTML = '<p>Ingen aktuell väderdata tillgänglig.</p>';
-			return;
-		}
+    // Ny funktion för att hitta mest frekventa värde (för vädersymbol)
+    function getMode(arr) {
+        if (arr.length === 0) return null;
+        const freq = {};
+        arr.forEach(val => {
+            freq[val] = (freq[val] || 0) + 1;
+        });
+        let maxFreq = 0;
+        let modeVal = null;
+        Object.keys(freq).forEach(key => {
+            if (freq[key] > maxFreq) {
+                maxFreq = freq[key];
+                modeVal = key;
+            }
+        });
+        return parseInt(modeVal);
+    }
 
-		// Hämta platsnamn via Nominatim
-		let place = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
-		try {
-			const geoUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
-			const geoResponse = await fetch(geoUrl);
-			const geoData = await geoResponse.json();
-			place = geoData.display_name || place;
-		} catch (error) {
-			console.error('Fel vid hämtning av plats:', error);
-		}
+    // Uppdaterad displayCurrentWeather för att lägga till fiskeprognos idag
+    async function displayCurrentWeather(lat, lon, weatherData) {
+        const container = document.getElementById('current-weather');
+        if (!lat || !lon || !weatherData) {
+            container.innerHTML = '<p>Ingen aktuell väderdata tillgänglig.</p>';
+            return;
+        }
 
-		const current = getCurrentWeather(weatherData.timeSeries);
-		if (!current) {
-			container.innerHTML = '<p>Ingen aktuell väderdata tillgänglig.</p>';
-			return;
-		}
+        // Hämta platsnamn via Nominatim (stad och land)
+        let place = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+        let city = '';
+        let country = '';
+        try {
+            const geoUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+            const geoResponse = await fetch(geoUrl);
+            const geoData = await geoResponse.json();
+            city = geoData.address.city || geoData.address.town || geoData.address.village || '';
+            country = geoData.address.country || '';
+            place = (city ? city + ', ' : '') + country;
+        } catch (error) {
+            console.error('Fel vid hämtning av plats:', error);
+        }
 
-		const symb = current.Wsymb2 || 1; // Default till klart
-		const iconData = weatherIcons[symb] || { desc: 'Okänt', icon: '❓' };
+        const current = getCurrentWeather(weatherData.timeSeries);
+        if (!current) {
+            container.innerHTML = '<p>Ingen aktuell väderdata tillgänglig.</p>';
+            return;
+        }
 
-		let html = `
-			<div class="weather-card">
-				<h2>Aktuellt väder i ${place}</h2>
-				<p><span class="icon">${iconData.icon}</span> ${iconData.desc}</p>
-				<p>Temperatur: ${current.t} °C</p>
-				<p>Vind: ${current.ws} m/s från ${current.wd}°</p>
-				<p>Lufttryck: ${current.msl} hPa</p>
-				<p>Relativ fuktighet: ${current.r} %</p>
-			</div>
-		`;
-		container.innerHTML = html;
-	}
+        const symb = current.Wsymb2 || 1;
+        const iconData = weatherIcons[symb] || { desc: 'Okänt', icon: '❓' };
 
-	// Visa tabell
-	async function displayPrognos(lat, lon, weatherData) {
-		await displayCurrentWeather(lat, lon, weatherData);
-		const container = document.getElementById('prognos');
-		let table = '<table><tr><th>Datum</th><th>Månfas</th><th>Prognos</th></tr>';
-		const today = new Date();
-		const weatherDays = weatherData ? groupByDay(weatherData.timeSeries) : null;
-		for (let i = 0; i < 60; i++) {
-			const date = new Date(today);
-			date.setDate(today.getDate() + i);
-			const year = date.getFullYear();
-			const month = date.getMonth() + 1;
-			const day = date.getDate();
-			const phase = getMoonPhase(year, month, day);
-			const moonScore = getMoonScore(phase);
-			let weatherScore = 0;
-			const dateStr = date.toLocaleDateString('sv-SE');
-			if (weatherDays && weatherDays[dateStr]) {
-				weatherScore = getWeatherScore(weatherDays[dateStr]);
-			}
-			const total = moonScore + weatherScore;
-			const rating = getRating(total);
-			table += `<tr><td>${dateStr}</td><td>${phase}</td><td>${rating}</td></tr>`;
-		}
-		table += '</table>';
-		container.innerHTML = table;
-	}
+        // Beräkna dagens fiskeprognos
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+        const phase = getMoonPhase(year, month, day);
+        const moonScore = getMoonScore(phase);
+        const weatherDays = groupByDay(weatherData.timeSeries);
+        const todayStr = today.toLocaleDateString('sv-SE');
+        let weatherScore = weatherDays[todayStr] ? getWeatherScore(weatherDays[todayStr]) : 0;
+        const total = moonScore + weatherScore;
+        const rating = getRating(total);
+
+        let html = `
+            <div class="weather-card">
+                <h2>Aktuellt väder i ${place}</h2>
+                <p><span class="icon">${iconData.icon}</span> ${iconData.desc}</p>
+                <p>Temperatur: ${current.t} °C</p>
+                <p>Vind: ${current.ws} m/s från ${current.wd}°</p>
+                <p>Lufttryck: ${current.msl} hPa</p>
+                <p>Relativ fuktighet: ${current.r} %</p>
+                <p><strong>Fiskeprognos idag: ${rating}</strong></p>
+            </div>
+        `;
+        container.innerHTML = html;
+    }
+
+    // Uppdaterad displayPrognos för att lägga till väderkolumn
+    async function displayPrognos(lat, lon, weatherData) {
+        await displayCurrentWeather(lat, lon, weatherData);
+        const container = document.getElementById('prognos');
+        let table = '<table><tr><th>Datum</th><th>Månfas</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
+        const today = new Date();
+        const weatherDays = weatherData ? groupByDay(weatherData.timeSeries) : null;
+        const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : []; // Endast 5 dagar
+        for (let i = 0; i < 60; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const phase = getMoonPhase(year, month, day);
+            const moonScore = getMoonScore(phase);
+            let weatherScore = 0;
+            const dateStr = date.toLocaleDateString('sv-SE');
+            let weatherInfo = '';
+            if (weatherDays && weatherDays[dateStr] && dayKeys.includes(dateStr)) {
+                const dayData = weatherDays[dateStr];
+                weatherScore = getWeatherScore(dayData);
+                // Medeltemp
+                const temps = dayData.t || [];
+                const avgTemp = temps.length > 0 ? (temps.reduce((a, b) => a + b, 0) / temps.length).toFixed(1) : 'N/A';
+                // Vanligaste väder
+                const symbs = dayData.Wsymb2 || [];
+                const modeSymb = getMode(symbs) || 1;
+                const iconData = weatherIcons[modeSymb] || { desc: 'Okänt', icon: '❓' };
+                weatherInfo = `Medeltemp: ${avgTemp} °C, Väder: ${iconData.icon} ${iconData.desc}`;
+            }
+            const total = moonScore + weatherScore;
+            const rating = getRating(total);
+            table += `<tr><td>${dateStr}</td><td>${phase}</td><td>${rating}</td><td>${weatherInfo}</td></tr>`;
+        }
+        table += '</table>';
+        container.innerHTML = table;
+    }
 
 	// Hämta väder från SMHI
 	function fetchWeather(lat, lon) {
@@ -447,4 +494,29 @@ document.addEventListener("DOMContentLoaded", function() {
             { timeout: 10000 } // Timeout efter 10 sekunder
 		);
 	}
+
+    // Lägg till event listener för sökknapp
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('location-search');
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', async () => {
+            const query = searchInput.value.trim();
+            if (!query) return;
+            try {
+                const searchUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+                const response = await fetch(searchUrl);
+                const data = await response.json();
+                if (data.length > 0) {
+                    const lat = parseFloat(data[0].lat);
+                    const lon = parseFloat(data[0].lon);
+                    fetchWeather(lat, lon);
+                } else {
+                    alert('Plats inte hittad.');
+                }
+            } catch (error) {
+                console.error('Fel vid platssök:', error);
+                alert('Fel vid sökning.');
+            }
+        });
+    }
 });

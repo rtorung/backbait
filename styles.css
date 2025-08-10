@@ -43,7 +43,7 @@ body {
     background-color: #333;
     color: white;
     position: fixed;
-    top: 100px;
+    top: 213px;
     z-index: 1500;
     height: 50px;
     display: flex;
@@ -308,7 +308,7 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
-    margin-top: 363px;
+    margin-top: 223px;
 }
 
 /* Sidinnehåll */

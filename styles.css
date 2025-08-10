@@ -408,7 +408,7 @@ body {
     position: fixed;
     top: 0;
     left: -100%;
-    width: 80%;
+    width: 250px; /* Minskat från ~80% (~300px på små skärmar) till 250px */
     height: 100vh;
     background-color: #333;
     color: white;
@@ -440,14 +440,17 @@ body {
 }
 
 .sidebar-items li {
-    padding: 15px 0;
-    border-bottom: 1px solid #555;
+    padding: 10px 0; /* Minskat från 15px 0 för mindre avstånd mellan rader */
+    /* border-bottom: 1px solid #555; */ /* Borttagen linje mellan rader */
 }
 
 .sidebar-items a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px; /* Matchar desktop .menu-items li a */
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600; /* Matchar desktop .menu-items li a */
+    text-transform: uppercase; /* Matchar desktop .menu-items li a */
     display: block;
 }
 
@@ -458,6 +461,16 @@ body {
 }
 
 .sidebar-dropdown-parent.active .sidebar-dropdown {
+    display: block;
+}
+
+.sidebar-dropdown a {
+    color: white; /* Ändrat från svart till vitt för konsistens med .sidebar-items a */
+    text-decoration: none;
+    font-size: 14px; /* Matchar desktop .dropdown li a */
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600; /* Matchar desktop .dropdown li a */
+    text-transform: uppercase; /* Matchar desktop .dropdown li a */
     display: block;
 }
 
@@ -722,9 +735,9 @@ body {
 	.menu-left {
         display: flex;
         justify-content: flex-start;
-        width: auto; /* Återställ width för att undvika konflikt */
-        min-height: auto; /* Ta bort min-height */
-        margin-bottom: 0; /* Ta bort marginal */
+        width: auto;
+        min-height: auto;
+        margin-bottom: 0;
     }
 
     .hamburger-icon {
@@ -732,25 +745,25 @@ body {
     }
 
     .menu-center {
-        display: none; /* Dölj befintlig meny */
+        display: none;
     }
 
     .main-menu {
-        height: 50px; /* Fast höjd */
-        min-height: auto; /* Explicit nollställ min-height */
-        overflow-x: hidden; /* Säkerställ ingen scroll */
+        height: 50px;
+        min-height: auto;
+        overflow-x: hidden;
     }
 
     .menu-content-wrapper {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        min-height: auto; /* Ta bort min-height */
-        padding: 0; /* Minska padding om nödvändigt */
+        min-height: auto;
+        padding: 0;
     }
 
     .menu-right {
-        width: auto; /* Justera för att bara ta upp nödvändigt utrymme */
+        width: auto;
         justify-content: flex-end;
         margin-top: 0;
     }

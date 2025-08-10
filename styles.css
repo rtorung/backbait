@@ -829,6 +829,7 @@ body {
         width: 100%;
         margin: 0 auto;
 		flex-direction: column;
+		align-items: center;
     }
 
     .footer-left {

@@ -813,7 +813,9 @@ th {
     .main-content {
         margin-top: 10px;
     }
-
+    .main-content-page {
+        margin-top: 110px;
+    }
     .small-image-card-container {
         max-width: 100%;
         width: 100%;

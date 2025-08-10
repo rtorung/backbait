@@ -493,7 +493,7 @@ body {
 
 .footer-center {
 	width: 125px;
-	justify-content: center;
+	align-items: center;
 }
 
 .footer-right {
@@ -834,6 +834,7 @@ body {
 
     .footer-left {
         margin-bottom: 15px;
+		align-items: center;
     }
 
     .footer-center {
@@ -842,6 +843,7 @@ body {
 
     .footer-right {
         margin-top: 15px;
+		align-items: center;
     }
 	
     .menu-left {

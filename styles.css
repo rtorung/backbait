@@ -308,7 +308,7 @@ body {
     align-items: center;
     width: 100%;
     z-index: 900;
-    margin-top: 223px;
+    margin-top: 263px;
 }
 
 /* Sidinnehåll */
@@ -801,7 +801,7 @@ th {
     }
 
     .main-content {
-        margin-top: 200px;
+        margin-top: 190px;
     }
 
     .small-image-card-container {

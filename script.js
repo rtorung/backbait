@@ -423,6 +423,56 @@ document.addEventListener("DOMContentLoaded", function() {
         container.innerHTML = html;
     }
 
+    // Ny funktion för mini-weather-card på startsidan
+    async function displayMiniWeather(lat, lon, weatherData) {
+        const container = document.getElementById('mini-weather-card');
+        if (!container || !lat || !lon || !weatherData) return;
+
+        // Hämta platsnamn (stad, land)
+        let place = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
+        let city = '';
+        let country = '';
+        try {
+            const geoUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+            const geoResponse = await fetch(geoUrl);
+            const geoData = await geoResponse.json();
+            city = geoData.address.city || geoData.address.town || geoData.address.village || '';
+            country = geoData.address.country || '';
+            place = (city ? city + ', ' : '') + country;
+        } catch (error) {
+            console.error('Fel vid hämtning av plats för mini-kort:', error);
+        }
+
+        const current = getCurrentWeather(weatherData.timeSeries);
+        if (!current) return;
+
+        const symb = current.Wsymb2 || 1;
+        const iconData = weatherIcons[symb] || { desc: 'Okänt', icon: '❓' };
+
+        // Beräkna dagens fiskeprognos
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+        const phase = getMoonPhase(year, month, day);
+        const moonScore = getMoonScore(phase);
+        const weatherDays = groupByDay(weatherData.timeSeries);
+        const todayStr = today.toLocaleDateString('sv-SE');
+        let weatherScore = weatherDays[todayStr] ? getWeatherScore(weatherDays[todayStr]) : 0;
+        const total = moonScore + weatherScore;
+        const rating = getRating(total);
+
+        // Rullande text
+        const infoText = `Aktuellt väder i ${place}: ${iconData.icon} ${iconData.desc}, Fiske idag: ${rating}, Temp: ${current.t} °C, Vind: ${current.ws} m/s, Tryck: ${current.msl} hPa, Fukt: ${current.r} %   `; // Extra space för loop
+
+        let html = `
+            <div class="mini-weather-card">
+                <div class="marquee">${infoText.repeat(2)}</div> <!-- Repeat för seamless loop -->
+            </div>
+        `;
+        container.innerHTML = html;
+    }
+
     // Uppdaterad displayPrognos för att lägga till väderkolumn
     async function displayPrognos(lat, lon, weatherData) {
         await displayCurrentWeather(lat, lon, weatherData);
@@ -469,6 +519,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			.then(response => response.json())
 			.then(data => {
 				displayPrognos(lat, lon, data);
+                // Om mini-weather-card finns (på startsidan), visa det också
+                if (document.getElementById('mini-weather-card')) {
+                    displayMiniWeather(lat, lon, data);
+                }
 			})
 			.catch(error => {
 				console.error('Fel vid hämtning av väder:', error);
@@ -502,6 +556,11 @@ document.addEventListener("DOMContentLoaded", function() {
         searchBtn.addEventListener('click', async () => {
             const query = searchInput.value.trim();
             if (!query) return;
+            // Klick-effekt
+            searchBtn.classList.add('clicked');
+            setTimeout(() => {
+                searchBtn.classList.remove('clicked');
+            }, 200);
             try {
                 const searchUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
                 const response = await fetch(searchUrl);
@@ -510,6 +569,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     const lat = parseFloat(data[0].lat);
                     const lon = parseFloat(data[0].lon);
                     fetchWeather(lat, lon);
+                    // Nollställ sökfält
+                    searchInput.value = '';
                 } else {
                     alert('Plats inte hittad.');
                 }

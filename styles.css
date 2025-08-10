@@ -184,7 +184,7 @@ body {
 /* Floating social media bar */
 .floating-social-bar {
     position: fixed;
-    top: 30%;
+    top: 70%;
     right: 10px;
     transform: translateY(-50%);
     display: flex;

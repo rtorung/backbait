@@ -1,4 +1,4 @@
-// script.js (uppdaterad med null-checks och fallback-funktioner)
+// script.js
 document.addEventListener("DOMContentLoaded", function() {
     // Ladda header och footer dynamiskt
     const headerElement = document.getElementById("header");
@@ -274,7 +274,76 @@ document.addEventListener("DOMContentLoaded", function() {
         container.innerHTML = html;
     }
 
-    // Updated displayPrognos with null-check and full fallback functions
+    // Funktion för att generera kalender-HTML från daysData
+    function generateCalendar(daysData) {
+        if (!daysData || daysData.length === 0) return '<p>Ingen prognosdata tillgänglig.</p>';
+
+        let calendarHTML = '';
+        const months = {};
+        daysData.forEach(day => {
+            const key = `${day.year}-${day.month}`;
+            if (!months[key]) {
+                months[key] = { year: day.year, month: day.month, days: [] };
+            }
+            months[key].days.push(day);
+        });
+
+        Object.keys(months).forEach(key => {
+            const { year, month, days } = months[key];
+            const firstDay = new Date(year, month, 1);
+            const firstWeekday = firstDay.getDay() === 0 ? 7 : firstDay.getDay(); // Måndag = 1, Söndag = 7
+            const monthName = firstDay.toLocaleString('sv-SE', { month: 'long' });
+
+            calendarHTML += `
+                <div class="month">
+                    <ul>
+                        <li>${monthName}<br><span style="font-size:18px">${year}</span></li>
+                    </ul>
+                </div>
+                <ul class="weekdays">
+                    <li>Må</li>
+                    <li>Ti</li>
+                    <li>On</li>
+                    <li>To</li>
+                    <li>Fr</li>
+                    <li>Lö</li>
+                    <li>Sö</li>
+                </ul>
+                <ul class="days">
+            `;
+
+            // Lägg till tomma celler för början av månaden
+            for (let i = 1; i < firstWeekday; i++) {
+                calendarHTML += '<li></li>';
+            }
+
+            // Lägg till dagar
+            const numDaysInMonth = new Date(year, month + 1, 0).getDate();
+            for (let d = 1; d <= numDaysInMonth; d++) {
+                const dayData = days.find(dd => dd.day === d);
+                let className = '';
+                let ratingText = '';
+                let weatherText = '';
+                if (dayData) {
+                    switch (dayData.rating) {
+                        case 'Sämre': className = 'rating-samre'; break;
+                        case 'Normalt': className = 'rating-normalt'; break;
+                        case 'Bra': className = 'rating-bra'; break;
+                        case 'Perfekt': className = 'rating-perfekt'; break;
+                    }
+                    ratingText = `<div class="rating">${dayData.rating}</div>`;
+                    weatherText = dayData.weatherInfo ? `<div class="weather">${dayData.weatherInfo}</div>` : '';
+                }
+                calendarHTML += `<li class="${className}"><span class="day-number">${d}</span>${ratingText}${weatherText}</li>`;
+            }
+
+            calendarHTML += '</ul>';
+        });
+
+        return calendarHTML;
+    }
+
+    // Updated displayPrognos with calendar
     async function displayPrognos(lat, lon, weatherData) {
         const prognosContainer = document.getElementById('prognos');
         if (prognosContainer) {
@@ -286,9 +355,9 @@ document.addEventListener("DOMContentLoaded", function() {
             worker.postMessage({ weatherData, lat, lon });
 
             worker.onmessage = function(e) {
-                const { table, currentData, miniData } = e.data;
+                const { daysData, currentData, miniData } = e.data;
                 if (prognosContainer) {
-                    prognosContainer.innerHTML = table || '<p>Ingen prognosdata.</p>';
+                    prognosContainer.innerHTML = generateCalendar(daysData);
                 }
                 if (lat && lon) {
                     displayCurrentWeather(lat, lon, currentData);
@@ -454,8 +523,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 return params;
             }
 
-            // Beräkna tabell i fallback
-            let table = '<table><tr><th>Datum</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
+            // Beräkna daysData i fallback
+            let daysData = [];
             const today = new Date();
             const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;
             const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];
@@ -482,11 +551,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 const total = moonScore + weatherScore;
                 const rating = getRating(total);
-                table += `<tr><td>${dateStr}</td><td>${rating}</td><td>${weatherInfo}</td></tr>`;
+                daysData.push({ dateStr, year, month: date.getMonth(), day, weekday: date.getDay(), rating, weatherInfo });
             }
-            table += '</table>';
+
             if (prognosContainer) {
-                prognosContainer.innerHTML = table;
+                prognosContainer.innerHTML = generateCalendar(daysData);
             }
 
             // Beräkna currentData och miniData i fallback

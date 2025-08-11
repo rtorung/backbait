@@ -153,8 +153,8 @@ self.addEventListener('message', function(e) {
     // Beräkna resultatobjekt
     let result = {};
 
-    // 60-dagars tabell (utökad från original worker)
-    let table = '<table><tr><th>Datum</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
+    // 60-dagars data
+    let daysData = [];
     const today = new Date();
     const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;
     const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];
@@ -181,10 +181,9 @@ self.addEventListener('message', function(e) {
         }
         const total = moonScore + weatherScore;
         const rating = getRating(total);
-        table += `<tr><td>${dateStr}</td><td>${rating}</td><td>${weatherInfo}</td></tr>`;
+        daysData.push({ dateStr, year, month: date.getMonth(), day, weekday: date.getDay(), rating, weatherInfo });
     }
-    table += '</table>';
-    result.table = table;
+    result.daysData = daysData;
 
     // Dagens data för current och mini
     if (weatherData) {

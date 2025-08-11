@@ -1,6 +1,8 @@
+// prognosWorker.js
 self.addEventListener('message', function(e) {
-    const { weatherDays, dayKeys } = e.data;
+    const { weatherData } = e.data; // Lat/lon skickas men används inte här
 
+    // Kopierade funktioner från script.js (getMoonPhase, getMoonScore, etc.)
     function getMoonPhase(year, month, day) {
         let c = e = jd = b = 0;
         if (month < 3) {
@@ -119,8 +121,43 @@ self.addEventListener('message', function(e) {
         27: { desc: 'Kraftigt snöfall', icon: '❄️' }
     };
 
+    function groupByDay(timeSeries, filterHours = false) {
+        const now = new Date();
+        const todayStr = now.toLocaleDateString('sv-SE');
+        const days = {};
+        timeSeries.forEach(ts => {
+            const dt = new Date(ts.validTime);
+            const dateStr = dt.toLocaleDateString('sv-SE');
+            const hour = dt.getHours();
+            if (filterHours && (hour < 6 || hour > 21)) return;
+            if (dateStr === todayStr && dt <= now) return;
+            if (!days[dateStr]) days[dateStr] = {};
+            ts.parameters.forEach(p => {
+                if (!days[dateStr][p.name]) days[dateStr][p.name] = [];
+                days[dateStr][p.name].push(p.values[0]);
+            });
+        });
+        return days;
+    }
+
+    function getCurrentWeather(timeSeries) {
+        if (!timeSeries || timeSeries.length === 0) return null;
+        const current = timeSeries[0];
+        const params = {};
+        current.parameters.forEach(p => {
+            params[p.name] = p.values[0];
+        });
+        return params;
+    }
+
+    // Beräkna resultatobjekt
+    let result = {};
+
+    // 60-dagars tabell (utökad från original worker)
     let table = '<table><tr><th>Datum</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
     const today = new Date();
+    const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;
+    const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];
     for (let i = 0; i < 60; i++) {
         const date = new Date(today);
         date.setDate(today.getDate() + i);
@@ -147,6 +184,39 @@ self.addEventListener('message', function(e) {
         table += `<tr><td>${dateStr}</td><td>${rating}</td><td>${weatherInfo}</td></tr>`;
     }
     table += '</table>';
+    result.table = table;
 
-    self.postMessage(table);
+    // Dagens data för current och mini
+    if (weatherData) {
+        const current = getCurrentWeather(weatherData.timeSeries);
+        if (current) {
+            const symb = current.Wsymb2 || 1;
+            const iconData = weatherIcons[symb] || { desc: 'Okänt', icon: '❓' };
+
+            const year = today.getFullYear();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            const phase = getMoonPhase(year, month, day);
+            const moonScore = getMoonScore(phase);
+            const todayStr = today.toLocaleDateString('sv-SE');
+            const weatherScore = weatherDays[todayStr] ? getWeatherScore(weatherDays[todayStr]) : 0;
+            const total = moonScore + weatherScore;
+            const rating = getRating(total);
+
+            result.currentData = {
+                icon: iconData.icon,
+                desc: iconData.desc,
+                t: current.t,
+                ws: current.ws,
+                wd: current.wd,
+                msl: current.msl,
+                r: current.r,
+                rating: rating
+            };
+
+            result.miniData = { ...result.currentData };  // Samma data för mini
+        }
+    }
+
+    self.postMessage(result);
 });

@@ -1,40 +1,5 @@
-// prognosWorker.js (uppdaterad: lägg till groupByDay, hantera timeSeries)
 self.addEventListener('message', function(e) {
-    const { timeSeries } = e.data;
-
-    // Gruppera timdata per dag (flyttad hit, utan timfilter för prognos; alltid framtida)
-    function groupByDay(timeSeries) {
-        const groups = {};
-        timeSeries.forEach(ts => {
-            const validTime = new Date(ts.validTime);
-            const dateStr = validTime.toLocaleDateString('sv-SE');
-            if (!groups[dateStr]) {
-                groups[dateStr] = {
-                    t: [],
-                    Wsymb2: [],
-                    msl: [],
-                    ws: [],
-                    pct: [],
-                    pmean: []
-                };
-            }
-            ts.parameters.forEach(p => {
-                const val = p.values[0];
-                switch (p.name) {
-                    case 't': groups[dateStr].t.push(val); break;
-                    case 'Wsymb2': groups[dateStr].Wsymb2.push(val); break;
-                    case 'msl': groups[dateStr].msl.push(val); break;
-                    case 'ws': groups[dateStr].ws.push(val); break;
-                    case 'pct': groups[dateStr].pct.push(val); break;
-                    case 'pmean': groups[dateStr].pmean.push(val); break;
-                }
-            });
-        });
-        return groups;
-    }
-
-    const weatherDays = timeSeries ? groupByDay(timeSeries) : null;
-    const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];
+    const { weatherDays, dayKeys } = e.data;
 
     function getMoonPhase(year, month, day) {
         let c = e = jd = b = 0;

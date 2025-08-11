@@ -64,7 +64,7 @@ body {
 }
 
 .menu-left {
-    width: auto;
+	width: auto; /* Changed from 350px to collapse empty space */
 }
 
 .menu-center {
@@ -73,7 +73,7 @@ body {
 }
 
 .menu-right {
-    width: auto;
+	width: auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -121,6 +121,13 @@ body {
     text-decoration: underline;
 }
 
+/* Sociala ikoner i menyn (unused since removed from .menu-right) */
+.menu-social-icon {
+    width: 25px;
+    height: 25px;
+    display: block;
+}
+
 /* Dropdown-meny */
 .dropdown-parent {
     position: relative;
@@ -140,84 +147,34 @@ body {
     font-weight: 300;
     display: none;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.dropdown-parent.active .dropdown {
+    display: flex;
 }
 
 .dropdown li {
-    margin: 10px 0;
+    padding: 10px 20px;
+    margin: 0;
+    text-align: left;
+    box-sizing: border-box;
 }
 
 .dropdown li a {
-    color: #333;
+    color: #000000;
     text-decoration: none;
-    font-size: 16px;
-    text-transform: uppercase;
-}
-
-/* Mobil sidomeny */
-.mobile-sidebar {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 300px;
-    height: 100%;
-    background-color: white;
-    z-index: 2000;
-    transition: right 0.3s ease;
-}
-
-.mobile-sidebar.active {
-    right: 0;
-}
-
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1900;
-    display: none;
-}
-
-.sidebar-overlay.active {
     display: block;
-}
-
-.close-sidebar {
-    font-size: 30px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-}
-
-.sidebar-items {
-    list-style: none;
-    padding: 20px;
-    margin: 0;
-}
-
-.sidebar-items li {
-    margin: 10px 0;
-}
-
-.sidebar-items li a {
-    color: #333;
-    text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
     text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.sidebar-dropdown {
-    list-style: none;
-    padding: 0 0 0 20px;
-    display: none;
-}
-
-.sidebar-dropdown-parent.active .sidebar-dropdown {
-    display: block;
+.dropdown li.active-page a {
+    text-decoration: underline;
 }
 
 /* Floating social media bar */
@@ -242,26 +199,165 @@ body {
     display: block;
 }
 
-.small-image-card-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    margin: 20px auto;
-    max-width: 1100px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+/* Hamburgermeny-ikon (dold i desktop) */
+.hamburger-icon {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
 }
 
+/* Sidomeny (off-canvas) */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px; /* Reduced from 80% */
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    z-index: 2000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.sidebar-items {
+    list-style: none;
+    padding: 0;
+    margin: 50px 0 0;
+}
+
+.sidebar-items li {
+    padding: 10px 0; /* Reduced from 15px 0 */
+    /* border-bottom: 1px solid #555; */ /* Removed */
+}
+
+.sidebar-items a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px; /* Matches desktop .menu-items li a */
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600; /* Matches desktop */
+    text-transform: uppercase; /* Matches desktop */
+    display: block;
+}
+
+.sidebar-dropdown {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+}
+
+.sidebar-dropdown-parent.active .sidebar-dropdown {
+    display: block;
+}
+
+.sidebar-dropdown a {
+    color: white; /* Changed to white for consistency */
+    text-decoration: none;
+    font-size: 14px; /* Matches desktop .dropdown li a */
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600; /* Matches desktop */
+    text-transform: uppercase; /* Matches desktop */
+    display: block;
+}
+
+/* Overlay för att dölja bakgrund när meny öppen */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* Huvudinnehåll index*/
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 900;
+    margin-top: 20px;
+}
+
+/* Huvudinnehåll övrigt*/
+.main-content-page {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 900;
+    margin-top: 263px;
+}
+
+/* Sidinnehåll */
+.page-content {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+    box-sizing: border-box;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+    margin: 0 auto 20px;
+}
+
+/* Container för små bildkort */
+.small-image-card-container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px auto 20px !important;
+    box-sizing: border-box;
+}
+
+/* Små bildkort */
 .small-image-card {
-    flex: 0 0 auto;
-    width: 250px;
-    margin-right: 20px;
-    scroll-snap-align: start;
+    width: calc((100% - 60px) / 4);
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    margin: 0 10px;
+}
+
+.small-image-card:first-child {
+    margin-left: 0;
 }
 
 .small-image-card:last-child {
-    margin-right: 20px;
+    margin-right: 0;
 }
 
 .small-image-card img {
@@ -273,58 +369,34 @@ body {
 }
 
 .small-image-card .image-text {
-    font-size: 16px;
+    position: relative;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 0;
     color: #333;
+    font-size: 16px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600;
     text-align: left;
+    z-index: 10;
 }
 
+/* Prickindikatorer (endast mobil) */
 .card-indicator {
-    display: flex;
-    justify-content: center;
-    margin: 10px auto 20px;
-    position: relative;
-    z-index: 5;
+    display: none;
 }
 
 .indicator-dot {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 6px;
     background-color: #ccc;
     border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
+    display: inline-block;
+    margin: 0 10px;
 }
 
 .indicator-dot.active {
     background-color: #333;
-}
-
-/* Mini-väderkort med marquee */
-.mini-weather-card {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    margin: 263px auto 20px; /* Justera för header (213px) + menu (50px) */
-    max-width: 1100px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    text-align: center;
-    z-index: 1200;
-    position: relative;
-}
-
-.mini-weather-card .marquee {
-    white-space: nowrap;
-    overflow: hidden;
-    font-size: 14px;
-    animation: marquee 15s linear infinite;
-}
-
-@keyframes marquee {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
 }
 
 /* Bakgrundsbild */
@@ -337,174 +409,589 @@ body {
     image-rendering: auto;
 }
 
-/* Väderkort */
-.weather-card {
-    background-color: white;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    text-align: left;
-    z-index: 5;
-}
-
-.weather-card h2 {
-    margin-top: 0;
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.weather-card p {
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-/* Footer */
+/* Innehållsförteckning */
 .footer-toc {
-    background-color: #f8f8f8;
+    width: 100vw;
+    background-color: #333;
+    color: white;
+    display: flex;
     padding: 20px 0;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", Arial, sans-serif;
 }
 
-.footer-toc-content-wrapper {
+.footer-toc .footer-content-wrapper {
     max-width: 1100px;
     width: 100%;
-    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
 }
 
-.toc-column {
-    width: 33.33%;
-    padding: 0 20px;
+.footer-toc .footer-content {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    box-sizing: border-box;
 }
 
-.toc-column h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
+.footer-toc h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-.toc-items {
+.footer-toc ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.toc-items li {
-    margin: 10px 0;
-}
-
-.toc-items li a {
-    color: #333;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.footer {
-    background-color: #333;
+.footer-toc li a {
     color: white;
-    padding: 20px 0;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.footer-toc li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    width: 100vw;
+    background-color: black;
+    color: white;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", Arial, sans-serif;
 }
 
 .footer-content-wrapper {
     max-width: 1100px;
     width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+    box-sizing: border-box;
+	align-items: center;
+    justify-content: center;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-between;
+    max-width: 1100px;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;	
+	align-items: center;
+    box-sizing: border-box;
+}
+	
+.footer-left {
+	width: 125px;
+	display: flex;
+	justify-content: center;
 }
 
-.footer-left, .footer-center, .footer-right {
-    flex: 1;
-    text-align: center;
+.footer-center {
+	width: 125px;
+	display: flex;
+	justify-content: center;
 }
 
-.footer-left span {
-    font-size: 16px;
+.footer-right {
+	width: 125px;
+	justify-content: center;
 }
 
-.footer-center a {
+.footer span {
+    color: #fff;
+    font-size: 14px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+	align-items: center;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Hamburgermeny-ikon (dold i desktop) */
+.hamburger-icon {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+/* Sidomeny (off-canvas) */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px; /* Minskat från ~80% (~300px på små skärmar) till 250px */
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    z-index: 2000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.sidebar-items {
+    list-style: none;
+    padding: 0;
+    margin: 50px 0 0;
+}
+
+.sidebar-items li {
+    padding: 10px 0; /* Minskat från 15px 0 för mindre avstånd mellan rader */
+    /* border-bottom: 1px solid #555; */ /* Borttagen linje mellan rader */
+}
+
+.sidebar-items a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 16px; /* Matchar desktop .menu-items li a */
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 600; /* Matchar desktop .menu-items li a */
+    text-transform: uppercase; /* Matchar desktop .menu-items li a */
+    display: block;
 }
 
+.sidebar-dropdown {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+}
 
-/* Media query för mobil */
+.sidebar-dropdown-parent.active .sidebar-dropdown {
+    display: block;
+}
+
+.sidebar-dropdown a {
+    color: white; /* Ändrat från svart till vitt för konsistens med .sidebar-items a */
+    text-decoration: none;
+    font-size: 14px; /* Matchar desktop .dropdown li a */
+    font-family: "Roboto", Arial, sans-serif;
+    font-weight: 300; /* Matchar desktop .dropdown li a */
+    text-transform: uppercase; /* Matchar desktop .dropdown li a */
+    display: block;
+}
+
+/* Overlay för att dölja bakgrund när meny öppen */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+table { 
+    border-collapse: collapse; 
+    width: 100%; 
+}
+
+th, td { 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
+}
+
+th { 
+    background-color: #f2f2f2; 
+}
+
+.weather-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	max-width: 450px; /* Begränsa storlek för att inte ta för mycket plats */
+    margin: 0 auto 20px;
+}
+
+.weather-card h2 {
+    margin-top: 0;
+}
+
+.weather-card .icon {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+#search-container {
+    margin-bottom: 20px;
+}
+
+#location-search {
+    padding: 8px;
+    width: 200px;
+}
+
+#search-btn {
+    padding: 8px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Effekt för sökknapp vid klick */
+#search-btn.clicked {
+    transform: scale(0.95); /* Lätt intryckning för att visa klick */
+    opacity: 0.8; /* Lite genomskinlighet för feedback */
+    transition: transform 0.1s ease, opacity 0.1s ease; /* Mjuk övergång */
+}
+
+/* Mini-weather-card för startsidan */
+.mini-weather-card {
+    height: 40px; /* Ca 40px högt som begärt */
+    overflow: hidden; /* Dölj overflow för rullande effekt */
+    background-color: #f4f4f4; /* Ljus bakgrund för läsbarhet */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px auto; /* Centrera och marginal */
+    max-width: 550px; /* Full bredd i mobil */
+    white-space: nowrap; /* Förhindra radbrytning */
+    font-size: 14px; /* Liten text för att passa */
+    line-height: 40px; /* Centrera vertikalt */
+    position: relative;
+	margin-top: 263px;
+}
+
+.mini-weather-card strong { font-weight: bold; }
+
+.mini-weather-card .marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 15s linear infinite; /* Rullande åt vänster, justera tid för hastighet */
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(50%); /* Startar från höger */
+    }
+    100% {
+        transform: translateX(-100%); /* Försvinner till vänster */
+    }
+}
+
+/* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
-    .site-header {
-        height: 150px;
+     .site-header {
+        height: 110px;
+    }
+	
+	.mini-weather-card {
+        font-size: 14px; /* Mindre text i mobil */
+        height: 40px; /* Anpassa höjd om nödvändigt */
+        line-height: 40px;
+		margin-top: 160px;
     }
 
     .header-logo {
+        margin: 17px auto;
         width: 300px;
-        margin: 15px auto;
+        max-width: 100%;
+        height: auto;
+        image-rendering: auto;
+    }
+	
+    .main-menu {
+        position: fixed;
+        top: 110px;
+        width: 100%;
+        height: 50px;
+        min-height: auto;
+        overflow-x: hidden;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        z-index: 1500;
     }
 
-    .main-menu {
-        top: 150px;
-        height: 50px;
+    .main-menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    .menu-content-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-height: auto;
+        padding: 0;
     }
 
     .menu-left {
         display: flex;
         justify-content: flex-start;
         width: auto;
-    }
-
-    .hamburger-icon {
-        display: block;
-        font-size: 24px;
-        cursor: pointer;
-        padding: 0 15px;
+        min-height: auto;
+        margin-bottom: 0;
     }
 
     .menu-center {
-        display: none;
+        display: none; /* Hide main menu items in mobile */
     }
 
     .menu-right {
-        display: flex;
-        justify-content: flex-end;
-        width: auto;
+        display: none; /* Hide empty menu-right in mobile */
     }
 
-    .footer-toc {
+    .menu-social-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .dropdown {
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         flex-direction: column;
-        align-items: center;
+        display: none;
+        z-index: 1600;
+        padding: 0 20px 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+
+    .dropdown-parent.active .dropdown {
+        display: block;
+    }
+
+    .dropdown li {
+        padding: 10px 20px;
+        margin: 0;
+        text-align: left;
+    }
+
+    .main-content {
+        margin-top: 10px;
+    }
+    .main-content-page {
+        margin-top: 130px;
+    }
+    .small-image-card-container {
+        max-width: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin: 10px auto 20px !important;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        position: relative;
+        z-index: 10;
+        padding-bottom: 20px;
+    }
+
+    .small-image-card-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .small-image-card {
+        width: 220px; /* Updated to 220px */
+        flex-shrink: 0;
+        margin: 0 10px;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        scroll-snap-align: center;
+        position: relative;
+        z-index: 10;
+    }
+
+    .small-image-card:first-child {
+        margin-left: 20px;
+    }
+
+    .small-image-card:last-child {
+        margin-right: 20px;
+    }
+
+    .small-image-card img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+        display: block;
+        image-rendering: auto;
+    }
+
+    .small-image-card .image-text {
+        font-size: 16px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 0;
+        color: #333;
+        text-align: left;
+    }
+
+    .card-indicator {
+        display: flex;
+        justify-content: center;
+        margin: 10px auto 20px;
+        position: relative;
+        z-index: 5;
+    }
+
+    .background-image {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 20px auto 50px !important;
+        image-rendering: auto;
+	}
+
+    .footer-toc {
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100vw; /* Full fönsterbredd */
     }
 
     .footer-toc-content-wrapper {
-        flex-direction: column;
-        align-items: center;
+        max-width: 1100px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        box-sizing: border-box;
     }
 
-    .toc-column {
-        width: 100%;
-        padding: 10px 20px;
-        text-align: center;
+    .footer-toc .toc-column {
+        width: 50%;
+        max-width: none;
+        padding: 0 10px;
+        margin: 0;
+    }
+
+    .footer-toc .toc-column:last-child {
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    .footer-toc h3 {
+        display: flex;
+        align-items: baseline;
+        line-height: 1.2;
+    }
+
+    .footer {
+        min-height: 50px;
+        padding: 10px 0;
+    }
+
+    .footer-content-wrapper {
+        padding: 0 10px;
+		align-items: center;
     }
 
     .footer-content {
-        flex-direction: column;
-        align-items: center;
+        max-width: 1100px;
+        width: 100%;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
     }
 
     .footer-left {
         margin-bottom: 15px;
     }
 
+    .footer-center {
+        margin: 0;
+    }
+
     .footer-right {
         margin-top: 15px;
+    }
+	
+    .menu-left {
+        display: flex;
+        justify-content: flex-start;
+        width: auto;
+        min-height: auto;
+        margin-bottom: 0;
+    }
+
+    .hamburger-icon {
+        display: block;
+    }
+
+    .menu-center {
+        display: none;
+    }
+
+    .main-menu {
+        height: 50px;
+        min-height: auto;
+        overflow-x: hidden;
+    }
+
+    .menu-content-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-height: auto;
+        padding: 0;
+    }
+
+    .menu-right {
+		display: flex;
+        justify-content: flex-end;
+		width: auto;
+        min-height: auto;
+        margin-bottom: 0;
     }
 }

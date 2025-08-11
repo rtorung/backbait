@@ -1,17 +1,17 @@
-<!-- prognos.html (uppdaterad: lägg till #current-weather för att återställa kort) -->
 <!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daglig fiskeprognos</title>
+    <title>Fiskeprognos - Backbait</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="header"></div>
-    <div class="main-content">
-        <h1>Daglig fiskeprognos</h1>
-        <p>Prognosen för fisket för din aktuella position. (Tillåt GPS för lokal väderdata) 
+    <div class="main-content-page">
+        <div class="page-content">
+            <h1>Daglig fiskeprognos</h1>
+            <p>Prognosen för fisket för din aktuella position. (Tillåt GPS för lokal väderdata) 
 			   Väderprognos visas för de närmaste 5 dagarna baserat på den plats du befinner dig på, så du får lokal väderinfo (t.ex. tryckvariation, vind) även mitt ute i naturen.
 			   Den fullständiga fiskeprognosen beräknas via en algoritm vi skapat där olika studerade vädertillstånd skapar olika förutsättningar för fisket. Detta har vi kombinerat med observationer runt hur månens tillstånd påverkar fisket för extra precision. 
 			   Fiskeprognosen gör det lättare för dig att planera ditt fiske för veckan men också se en potentiell status (osäker) för de kommande 60 dagarna sett till den data som finns tillgäng. 
@@ -19,12 +19,13 @@
                
 			   Begränsning: Väderdatan hämtad från SMHI är optimerat för Sverige; för Norge/Finland kan data vara mindre exakt.
 			   </p>
-        <div class="search-container">
-            <input type="text" id="location-search" placeholder="Sök">
-            <button id="search-btn">Sök</button>
+            <div id="search-container">
+                <input id="location-search" type="text" placeholder="Sök plats...">
+                <button id="search-btn">Sök</button>
+            </div>
+			<div id="current-weather"></div>
+            <div id="prognos">Laddar prognos...</div>
         </div>
-        <div id="current-weather"></div> <!-- Tillagd för att återställa aktuellt väder-kort -->
-        <div id="prognos">Laddar prognos...</div>
     </div>
     <div id="footer"></div>
     <script src="script.js"></script>

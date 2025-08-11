@@ -730,7 +730,7 @@ body {font-family: Verdana, sans-serif;}
 .month {
   padding: 20px 25px;
   width: 100%;
-  background: #1abc9c;
+  background: #333;
   text-align: center;
   box-sizing: border-box;
 }

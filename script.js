@@ -1,3 +1,4 @@
+// script.js (uppdaterad: worker tar timeSeries, fallback använder groupByDay; återställ display-funktioner)
 document.addEventListener("DOMContentLoaded", function() {
     // Ladda header och footer dynamiskt
     const headerElement = document.getElementById("header");
@@ -468,24 +469,20 @@ document.addEventListener("DOMContentLoaded", function() {
         container.innerHTML = html;
     }
 
-    // Updated displayPrognos to use Web Worker for the loop and grouping
+    // Updated displayPrognos to use Web Worker for grouping and loop
     async function displayPrognos(lat, lon, weatherData) {
         await displayCurrentWeather(lat, lon, weatherData);
         const container = document.getElementById('prognos');
-        if (!container) {
-            console.error("Prognos container with id='prognos' not found in the DOM");
-            return;
-        }
         container.innerHTML = '<p>Laddar prognos...</p>'; // Temporary loading message
 
         if (window.Worker) {
-            const worker = new Worker('prognosWorker.js'); // Path to worker file
+            const worker = new Worker('prognosWorker.js');
             const timeSeries = weatherData ? weatherData.timeSeries : null;
-            worker.postMessage({ timeSeries }); // Skicka rå timeSeries istället för weatherDays och dayKeys
+            worker.postMessage({ timeSeries });
 
             worker.onmessage = function(e) {
-                container.innerHTML = e.data; // Receive and insert the table HTML
-                worker.terminate(); // Clean up worker
+                container.innerHTML = e.data;
+                worker.terminate();
             };
 
             worker.onerror = function(error) {
@@ -493,7 +490,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 container.innerHTML = '<p>Fel vid laddning av prognos.</p>';
             };
         } else {
-            // Fallback to original loop if no Worker support
+            // Fallback
             let table = '<table><tr><th>Datum</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
             const today = new Date();
             const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;

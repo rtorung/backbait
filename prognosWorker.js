@@ -1,7 +1,8 @@
+// prognosWorker.js (uppdaterad: lägg till groupByDay, hantera timeSeries)
 self.addEventListener('message', function(e) {
     const { timeSeries } = e.data;
 
-    // Funktion för att gruppera väderdata per dag
+    // Gruppera timdata per dag (flyttad hit, utan timfilter för prognos; alltid framtida)
     function groupByDay(timeSeries) {
         const groups = {};
         timeSeries.forEach(ts => {
@@ -9,12 +10,12 @@ self.addEventListener('message', function(e) {
             const dateStr = validTime.toLocaleDateString('sv-SE');
             if (!groups[dateStr]) {
                 groups[dateStr] = {
-                    t: [],      // Temperatur
-                    Wsymb2: [], // Vädersymbol
-                    msl: [],    // Lufttryck
-                    ws: [],     // Vindhastighet
-                    pct: [],    // Molntäcke
-                    pmean: []   // Nederbörd
+                    t: [],
+                    Wsymb2: [],
+                    msl: [],
+                    ws: [],
+                    pct: [],
+                    pmean: []
                 };
             }
             ts.parameters.forEach(p => {
@@ -32,7 +33,6 @@ self.addEventListener('message', function(e) {
         return groups;
     }
 
-    // Beräkna weatherDays och dayKeys här i workern
     const weatherDays = timeSeries ? groupByDay(timeSeries) : null;
     const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];
 

@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener("DOMContentLoaded", function() {
     // Ladda header och footer dynamiskt
     const headerElement = document.getElementById("header");
@@ -547,7 +546,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const symbs = dayData.Wsymb2 || [];
                     const modeSymb = getMode(symbs) || 1;
                     const iconData = weatherIcons[modeSymb] || { desc: 'Okänt', icon: '❓' };
-                    weatherInfo = `Medeltemp: ${avgTemp} °C, Väder: ${iconData.icon} ${iconData.desc}`;
+                    weatherInfo = `${avgTemp} °C ${iconData.icon} ${iconData.desc}`; // Borttagna "Medeltemp:" och "Väder:"
                 }
                 const total = moonScore + weatherScore;
                 const rating = getRating(total);

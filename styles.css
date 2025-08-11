@@ -693,8 +693,6 @@ th {
     height: 40px; /* Ca 40px högt som begärt */
     overflow: hidden; /* Dölj overflow för rullande effekt */
     background-color: #f4f4f4; /* Ljus bakgrund för läsbarhet */
-    border: 1px solid #ddd;
-    border-radius: 8px;
     margin: 10px auto; /* Centrera och marginal */
     max-width: 550px; /* Full bredd i mobil */
     white-space: nowrap; /* Förhindra radbrytning */
@@ -702,6 +700,8 @@ th {
     line-height: 40px; /* Centrera vertikalt */
     position: relative;
 	margin-top: 263px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
 }
 
 .mini-weather-card strong { font-weight: bold; }

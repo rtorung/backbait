@@ -177,7 +177,7 @@ self.addEventListener('message', function(e) {
             const symbs = dayData.Wsymb2 || [];
             const modeSymb = getMode(symbs) || 1;
             const iconData = weatherIcons[modeSymb] || { desc: 'Okänt', icon: '❓' };
-            weatherInfo = `Medeltemp: ${avgTemp} °C, Väder: ${iconData.icon} ${iconData.desc}`;
+            weatherInfo = `${avgTemp} °C, ${iconData.icon} ${iconData.desc}`;
         }
         const total = moonScore + weatherScore;
         const rating = getRating(total);

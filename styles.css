@@ -64,7 +64,7 @@ body {
 }
 
 .menu-left {
-    width: auto; /* Changed from 350px to collapse empty space */
+    width: auto;
 }
 
 .menu-center {
@@ -140,34 +140,84 @@ body {
     font-weight: 300;
     display: none;
     flex-direction: column;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.dropdown-parent.active .dropdown {
-    display: flex;
+    align-items: center;
 }
 
 .dropdown li {
-    padding: 10px 20px;
-    margin: 0;
-    text-align: left;
-    box-sizing: border-box;
+    margin: 10px 0;
 }
 
 .dropdown li a {
-    color: #000000;
+    color: #333;
     text-decoration: none;
-    display: block;
-    font-size: 14px;
-    font-family: "Roboto", Arial, sans-serif;
-    font-weight: 300;
+    font-size: 16px;
     text-transform: uppercase;
-    -webkit-tap-highlight-color: transparent;
 }
 
-.dropdown li.active-page a {
-    text-decoration: underline;
+/* Mobil sidomeny */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    z-index: 2000;
+    transition: right 0.3s ease;
+}
+
+.mobile-sidebar.active {
+    right: 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1900;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+.close-sidebar {
+    font-size: 30px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.sidebar-items {
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.sidebar-items li {
+    margin: 10px 0;
+}
+
+.sidebar-items li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.sidebar-dropdown {
+    list-style: none;
+    padding: 0 0 0 20px;
+    display: none;
+}
+
+.sidebar-dropdown-parent.active .sidebar-dropdown {
+    display: block;
 }
 
 /* Floating social media bar */
@@ -192,86 +242,102 @@ body {
     display: block;
 }
 
-/* Hamburgermeny-ikon (dold i desktop) */
-.hamburger-icon {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
+.small-image-card-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 20px auto;
+    max-width: 1100px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
-/* Sidomeny (off-canvas) */
-.mobile-sidebar {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 250px; /* Reduced from 80% */
-    height: 100vh;
+.small-image-card {
+    flex: 0 0 auto;
+    width: 250px;
+    margin-right: 20px;
+    scroll-snap-align: start;
+}
+
+.small-image-card:last-child {
+    margin-right: 20px;
+}
+
+.small-image-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    display: block;
+    image-rendering: auto;
+}
+
+.small-image-card .image-text {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0;
+    color: #333;
+    text-align: left;
+}
+
+.card-indicator {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.indicator-dot.active {
     background-color: #333;
-    color: white;
-    z-index: 2000;
-    transition: left 0.3s ease;
-    overflow-y: auto;
-    padding: 20px;
 }
 
-.mobile-sidebar.active {
-    left: 0;
+/* Mini-väderkort med marquee */
+.mini-weather-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    margin: 263px auto 20px; /* Justera för header (213px) + menu (50px) */
+    max-width: 1100px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    text-align: center;
+    z-index: 1200;
+    position: relative;
 }
 
-.close-sidebar {
-    background: none;
-    border: none;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.mini-weather-card .marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    animation: marquee 15s linear infinite;
 }
 
-.sidebar-items {
-    list-style: none;
-    padding: 0;
-    margin: 50px 0 0;
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
 }
 
-.sidebar-items li {
-    padding: 10px 0; /* Reduced from 15px 0 */
-}
-
-.sidebar-items a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px; /* Matches desktop .menu-items li a */
-    font-family: "Roboto", Arial, sans-serif;
-    font-weight: 600; /* Matches desktop */
-    text-transform: uppercase; /* Matches desktop */
+/* Bakgrundsbild */
+.background-image {
+    max-width: 1100px;
+    width: 100%;
+    height: auto;
     display: block;
+    margin: 20px auto 100px !important;
+    image-rendering: auto;
 }
 
-.sidebar-dropdown {
-    display: none;
-    list-style: none;
-    padding-left: 20px;
-}
-
-.sidebar-dropdown-parent.active .sidebar-dropdown {
-    display: block;
-}
-
-.sidebar-dropdown a {
-    color: white; /* Changed to white for consistency */
-    text-decoration: none;
-    font-size: 14px; /* Matches desktop .dropdown li a */
-    font-family: "Roboto", Arial, sans-serif;
-    font-weight: 600;
-}
-
-/* Weather card */
+/* Väderkort */
 .weather-card {
     background-color: white;
     padding: 20px;
@@ -280,7 +346,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     text-align: left;
-    z-index: 5; /* Säkerställ ovanför annat innehåll */
+    z-index: 5;
 }
 
 .weather-card h2 {
@@ -294,319 +360,151 @@ body {
     font-size: 16px;
 }
 
-.mini-weather-card {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    margin: 263px auto 20px; /* Justera för header (213px) + menu (50px) */
-    max-width: 1100px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    text-align: center;
-    z-index: 1200; /* Ovanför main content, under dropdowns */
-    position: relative; /* För att säkerställa positionering */
-}
-
-.mini-weather-card .marquee {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 14px;
-}
-
-/* Search container */
-.search-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-#location-search {
-    padding: 10px;
-    font-size: 16px;
-    width: 300px;
-    max-width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
-
-#search-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
-#search-btn.clicked {
-    background-color: #555;
-}
-
-#prognos {
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
-
-#prognos table {
+/* Footer */
+.footer-toc {
+    background-color: #f8f8f8;
+    padding: 20px 0;
     width: 100%;
-    border-collapse: collapse;
 }
 
-#prognos th, #prognos td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
+.footer-toc-content-wrapper {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
 }
 
-#prognos th {
+.toc-column {
+    width: 33.33%;
+    padding: 0 20px;
+}
+
+.toc-column h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.toc-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-items li {
+    margin: 10px 0;
+}
+
+.toc-items li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer {
     background-color: #333;
     color: white;
+    padding: 20px 0;
 }
 
-/* Media queries för mobil */
-@media screen and (max-width: 768px) {
+.footer-content-wrapper {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-left, .footer-center, .footer-right {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-left span {
+    font-size: 16px;
+}
+
+.footer-center a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+/* Media query för mobil */
+@media (max-width: 768px) {
     .site-header {
-        height: 110px;
-        /* Anpassa höjd om nödvändigt */
-        line-height: 40px;
-        margin-top: 160px;
+        height: 150px;
     }
 
     .header-logo {
-        margin: 17px auto;
         width: 300px;
-        max-width: 100%;
-        height: auto;
-        image-rendering: auto;
+        margin: 15px auto;
     }
 
     .main-menu {
-        position: fixed;
-        top: 110px;
-        width: 100%;
+        top: 150px;
         height: 50px;
-        min-height: auto;
-        overflow-x: hidden;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-        z-index: 1500;
-    }
-
-    .main-menu::-webkit-scrollbar {
-        display: none;
-    }
-
-    .menu-content-wrapper {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        min-height: auto;
-        padding: 0;
     }
 
     .menu-left {
         display: flex;
         justify-content: flex-start;
         width: auto;
-        min-height: auto;
-        margin-bottom: 0;
+    }
+
+    .hamburger-icon {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0 15px;
     }
 
     .menu-center {
-        display: none; /* Hide main menu items in mobile */
+        display: none;
     }
 
     .menu-right {
         display: flex;
         justify-content: flex-end;
         width: auto;
-        min-height: auto;
-        margin-bottom: 0;
-    }
-
-    .menu-social-icon {
-        width: 25px;
-        height: 25px;
-    }
-
-    .dropdown {
-        left: 0;
-        right: 0;
-        width: 100%;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        flex-direction: column;
-        display: none;
-        z-index: 1600;
-        padding: 0 20px 20px;
-        box-sizing: border-box;
-        overflow-y: auto;
-    }
-
-    .dropdown-parent.active .dropdown {
-        display: block;
-    }
-
-    .dropdown li {
-        padding: 10px 20px;
-        margin: 0;
-        text-align: left;
-    }
-
-    .main-content {
-        margin-top: 10px;
-    }
-
-    .main-content-page {
-        margin-top: 130px;
-    }
-
-    .small-image-card-container {
-        max-width: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        margin: 10px auto 20px !important;
-        box-sizing: border-box;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        position: relative;
-        z-index: 10;
-        padding-bottom: 20px;
-    }
-
-    .small-image-card-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    .small-image-card {
-        width: 220px; /* Updated to 220px */
-        flex-shrink: 0;
-        margin: 0 10px;
-        padding: 10px;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        box-sizing: border-box;
-        scroll-snap-align: center;
-        position: relative;
-        z-index: 10;
-    }
-
-    .small-image-card:first-child {
-        margin-left: 20px;
-    }
-
-    .small-image-card:last-child {
-        margin-right: 20px;
-    }
-
-    .small-image-card img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 3 / 2;
-        display: block;
-        image-rendering: auto;
-    }
-
-    .small-image-card .image-text {
-        font-size: 16px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-left: 0;
-        color: #333;
-        text-align: left;
-    }
-
-    .card-indicator {
-        display: flex;
-        justify-content: center;
-        margin: 10px auto 20px;
-        position: relative;
-        z-index: 5;
-    }
-
-    .background-image {
-        max-width: 100%;
-        width: 100%;
-        height: auto;
-        display: block;
-        margin: 20px auto 50px !important;
-        image-rendering: auto;
     }
 
     .footer-toc {
-        flex-direction: row;
-        align-items: flex-start;
-        width: 100vw; /* Full fönsterbredd */
+        flex-direction: column;
+        align-items: center;
     }
 
     .footer-toc-content-wrapper {
-        max-width: 1100px;
-        width: 100%;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        box-sizing: border-box;
-    }
-
-    .footer-toc .toc-column {
-        width: 50%;
-        max-width: none;
-        padding: 0 10px;
-        margin: 0;
-    }
-
-    .footer-toc .toc-column:last-child {
-        padding-top: 0;
-        margin-top: 0;
-    }
-
-    .footer-toc h3 {
-        display: flex;
-        align-items: baseline;
-        line-height: 1.2;
-    }
-
-    .footer {
-        min-height: 50px;
-        padding: 10px 0;
-    }
-
-    .footer-content-wrapper {
-        padding: 0 10px;
+        flex-direction: column;
         align-items: center;
+    }
+
+    .toc-column {
+        width: 100%;
+        padding: 10px 20px;
+        text-align: center;
     }
 
     .footer-content {
-        max-width: 1100px;
-        width: 100%;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
     }
 
     .footer-left {
         margin-bottom: 15px;
     }
 
-    .footer-center {
-        margin: 0;
-    }
-
     .footer-right {
         margin-top: 15px;
-    }
-
-    .hamburger-icon {
-        display: block;
     }
 }

@@ -1,4 +1,3 @@
-// script.js (uppdaterad: worker tar timeSeries, fallback använder groupByDay; återställ display-funktioner)
 document.addEventListener("DOMContentLoaded", function() {
     // Ladda header och footer dynamiskt
     const headerElement = document.getElementById("header");
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             headerElement.innerHTML = data;
             console.log("Header loaded successfully");
-            // Initiera menyhantering efter att header har laddats
             initializeMenus();
         })
         .catch(error => {
@@ -62,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     const dropdown = this.querySelector(".dropdown");
                     const isActive = this.classList.contains("active");
 
-                    // Stäng andra dropdowns
                     dropdownParents.forEach(p => {
                         if (p !== this) {
                             p.classList.remove("active");
@@ -74,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     });
 
-                    // Växla denna dropdown
                     if (!isActive) {
                         this.classList.add("active");
                         dropdown.style.display = "flex";
@@ -91,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             });
 
-            // Stäng dropdown vid klick utanför
             document.addEventListener("click", function(event) {
                 if (!event.target.closest(".dropdown-parent")) {
                     dropdownParents.forEach(parent => {
@@ -112,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const closeSidebar = document.querySelector(".close-sidebar");
         const sidebarOverlay = document.querySelector(".sidebar-overlay") || document.createElement("div");
 
-        // Skapa overlay om den inte redan finns
         if (!document.querySelector(".sidebar-overlay")) {
             sidebarOverlay.classList.add("sidebar-overlay");
             document.body.appendChild(sidebarOverlay);
@@ -137,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log("Closed mobile sidebar via overlay");
             });
 
-            // Hantera undermenyer i sidomeny (accordion-stil)
             const sidebarParents = document.querySelectorAll(".sidebar-dropdown-parent");
             if (sidebarParents.length === 0) {
                 console.warn("No sidebar dropdown parents found in the DOM");
@@ -177,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Hantera prickindikatorer för små bildkort i mobil
+    // Hantera prickindikatorer för små bildkort
     const container = document.querySelector(".small-image-card-container");
     const dots = document.querySelectorAll(".indicator-dot");
 
@@ -206,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Funktion för att beräkna månfas
+    // Funktioner för väder och prognos
     function getMoonPhase(year, month, day) {
         let c = e = jd = b = 0;
         if (month < 3) {
@@ -235,7 +228,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Poäng för månfas
     function getMoonScore(phase) {
         if (phase === 'New Moon' || phase === 'Full Moon') return 3;
         if (phase.includes('Gibbous')) return 2;
@@ -244,7 +236,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return 0;
     }
 
-    // Betyg baserat på totalpoäng
     const ratings = ['Sämre', 'Normalt', 'Bra', 'Perfekt'];
     function getRating(total) {
         if (total <= 0) return ratings[0];
@@ -253,7 +244,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return ratings[3];
     }
 
-    // Gruppera timdata per dag, filtrera till 06:00–21:00
     function groupByDay(timeSeries, filterHours = false) {
         const now = new Date();
         const todayStr = now.toLocaleDateString('sv-SE');
@@ -273,7 +263,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return days;
     }
 
-    // Väderpoäng för en dag
     function getWeatherScore(dayData) {
         let score = 0;
         if (dayData.msl && dayData.msl.length > 1) {
@@ -302,7 +291,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return score;
     }
 
-    // Mappning för SMHI Wsymb2
     const weatherIcons = {
         1: { desc: 'Klart', icon: '☀️' },
         2: { desc: 'Nästan klart', icon: '☀️' },
@@ -333,7 +321,6 @@ document.addEventListener("DOMContentLoaded", function() {
         27: { desc: 'Kraftigt snöfall', icon: '❄️' }
     };
 
-    // Hämta aktuell väderdata
     function getCurrentWeather(timeSeries) {
         if (!timeSeries || timeSeries.length === 0) return null;
         const current = timeSeries[0];
@@ -344,7 +331,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return params;
     }
 
-    // Hitta mest frekventa värde
     function getMode(arr) {
         if (arr.length === 0) return null;
         const freq = {};
@@ -362,7 +348,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return parseInt(modeVal);
     }
 
-    // Uppdaterad displayCurrentWeather
     async function displayCurrentWeather(lat, lon, weatherData) {
         const container = document.getElementById('current-weather');
         if (!lat || !lon || !weatherData || !container) {
@@ -370,7 +355,6 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // Hämta platsnamn via Nominatim (stad och land)
         let place = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
         let city = '';
         let country = '';
@@ -394,7 +378,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const symb = current.Wsymb2 || 1;
         const iconData = weatherIcons[symb] || { desc: 'Okänt', icon: '❓' };
 
-        // Beräkna dagens fiskeprognos från väderdatan mellan 06:00 och 21:00
         const today = new Date();
         const year = today.getFullYear();
         const month = today.getMonth() + 1;
@@ -421,12 +404,10 @@ document.addEventListener("DOMContentLoaded", function() {
         container.innerHTML = html;
     }
 
-    // Uppdaterad displayMiniWeather
     async function displayMiniWeather(lat, lon, weatherData) {
         const container = document.getElementById('mini-weather-card');
         if (!container || !lat || !lon || !weatherData) return;
 
-        // Hämta platsnamn via Nominatim (stad och land)
         let place = `${lat.toFixed(2)}, ${lon.toFixed(2)}`;
         let city = '';
         let country = '';
@@ -447,7 +428,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const symb = current.Wsymb2 || 1;
         const iconData = weatherIcons[symb] || { desc: 'Okänt', icon: '❓' };
 
-        // Beräkna dagens fiskeprognos från väderdatan mellan 06:00 och 21:00
         const today = new Date();
         const year = today.getFullYear();
         const month = today.getMonth() + 1;
@@ -469,11 +449,10 @@ document.addEventListener("DOMContentLoaded", function() {
         container.innerHTML = html;
     }
 
-    // Updated displayPrognos to use Web Worker for grouping and loop
     async function displayPrognos(lat, lon, weatherData) {
         await displayCurrentWeather(lat, lon, weatherData);
         const container = document.getElementById('prognos');
-        container.innerHTML = '<p>Laddar prognos...</p>'; // Temporary loading message
+        container.innerHTML = '<p>Laddar prognos...</p>';
 
         if (window.Worker) {
             const worker = new Worker('prognosWorker.js');
@@ -490,7 +469,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 container.innerHTML = '<p>Fel vid laddning av prognos.</p>';
             };
         } else {
-            // Fallback
             let table = '<table><tr><th>Datum</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
             const today = new Date();
             const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;
@@ -525,7 +503,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Hämta väder från SMHI
     function fetchWeather(lat, lon) {
         const cacheKey = `weather_${lat}_${lon}`;
         const cache = localStorage.getItem(cacheKey);
@@ -558,10 +535,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    // Visa grundläggande prognos baserat på månfas direkt
     displayPrognos(null, null, null);
 
-    // Hämta GPS och uppdatera om möjligt
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             pos => {
@@ -576,14 +551,12 @@ document.addEventListener("DOMContentLoaded", function() {
         );
     }
 
-    // Lägg till event listener för sökknapp
     const searchBtn = document.getElementById('search-btn');
     const searchInput = document.getElementById('location-search');
     if (searchBtn && searchInput) {
         searchBtn.addEventListener('click', async () => {
             const query = searchInput.value.trim();
             if (!query) return;
-            // Klick-effekt
             searchBtn.classList.add('clicked');
             setTimeout(() => {
                 searchBtn.classList.remove('clicked');
@@ -596,7 +569,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     const lat = parseFloat(data[0].lat);
                     const lon = parseFloat(data[0].lon);
                     fetchWeather(lat, lon);
-                    // Nollställ sökfält
                     searchInput.value = '';
                 } else {
                     alert('Plats inte hittad i Sverige, Norge eller Finland.');

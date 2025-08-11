@@ -1,8 +1,7 @@
-// prognosWorker.js
 self.addEventListener('message', function(e) {
     const { timeSeries } = e.data;
 
-    // Ny funktion: groupByDay (flyttad hit för prognos; alltid inkluderar framtida dagar)
+    // Funktion för att gruppera väderdata per dag
     function groupByDay(timeSeries) {
         const groups = {};
         timeSeries.forEach(ts => {

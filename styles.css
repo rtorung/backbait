@@ -653,12 +653,12 @@ th {
 
 .weather-card h2 {
     margin-top: 0;
-	font-size: 16;
+	font-size: 16px;
 }
 
 .weather-card p {
     margin-top: 0;
-    font-size: 14;
+    font-size: 14px;
 }
 
 .weather-card .icon {

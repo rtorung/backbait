@@ -659,6 +659,7 @@ th {
 .weather-card p {
     margin-top: 0;
     font-size: 14px;
+	padding: 8px;
 }
 
 .weather-card .icon {

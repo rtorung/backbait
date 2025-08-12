@@ -81,7 +81,7 @@ body {
 
 .menu-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 1100px;
 }
 
 .menu-items {
@@ -701,6 +701,7 @@ th {
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */
     position: relative;
+	width: 100%
 }
 
 .mini-weather-card strong { font-weight: bold; }
@@ -730,6 +731,7 @@ th {
         font-size: 14px; /* Mindre text i mobil */
         height: 40px; /* Anpassa höjd om nödvändigt */
         line-height: 40px;
+		width: 100vw
     }
 
     .header-logo {

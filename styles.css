@@ -646,7 +646,7 @@ th {
     padding: 12px;
     margin-bottom: 20px;
     background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	max-width: 1100px; /* Begränsa storlek för att inte ta för mycket plats */
     margin: 0 auto 20px;
 }
@@ -665,6 +665,10 @@ th {
 .weather-card .icon {
     font-size: 2em;
     margin-right: 10px;
+}
+
+.prognos {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #search-container {

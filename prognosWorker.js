@@ -153,13 +153,8 @@ self.addEventListener('message', function(e) {
     // Beräkna resultatobjekt
     let result = {};
 
-<<<<<<< HEAD
     // 60-dagars tabell (utökad från original worker)
     let table = '<table><tr><th>Datum</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
-=======
-    // 60-dagars data
-    let daysData = [];
->>>>>>> 00d86139f4da4b8cbed620c17c8c347da80d8f3d
     const today = new Date();
     const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;
     const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];
@@ -182,7 +177,6 @@ self.addEventListener('message', function(e) {
             const symbs = dayData.Wsymb2 || [];
             const modeSymb = getMode(symbs) || 1;
             const iconData = weatherIcons[modeSymb] || { desc: 'Okänt', icon: '❓' };
-<<<<<<< HEAD
             weatherInfo = `Medeltemp: ${avgTemp} °C, Väder: ${iconData.icon} ${iconData.desc}`;
         }
         const total = moonScore + weatherScore;
@@ -191,15 +185,6 @@ self.addEventListener('message', function(e) {
     }
     table += '</table>';
     result.table = table;
-=======
-            weatherInfo = `${avgTemp} °C, ${iconData.icon} ${iconData.desc}`;
-        }
-        const total = moonScore + weatherScore;
-        const rating = getRating(total);
-        daysData.push({ dateStr, year, month: date.getMonth(), day, weekday: date.getDay(), rating, weatherInfo });
-    }
-    result.daysData = daysData;
->>>>>>> 00d86139f4da4b8cbed620c17c8c347da80d8f3d
 
     // Dagens data för current och mini
     if (weatherData) {

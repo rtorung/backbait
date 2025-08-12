@@ -455,7 +455,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             // Beräkna tabell i fallback
-            let table = '<table><tr><th>Datum</th><th>Prognos</th><th>Väderprognos (endast 5 dagar)</th></tr>';
+            let table = '<table><tr><th>Datum</th><th>Fiskeprognos</th><th>Väderprognos (SMHI)</th></tr>';
             const today = new Date();
             const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;
             const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];

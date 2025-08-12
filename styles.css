@@ -630,6 +630,7 @@ body {
 table { 
     border-collapse: collapse; 
     width: 100%; 
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 td { 
@@ -644,7 +645,7 @@ th {
 	border: 1px solid #ddd; 
     padding: 8px; 
     text-align: left;
-  	font-size: 16px;	
+  	font-size: 14px;	
 }
 
 .weather-card {
@@ -670,10 +671,6 @@ th {
 .weather-card .icon {
     font-size: 2em;
     margin-right: 10px;
-}
-
-.prognos {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #search-container {

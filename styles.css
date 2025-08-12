@@ -699,7 +699,7 @@ th {
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */
     position: relative;
-	width: 100%
+	width: 100%;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
 }

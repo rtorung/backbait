@@ -645,13 +645,11 @@ th {
 }
 
 .weather-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
     padding: 16px;
     margin-bottom: 20px;
-    background-color: #f9f9f9;
+    background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	max-width: 450px; /* Begränsa storlek för att inte ta för mycket plats */
+	max-width: 550px; /* Begränsa storlek för att inte ta för mycket plats */
     margin: 0 auto 20px;
 }
 
@@ -692,7 +690,7 @@ th {
 .mini-weather-card {
     height: 40px; /* Ca 40px högt som begärt */
     overflow: hidden; /* Dölj overflow för rullande effekt */
-    background-color: #f4f4f4; /* Ljus bakgrund för läsbarhet */
+    background-color: white; /* Ljus bakgrund för läsbarhet */
     margin: 10px auto; /* Centrera och marginal */
     max-width: 1100px; /* Full bredd i mobil */
     white-space: nowrap; /* Förhindra radbrytning */

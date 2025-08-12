@@ -274,6 +274,7 @@ document.addEventListener("DOMContentLoaded", function() {
         container.innerHTML = html;
     }
 
+<<<<<<< HEAD
     // Updated displayPrognos with null-check and full fallback functions
     async function displayPrognos(lat, lon, weatherData) {
         const prognosContainer = document.getElementById('prognos');
@@ -559,6 +560,362 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
+=======
+    // Funktion för att generera kalender-HTML från daysData
+    function generateCalendar(daysData) {
+        if (!daysData || daysData.length === 0) return '<p>Ingen prognosdata tillgänglig.</p>';
+
+        let calendarHTML = '';
+        const months = {};
+        daysData.forEach(day => {
+            const key = `${day.year}-${day.month}`;
+            if (!months[key]) {
+                months[key] = { year: day.year, month: day.month, days: [] };
+            }
+            months[key].days.push(day);
+        });
+
+        Object.keys(months).forEach(key => {
+            const { year, month, days } = months[key];
+            const firstDay = new Date(year, month, 1);
+            const firstWeekday = firstDay.getDay() === 0 ? 7 : firstDay.getDay(); // Måndag = 1, Söndag = 7
+            const monthName = firstDay.toLocaleString('sv-SE', { month: 'long' });
+
+            calendarHTML += `
+                <div class="month">
+                    <ul>
+                        <li>${monthName}<br><span style="font-size:18px">${year}</span></li>
+                    </ul>
+                </div>
+                <ul class="weekdays">
+                    <li>Må</li>
+                    <li>Ti</li>
+                    <li>On</li>
+                    <li>To</li>
+                    <li>Fr</li>
+                    <li>Lö</li>
+                    <li>Sö</li>
+                </ul>
+                <ul class="days">
+            `;
+
+            // Lägg till tomma celler för början av månaden
+            for (let i = 1; i < firstWeekday; i++) {
+                calendarHTML += '<li></li>';
+            }
+
+            // Lägg till dagar
+            const numDaysInMonth = new Date(year, month + 1, 0).getDate();
+            for (let d = 1; d <= numDaysInMonth; d++) {
+                const dayData = days.find(dd => dd.day === d);
+                let className = '';
+                let ratingText = '';
+                let weatherText = '';
+                if (dayData) {
+                    switch (dayData.rating) {
+                        case 'Sämre': className = 'rating-samre'; break;
+                        case 'Normalt': className = 'rating-normalt'; break;
+                        case 'Bra': className = 'rating-bra'; break;
+                        case 'Perfekt': className = 'rating-perfekt'; break;
+                    }
+                    ratingText = `<div class="rating">${dayData.rating}</div>`;
+                    weatherText = dayData.weatherInfo ? `<div class="weather">${dayData.weatherInfo}</div>` : '';
+                }
+                calendarHTML += `<li class="${className}"><span class="day-number">${d}</span>${ratingText}${weatherText}</li>`;
+            }
+
+            calendarHTML += '</ul>';
+        });
+
+        return calendarHTML;
+    }
+
+    // Updated displayPrognos with calendar
+    async function displayPrognos(lat, lon, weatherData) {
+        const prognosContainer = document.getElementById('prognos');
+        if (prognosContainer) {
+            prognosContainer.innerHTML = '<p>Laddar prognos...</p>'; // Temporary loading message
+        }
+
+        if (window.Worker) {
+            const worker = new Worker('prognosWorker.js');
+            worker.postMessage({ weatherData, lat, lon });
+
+            worker.onmessage = function(e) {
+                const { daysData, currentData, miniData } = e.data;
+                if (prognosContainer) {
+                    prognosContainer.innerHTML = generateCalendar(daysData);
+                }
+                if (lat && lon) {
+                    displayCurrentWeather(lat, lon, currentData);
+                    if (document.getElementById('mini-weather-card')) {
+                        displayMiniWeather(lat, lon, miniData);
+                    }
+                }
+                worker.terminate(); // Clean up worker
+            };
+
+            worker.onerror = function(error) {
+                console.error('Worker error:', error);
+                if (prognosContainer) {
+                    prognosContainer.innerHTML = '<p>Fel vid laddning av prognos.</p>';
+                }
+            };
+        } else {
+            // Fallback: Define necessary functions locally
+            function getMoonPhase(year, month, day) {
+                let c = e = jd = b = 0;
+                if (month < 3) {
+                    year--;
+                    month += 12;
+                }
+                ++month;
+                c = 365.25 * year;
+                e = 30.6 * month;
+                jd = c + e + day - 694039.09;
+                jd /= 29.5305882;
+                b = parseInt(jd);
+                jd -= b;
+                b = Math.round(jd * 8);
+                if (b >= 8) b = 0;
+                switch (b) {
+                    case 0: return 'New Moon';
+                    case 1: return 'Waxing Crescent Moon';
+                    case 2: return 'Quarter Moon';
+                    case 3: return 'Waxing Gibbous Moon';
+                    case 4: return 'Full Moon';
+                    case 5: return 'Waning Gibbous Moon';
+                    case 6: return 'Last Quarter Moon';
+                    case 7: return 'Waning Crescent Moon';
+                    default: return 'Error';
+                }
+            }
+
+            function getMoonScore(phase) {
+                if (phase === 'New Moon' || phase === 'Full Moon') return 3;
+                if (phase.includes('Gibbous')) return 2;
+                if (phase.includes('Crescent')) return 1;
+                if (phase.includes('Quarter')) return 0;
+                return 0;
+            }
+
+            function getRating(total) {
+                if (total <= 0) return 'Sämre';
+                if (total <= 2) return 'Normalt';
+                if (total <= 4) return 'Bra';
+                return 'Perfekt';
+            }
+
+            function getWeatherScore(dayData) {
+                let score = 0;
+                if (dayData.msl && dayData.msl.length > 1) {
+                    const delta = dayData.msl[dayData.msl.length - 1] - dayData.msl[0];
+                    if (delta < -6) score += 3;
+                    else if (delta < -3) score += 2;
+                    else if (delta < 0) score += 1;
+                    else if (delta > 6) score -= 3;
+                    else if (delta > 3) score -= 2;
+                }
+                if (dayData.ws) {
+                    const windAvg = dayData.ws.reduce((a, b) => a + b, 0) / dayData.ws.length;
+                    if (windAvg < 3) score += 1;
+                    else if (windAvg > 8) score -= 2;
+                }
+                if (dayData.pct) {
+                    const cloudAvg = dayData.pct.reduce((a, b) => a + b, 0) / dayData.pct.length;
+                    if (cloudAvg > 60) score += 1;
+                    else if (cloudAvg < 30) score -= 1;
+                }
+                if (dayData.pmean) {
+                    const precipAvg = dayData.pmean.reduce((a, b) => a + b, 0) / dayData.pmean.length;
+                    if (precipAvg > 0 && precipAvg < 1) score += 1;
+                    else if (precipAvg > 3) score -= 1;
+                }
+                return score;
+            }
+
+            function getMode(arr) {
+                if (arr.length === 0) return null;
+                const freq = {};
+                arr.forEach(val => {
+                    freq[val] = (freq[val] || 0) + 1;
+                });
+                let maxFreq = 0;
+                let modeVal = null;
+                Object.keys(freq).forEach(key => {
+                    if (freq[key] > maxFreq) {
+                        maxFreq = freq[key];
+                        modeVal = key;
+                    }
+                });
+                return parseInt(modeVal);
+            }
+
+            const weatherIcons = {
+                1: { desc: 'Klart', icon: '☀️' },
+                2: { desc: 'Nästan klart', icon: '☀️' },
+                3: { desc: 'Varierande molnighet', icon: '⛅' },
+                4: { desc: 'Halvklart', icon: '⛅' },
+                5: { desc: 'Molnigt', icon: '☁️' },
+                6: { desc: 'Mulet', icon: '☁️' },
+                7: { desc: 'Dimma', icon: '🌫️' },
+                8: { desc: 'Lätta regnskurar', icon: '🌦️' },
+                9: { desc: 'Måttliga regnskurar', icon: '🌧️' },
+                10: { desc: 'Kraftiga regnskurar', icon: '🌧️' },
+                11: { desc: 'Åskskurar', icon: '⛈️' },
+                12: { desc: 'Lätta byar av regn och snöblandat', icon: '🌨️' },
+                13: { desc: 'Måttliga byar av regn och snöblandat', icon: '🌨️' },
+                14: { desc: 'Kraftiga byar av regn och snöblandat', icon: '🌨️' },
+                15: { desc: 'Lätta snöbyar', icon: '❄️' },
+                16: { desc: 'Måttliga snöbyar', icon: '❄️' },
+                17: { desc: 'Kraftiga snöbyar', icon: '❄️' },
+                18: { desc: 'Lätt regn', icon: '🌧️' },
+                19: { desc: 'Måttligt regn', icon: '🌧️' },
+                20: { desc: 'Kraftigt regn', icon: '🌧️' },
+                21: { desc: 'Åska', icon: '⛈️' },
+                22: { desc: 'Lätt regn och snöblandat', icon: '🌨️' },
+                23: { desc: 'Måttligt regn och snöblandat', icon: '🌨️' },
+                24: { desc: 'Kraftigt regn och snöblandat', icon: '🌨️' },
+                25: { desc: 'Lätt snöfall', icon: '❄️' },
+                26: { desc: 'Måttligt snöfall', icon: '❄️' },
+                27: { desc: 'Kraftigt snöfall', icon: '❄️' }
+            };
+
+            function groupByDay(timeSeries, filterHours = false) {
+                const now = new Date();
+                const todayStr = now.toLocaleDateString('sv-SE');
+                const days = {};
+                timeSeries.forEach(ts => {
+                    const dt = new Date(ts.validTime);
+                    const dateStr = dt.toLocaleDateString('sv-SE');
+                    const hour = dt.getHours();
+                    if (filterHours && (hour < 6 || hour > 21)) return;
+                    if (dateStr === todayStr && dt <= now) return;
+                    if (!days[dateStr]) days[dateStr] = {};
+                    ts.parameters.forEach(p => {
+                        if (!days[dateStr][p.name]) days[dateStr][p.name] = [];
+                        days[dateStr][p.name].push(p.values[0]);
+                    });
+                });
+                return days;
+            }
+
+            function getCurrentWeather(timeSeries) {
+                if (!timeSeries || timeSeries.length === 0) return null;
+                const current = timeSeries[0];
+                const params = {};
+                current.parameters.forEach(p => {
+                    params[p.name] = p.values[0];
+                });
+                return params;
+            }
+
+            // Beräkna daysData i fallback
+            let daysData = [];
+            const today = new Date();
+            const weatherDays = weatherData ? groupByDay(weatherData.timeSeries, true) : null;
+            const dayKeys = weatherDays ? Object.keys(weatherDays).slice(0, 5) : [];
+            for (let i = 0; i < 60; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1;
+                const day = date.getDate();
+                const phase = getMoonPhase(year, month, day);
+                const moonScore = getMoonScore(phase);
+                let weatherScore = 0;
+                const dateStr = date.toLocaleDateString('sv-SE');
+                let weatherInfo = '';
+                if (weatherDays && weatherDays[dateStr] && dayKeys.includes(dateStr)) {
+                    const dayData = weatherDays[dateStr];
+                    weatherScore = getWeatherScore(dayData);
+                    const temps = dayData.t || [];
+                    const avgTemp = temps.length > 0 ? (temps.reduce((a, b) => a + b, 0) / temps.length).toFixed(1) : 'N/A';
+                    const symbs = dayData.Wsymb2 || [];
+                    const modeSymb = getMode(symbs) || 1;
+                    const iconData = weatherIcons[modeSymb] || { desc: 'Okänt', icon: '❓' };
+                    weatherInfo = `${avgTemp} °C ${iconData.icon} ${iconData.desc}`; // Borttagna "Medeltemp:" och "Väder:"
+                }
+                const total = moonScore + weatherScore;
+                const rating = getRating(total);
+                daysData.push({ dateStr, year, month: date.getMonth(), day, weekday: date.getDay(), rating, weatherInfo });
+            }
+
+            if (prognosContainer) {
+                prognosContainer.innerHTML = generateCalendar(daysData);
+            }
+
+            // Beräkna currentData och miniData i fallback
+            let currentData = null;
+            let miniData = null;
+            if (weatherData) {
+                const current = getCurrentWeather(weatherData.timeSeries);
+                if (current) {
+                    const symb = current.Wsymb2 || 1;
+                    const iconData = weatherIcons[symb] || { desc: 'Okänt', icon: '❓' };
+
+                    const year = today.getFullYear();
+                    const month = today.getMonth() + 1;
+                    const day = today.getDate();
+                    const phase = getMoonPhase(year, month, day);
+                    const moonScore = getMoonScore(phase);
+                    const todayStr = today.toLocaleDateString('sv-SE');
+                    const weatherScore = weatherDays[todayStr] ? getWeatherScore(weatherDays[todayStr]) : 0;
+                    const total = moonScore + weatherScore;
+                    const rating = getRating(total);
+
+                    currentData = {
+                        icon: iconData.icon,
+                        desc: iconData.desc,
+                        t: current.t,
+                        ws: current.ws,
+                        wd: current.wd,
+                        msl: current.msl,
+                        r: current.r,
+                        rating: rating
+                    };
+
+                    miniData = { ...currentData };
+                }
+            }
+
+            if (lat && lon) {
+                displayCurrentWeather(lat, lon, currentData);
+                if (document.getElementById('mini-weather-card')) {
+                    displayMiniWeather(lat, lon, miniData);
+                }
+            }
+        }
+    }
+
+    // Hämta väder från SMHI
+    function fetchWeather(lat, lon) {
+        const cacheKey = `weather_${lat}_${lon}`;
+        const cache = localStorage.getItem(cacheKey);
+        const cacheTime = localStorage.getItem(`${cacheKey}_time`);
+        const now = Date.now();
+        if (cache && cacheTime && now - cacheTime < 3600000) {
+            console.log('Using cached weather data');
+            const data = JSON.parse(cache);
+            displayPrognos(lat, lon, data);
+            return;
+        }
+
+        const url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${lon.toFixed(2)}/lat/${lat.toFixed(2)}/data.json`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                localStorage.setItem(cacheKey, JSON.stringify(data));
+                localStorage.setItem(`${cacheKey}_time`, now);
+                displayPrognos(lat, lon, data);
+            })
+            .catch(error => {
+                console.error('Fel vid hämtning av väder:', error);
+                displayPrognos(lat, lon, null);
+            });
+    }
+
+>>>>>>> 00d86139f4da4b8cbed620c17c8c347da80d8f3d
     // Hämta GPS och uppdatera om möjligt
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(

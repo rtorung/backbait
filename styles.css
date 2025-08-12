@@ -1,3 +1,4 @@
+// styles.css
 body {
     margin: 0;
     font-family: "Roboto", Arial, sans-serif;
@@ -276,7 +277,7 @@ body {
     text-decoration: none;
     font-size: 14px; /* Matches desktop .dropdown li a */
     font-family: "Roboto", Arial, sans-serif;
-    font-weight: 600; /* Matches desktop */
+    font-weight: 300; /* Matches desktop */
     text-transform: uppercase; /* Matches desktop */
     display: block;
 }
@@ -720,6 +721,113 @@ th {
     }
 }
 
+/* Kalenderstilar (från W3Schools, anpassade) */
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+/* Month header */
+.month {
+  padding: 20px 25px;
+  width: 100%;
+  background: #333;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Month list */
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color:#ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #666;
+  text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #777;
+  position: relative;
+  height: 80px; /* Höjd för att rymma info */
+  vertical-align: top;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+/* Highlight ratings */
+.days li .day-number {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 10px; /* Öka marginalen för att ge plats åt andra element */
+  text-align: left;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.days li .rating {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.days li .weather {
+  display: block;
+  font-size: 10px;
+  white-space: pre-wrap;
+}
+
+/* Rating färger */
+.days li.rating-samre {
+  background-color: #ffcccc; /* Ljus röd */
+  color: #cc0000;
+}
+
+.days li.rating-normalt {
+  background-color: #ffffcc; /* Ljus gul */
+  color: #cccc00;
+}
+
+.days li.rating-bra {
+  background-color: #ccffcc; /* Ljus grön */
+  color: #00cc00;
+}
+
+.days li.rating-perfekt {
+  background-color: #cce5ff; /* Ljus blå */
+  color: #0066cc;
+}
+
 /* Responsiv design för mobila enheter */
 @media (max-width: 768px) {
      .site-header {
@@ -991,5 +1099,21 @@ th {
 		width: auto;
         min-height: auto;
         margin-bottom: 0;
+    }
+
+    /* Anpassa kalender för mobil */
+    .weekdays li, .days li {
+        width: calc(100% / 7 - 2px); /* Justera för mindre skärmar */
+        font-size: 8px;
+		top: 3px;
+        left: 3px;
+    }
+
+    .days li {
+        height: 60px; /* Mindre höjd i mobil */
+    }
+
+    .days li .weather {
+        font-size: 7px;
     }
 }

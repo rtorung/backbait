@@ -643,7 +643,7 @@ th {
 }
 
 .weather-card {
-    padding: 16px;
+    padding: 12px;
     margin-bottom: 20px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -653,6 +653,12 @@ th {
 
 .weather-card h2 {
     margin-top: 0;
+	font-size: 16;
+}
+
+.weather-card p {
+    margin-top: 0;
+    font-size: 14;
 }
 
 .weather-card .icon {

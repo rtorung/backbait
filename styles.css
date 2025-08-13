@@ -723,7 +723,7 @@ th {
 
 @keyframes marquee {
     0% {
-        transform: translateX(50%); /* Startar från höger */
+        transform: translateX(100%); /* Startar från höger */
     }
     100% {
         transform: translateX(-100%); /* Försvinner till vänster */

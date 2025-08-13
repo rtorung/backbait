@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const dt = new Date(ts.validTime);
                     const dateStr = dt.toLocaleDateString('sv-SE');
                     const hour = dt.getHours();
-                    if (filterHours && (hour < 6 || hour > 21)) return;
+                    if (filterHours && (hour < 6 || hour > 23)) return;
                     if (dateStr === todayStr && dt <= now) return;
                     if (!days[dateStr]) days[dateStr] = {};
                     ts.parameters.forEach(p => {

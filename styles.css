@@ -481,30 +481,35 @@ body {
     justify-content: center;
 }
 
+/* ÄNDRING: justify-content är nu 'center' */
 .footer-content {
     max-width: 1100px;
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;	
-	align-items: center;
+    justify-content: center; /* Tidigare 'space-between' */
+    align-items: center;
     box-sizing: border-box;
 }
-	
+
+/* Ingen ändring här, denna är korrekt */
 .footer-left {
 	width: 125px;
 	display: flex;
 	justify-content: center;
 }
 
+/* Ingen ändring här, denna är korrekt */
 .footer-center {
 	width: 125px;
 	display: flex;
 	justify-content: center;
 }
 
+/* ÄNDRING: lade till 'display: flex' */
 .footer-right {
 	width: 125px;
+	display: flex; /* Saknades tidigare */
 	justify-content: center;
 }
 

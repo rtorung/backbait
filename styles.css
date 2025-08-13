@@ -702,14 +702,15 @@ th {
     height: 40px; /* Ca 40px högt som begärt */
     overflow: hidden; /* Dölj overflow för rullande effekt */
     background-color: white; /* Ljus bakgrund för läsbarhet */
-    max-width: 1100px; /* Full bredd i mobil */
     white-space: nowrap; /* Förhindra radbrytning */
     font-size: 14px; /* Liten text för att passa */
     line-height: 40px; /* Centrera vertikalt */
-	width: 100%;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
-    margin-inline: auto;
+	margin: 0 auto;
+	width: 100%;
+    max-width: 1100px;
+
 }
 
 .mini-weather-card strong { font-weight: bold; }

@@ -358,14 +358,14 @@ body {
 	box-sizing: border-box;
 }
 
-.text_left {
+.text_right {
 	max-width: 525px;
 	text-align: left;
 	width: 100%;
     align-content: flex-start;
 }
 
-.image_right {
+.image_left {
 	max-width: 525px;
     align-content: flex-start;
 }

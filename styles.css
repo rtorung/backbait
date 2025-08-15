@@ -82,6 +82,7 @@ body {
 .menu-container {
     width: 100%;
     max-width: 1100px;
+	margin: 0px auto;
 }
 
 .menu-items {

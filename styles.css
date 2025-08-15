@@ -367,7 +367,7 @@ body {
 
 .image_right {
 	max-width: 400px;
-	justify-content: center;
+    align-content: center;
 }
 .artikel-image {
     max-width: 400px;

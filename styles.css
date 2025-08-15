@@ -976,7 +976,6 @@ th {
         box-sizing: border-box;
     }
 
-
     .footer-content {
         max-width: 1100px;
         width: 100%;
@@ -986,12 +985,7 @@ th {
 	}
 
 	.toc-column-center{
-		width: 200px;
-		display: flex;
-		list-style: none;
-		padding: 0;
 		margin: 0px 0px;
-		flex-direction: column;
 	}
 
     .footer-toc .toc-column:last-child {

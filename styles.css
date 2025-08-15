@@ -359,14 +359,14 @@ body {
 }
 
 .text_left {
-	max-width: 650px;
+	max-width: 525px;
 	text-align: left;
 	width: 100%;
     align-content: flex-start;
 }
 
 .image_right {
-	max-width: 400px;
+	max-width: 525px;
     align-content: flex-start;
 }
 .artikel-image {

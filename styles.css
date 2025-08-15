@@ -350,8 +350,8 @@ body {
 .text_left {
 	max-width: 650px;
 	text-align: left;
-	width: 100%
-	vertical-align: text-top
+	width: 100%;
+	vertical-align: text-top;
 }
 
 .image_right {

@@ -984,7 +984,12 @@ th {
 		justify-content: center;
 	}
 
+	.toc-column {
+		list-style-type: none;
+	}
+
 	.toc-column-center{
+		list-style-type: none;
 		margin: 0px 0px;
 	}
 

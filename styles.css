@@ -404,6 +404,13 @@ body {
     margin: 20px auto 100px !important;
     image-rendering: auto;
 }
+.artikel-image {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: auto;
+}
 
 /* Innehållsförteckning */
 .footer-toc {

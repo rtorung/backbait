@@ -332,14 +332,17 @@ body {
     width: 100%;
 	padding: 20px;
 	display: flex;
-	justify-content: center
+	justify-content: space-between
 }
 
 .text_left {
+	max-width: 400px;
 	text-align: left;
+	width: 100%
 }
 
 .image_right {
+	max-width: 400px;
 }
 
 /* Container för små bildkort */

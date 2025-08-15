@@ -86,7 +86,6 @@ body {
 
 .menu-items {
     list-style: none;
-    padding: 0;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -422,6 +421,7 @@ body {
 	width: 125px;
 	flex-direction: column;
 	display: flex;
+	justify-content: center;
 }
 	
 
@@ -476,7 +476,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-around; /* Tidigare 'space-between' */
-    align-items: center;
     box-sizing: border-box;
 }
 

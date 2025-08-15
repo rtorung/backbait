@@ -156,7 +156,7 @@ body {
 }
 
 .dropdown ul {
-    top: 242px;
+    margin-top: 0px;
 }
 
 .dropdown li {

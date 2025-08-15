@@ -421,6 +421,9 @@ body {
 	width: 125px;
 	display: flex;
 	justify-content: center;
+	list-style: none;
+    padding: 0;
+    margin: 0;
 }
 	
 
@@ -428,12 +431,6 @@ body {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 10px;
-}
-
-.footer-toc ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .footer-toc li a {

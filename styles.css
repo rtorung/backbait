@@ -370,7 +370,7 @@ body {
     align-content: flex-start;
 }
 .artikel-image {
-    max-width: 400px;
+    max-width: 525px;
     width: 100%;
     height: auto;
     display: block;

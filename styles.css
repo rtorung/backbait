@@ -418,7 +418,7 @@ body {
     font-family: "Roboto", Arial, sans-serif;
 }
 
-.footer-toc .footer-content-wrapper {
+.footer-content-wrapper {
     max-width: 1100px;
     width: 100%;
     display: flex;
@@ -427,7 +427,7 @@ body {
     box-sizing: border-box;
 }
 
-.footer-toc .footer-content {
+.footer-content {
     max-width: 1100px;
     width: 100%;
     display: flex;
@@ -436,6 +436,13 @@ body {
     align-items: flex-start;
     box-sizing: border-box;
 }
+
+.toc-column {
+	width: 125px;
+	display: flex;
+	justify-content: center;
+}
+	
 
 .footer-toc h3 {
     font-size: 16px;
@@ -487,7 +494,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center; /* Tidigare 'space-between' */
+    justify-content: space-around; /* Tidigare 'space-between' */
     align-items: center;
     box-sizing: border-box;
 }

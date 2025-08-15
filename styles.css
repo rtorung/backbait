@@ -375,6 +375,7 @@ body {
     height: auto;
     display: block;
     image-rendering: auto;
+	margin: 20px auto 0px;
 }
 
 /* Container för små bildkort */

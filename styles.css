@@ -155,6 +155,10 @@ body {
     display: flex;
 }
 
+.dropdown ul {
+    top: 242px;
+}
+
 .dropdown li {
     padding: 10px 20px;
     margin: 0px;

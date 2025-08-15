@@ -362,12 +362,12 @@ body {
 	max-width: 650px;
 	text-align: left;
 	width: 100%;
-	vertical-align: text-top;
+    align-content: flex-start;
 }
 
 .image_right {
 	max-width: 400px;
-    align-content: center;
+    align-content: flex-start;
 }
 .artikel-image {
     max-width: 400px;

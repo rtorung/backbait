@@ -431,6 +431,7 @@ ul.dropdown {
     font-weight: 600;
     text-align: left;
     z-index: 10;
+	text-decoration: none;
 }
 
 /* Prickindikatorer (endast mobil) */

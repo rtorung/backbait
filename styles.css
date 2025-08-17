@@ -420,6 +420,11 @@ ul.dropdown {
     image-rendering: auto;
 }
 
+.small-image-card a {
+	text-decoration: none;
+}
+	
+
 .small-image-card .image-text {
     position: relative;
     margin-top: 10px;
@@ -431,7 +436,6 @@ ul.dropdown {
     font-weight: 600;
     text-align: left;
     z-index: 10;
-	text-decoration: none;
 }
 
 /* Prickindikatorer (endast mobil) */

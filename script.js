@@ -345,8 +345,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
             function getRating(total) {
                 if (total <= 0) return 'Sämre';
-                if (total <= 2) return 'Normalt';
-                if (total <= 4) return 'Bra';
+                if (total <= 3) return 'Normalt';
+                if (total <= 5) return 'Bra';
                 return 'Perfekt';
             }
 

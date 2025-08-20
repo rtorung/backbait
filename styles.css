@@ -787,7 +787,7 @@ th {
 .mini-weather-card .marquee {
     display: inline-block;
     white-space: nowrap;
-    animation: marquee 12s linear infinite; /* Rullande åt vänster, justera tid för hastighet */
+    animation: marquee 15s linear infinite; /* Rullande åt vänster, justera tid för hastighet */
 }
 
 @keyframes marquee {
